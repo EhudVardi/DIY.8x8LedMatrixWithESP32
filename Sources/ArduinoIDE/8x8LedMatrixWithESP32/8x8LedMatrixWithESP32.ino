@@ -6,7 +6,7 @@
 const unsigned long patternChangeInterval = 1000; // Time in milliseconds to change patterns
 unsigned long previousMillis = 0; // Stores the last time the pattern was updated
 int currPattern = 0; // Index of the current pattern
-const int patternCount = 3;
+const int patternCount = 4;
 
 byte patterns[patternCount][8] = {
   {
@@ -28,6 +28,16 @@ byte patterns[patternCount][8] = {
     0b00000000, // Pattern 2, Row 6
     0b11111111, // Pattern 2, Row 7
     0b00000000  // Pattern 2, Row 8
+  },
+  {
+    0b10101010, // Pattern 2, Row 1
+    0b10101010, // Pattern 2, Row 2
+    0b10101010, // Pattern 2, Row 3
+    0b10101010, // Pattern 2, Row 4
+    0b10101010, // Pattern 2, Row 5
+    0b10101010, // Pattern 2, Row 6
+    0b10101010, // Pattern 2, Row 7
+    0b10101010  // Pattern 2, Row 8
   },
   {
     0b00011000, // Pattern 3, Row 1
