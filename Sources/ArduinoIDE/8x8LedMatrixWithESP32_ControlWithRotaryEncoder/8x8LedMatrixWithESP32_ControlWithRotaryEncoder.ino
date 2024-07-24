@@ -217,7 +217,7 @@ void loop() {
     // Save the last time the pattern was updated
     previousMillis = currentMillis;
     // Move to the next pattern
-    currPattern = (currPattern + 1) % 3;
+    currPattern = (currPattern + 1) % patternCount;
   }
 
   // Update the pattern
