@@ -12,7 +12,7 @@ the DIY board offers external pins to be controlled from the outside, [bought fr
    1. Go to File > Preferences.
    2. In the Additional Board Manager URLs field, add: https://dl.espressif.com/dl/package_esp32_index.json.
    3. Go to Tools > Board > Board Manager, Search for "esp32" and install the "esp32" platform.
-   4. Select the ESP32 Board: Go to Tools > Board and select "ESP32 Dev Module".
+   4. Select the ESP32 Board: Go to Tools > Board > esp32 > and select "ESP32 Dev Module".
 
 # Connecting the boards together
 
@@ -46,7 +46,10 @@ We select GPIO's 12,13,14 and 15 of the ESP32 board to the "OE", "IN", "STB", "C
 # Build & Flash firmware
 1. Open the ".ino" code file in the IDE 
 2. Disconnect the external power to the ESP32 board
-3. connect the ESP32 board to your host PC via USB - The IDE should tell you that the board is connected at the bottom right corner of the app
+3. connect the ESP32 board to your host PC via USB and select the COM port 
+- Open windows Device manager and look under "ports" what is the port of the board. 
+- Go to Tools > Port > and select that port.
+- The IDE should tell you that the board is connected at the bottom right corner of the app
 4. Hit the "Upload" button at the top left. the IDE will compile the program and if successful, it will attempt to upload the binaries to the ESP32 board. upon success it will show "100%" message at the log window.
 5. (optional) To prevent the host PC to power the boards, disconnect the USB cable and re-connect the external 5V power source to the ESP32 board.
 
