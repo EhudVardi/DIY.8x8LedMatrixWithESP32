@@ -6,8 +6,9 @@
 const unsigned long patternChangeInterval = 1000; // Time in milliseconds to change patterns
 unsigned long previousMillis = 0; // Stores the last time the pattern was updated
 int currPattern = 0; // Index of the current pattern
+const int patternCount = 3;
 
-byte patterns[3][8] = {
+byte patterns[patternCount][8] = {
   {
     0b10000001, // Pattern 1, Row 1
     0b01000010, // Pattern 1, Row 2
@@ -63,7 +64,7 @@ void loop() {
     // Save the last time the pattern was updated
     previousMillis = currentMillis;
     // Move to the next pattern
-    currPattern = (currPattern + 1) % 3;
+    currPattern = (currPattern + 1) % patternCount;
   }
   // Update the pattern
   displayPattern(patterns[currPattern]);
