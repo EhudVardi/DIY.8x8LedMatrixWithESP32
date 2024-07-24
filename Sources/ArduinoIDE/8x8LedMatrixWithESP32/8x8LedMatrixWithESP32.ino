@@ -3,6 +3,43 @@
 #define LATCH_PIN 14 // Latch Pin
 #define CLOCK_PIN 15 // Clock Pin
 
+const unsigned long patternChangeInterval = 1000; // Time in milliseconds to change patterns
+unsigned long previousMillis = 0; // Stores the last time the pattern was updated
+int currPattern = 0; // Index of the current pattern
+
+byte patterns[3][8] = {
+  {
+    0b10000001, // Pattern 1, Row 1
+    0b01000010, // Pattern 1, Row 2
+    0b10100101, // Pattern 1, Row 3
+    0b10011001, // Pattern 1, Row 4
+    0b10011001, // Pattern 1, Row 5
+    0b10100101, // Pattern 1, Row 6
+    0b01000010, // Pattern 1, Row 7
+    0b10000001  // Pattern 1, Row 8
+  },
+  {
+    0b11111111, // Pattern 2, Row 1
+    0b00000000, // Pattern 2, Row 2
+    0b11111111, // Pattern 2, Row 3
+    0b00000000, // Pattern 2, Row 4
+    0b11111111, // Pattern 2, Row 5
+    0b00000000, // Pattern 2, Row 6
+    0b11111111, // Pattern 2, Row 7
+    0b00000000  // Pattern 2, Row 8
+  },
+  {
+    0b00011000, // Pattern 3, Row 1
+    0b00111100, // Pattern 3, Row 2
+    0b01111110, // Pattern 3, Row 3
+    0b11111111, // Pattern 3, Row 4
+    0b11111111, // Pattern 3, Row 5
+    0b01111110, // Pattern 3, Row 6
+    0b00111100, // Pattern 3, Row 7
+    0b00011000  // Pattern 3, Row 8
+  }
+};
+
 void setup() {
   Serial.begin(115200);
   Serial.println("Initializing pins...");
@@ -19,22 +56,26 @@ void setup() {
 }
 
 void loop() {
-  byte pattern[8] = {
-    0b10000001, // Row 1
-    0b01000010, // Row 2
-    0b00100100, // Row 3
-    0b00011000, // Row 4
-    0b00011000, // Row 5
-    0b00100100, // Row 6
-    0b01000010, // Row 7
-    0b10000001  // Row 8
-  };
+  unsigned long currentMillis = millis(); // Get the current time
 
+  // Check if it's time to change the pattern
+  if (currentMillis - previousMillis >= patternChangeInterval) {
+    // Save the last time the pattern was updated
+    previousMillis = currentMillis;
+    // Move to the next pattern
+    currPattern = (currPattern + 1) % 3;
+  }
+  // Update the pattern
+  displayPattern(patterns[currPattern]);
+  //delay(10);
+}
+
+void displayPattern(byte pattern[8]) {
   for (int row = 0; row < 8; row++) {
     // Prepare row data (active low)
     byte row_data = ~(1 << row); // Only the current row is active
     // Prepare column data (active low)
-    byte col_data = ~pattern[row]; // Columns for the current row
+    byte col_data = ~pattern[row]; // Columns for the current row in the current pattern
 
     // Shift out row data
     shiftOut(row_data);
@@ -43,11 +84,9 @@ void loop() {
 
     // Latch the data
     digitalWrite(LATCH_PIN, HIGH);
-    delayMicroseconds(10); // Short delay to allow latching
+    //delayMicroseconds(2); // Short delay to ensure data is latched
     digitalWrite(LATCH_PIN, LOW);
-
-    // Small delay for persistence of vision
-    delay(2); // Adjust this for better visibility
+    delay(2); 
   }
 }
 
