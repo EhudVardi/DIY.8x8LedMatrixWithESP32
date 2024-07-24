@@ -7,56 +7,178 @@
 #define S2_PIN 4
 #define KEY_PIN 5
 
-const unsigned long patternChangeInterval = 1000; // Time in milliseconds to change patterns
-unsigned long previousMillis = 0; // Stores the last time the pattern was updated
-int currPattern = 0; // Index of the current pattern
-const int patternCount = 4;
-
 volatile int rotation = 0; // Stores the rotation count
 volatile bool buttonPressed = false; // Stores the button state
 
+const unsigned long patternChangeInterval = 1000; // Time in milliseconds to change patterns
+unsigned long previousMillis = 0; // Stores the last time the pattern was updated
+int currPattern = 0; // Index of the current pattern
+const int patternCount = 16;
+
 byte patterns[patternCount][8] = {
   {
-    0b10000001, // Pattern 1, Row 1
-    0b01000010, // Pattern 1, Row 2
-    0b10100101, // Pattern 1, Row 3
-    0b10011001, // Pattern 1, Row 4
-    0b10011001, // Pattern 1, Row 5
-    0b10100101, // Pattern 1, Row 6
-    0b01000010, // Pattern 1, Row 7
-    0b10000001  // Pattern 1, Row 8
+    0b00111100, // 0
+    0b01100110,
+    0b01101110,
+    0b01110110,
+    0b01100110,
+    0b01100110,
+    0b00111100,
+    0b00000000
   },
   {
-    0b11111111, // Pattern 2, Row 1
-    0b00000000, // Pattern 2, Row 2
-    0b11111111, // Pattern 2, Row 3
-    0b00000000, // Pattern 2, Row 4
-    0b11111111, // Pattern 2, Row 5
-    0b00000000, // Pattern 2, Row 6
-    0b11111111, // Pattern 2, Row 7
-    0b00000000  // Pattern 2, Row 8
+    0b00011000, // 1
+    0b00111000,
+    0b00011000,
+    0b00011000,
+    0b00011000,
+    0b00011000,
+    0b01111110,
+    0b00000000
   },
   {
-    0b10101010, // Pattern 2, Row 1
-    0b10101010, // Pattern 2, Row 2
-    0b10101010, // Pattern 2, Row 3
-    0b10101010, // Pattern 2, Row 4
-    0b10101010, // Pattern 2, Row 5
-    0b10101010, // Pattern 2, Row 6
-    0b10101010, // Pattern 2, Row 7
-    0b10101010  // Pattern 2, Row 8
+    0b00111100, // 2
+    0b01100110,
+    0b00000110,
+    0b00001100,
+    0b00110000,
+    0b01100000,
+    0b01111110,
+    0b00000000
   },
   {
-    0b00011000, // Pattern 3, Row 1
-    0b00111100, // Pattern 3, Row 2
-    0b01111110, // Pattern 3, Row 3
-    0b11111111, // Pattern 3, Row 4
-    0b11111111, // Pattern 3, Row 5
-    0b01111110, // Pattern 3, Row 6
-    0b00111100, // Pattern 3, Row 7
-    0b00011000  // Pattern 3, Row 8
+    0b00111100, // 3
+    0b01100110,
+    0b00000110,
+    0b00011100,
+    0b00000110,
+    0b01100110,
+    0b00111100,
+    0b00000000
+  },
+  {
+    0b00001100, // 4
+    0b00011100,
+    0b00111100,
+    0b01101100,
+    0b01111110,
+    0b00001100,
+    0b00001100,
+    0b00000000
+  },
+  {
+    0b01111110, // 5
+    0b01100000,
+    0b01111100,
+    0b00000110,
+    0b00000110,
+    0b01100110,
+    0b00111100,
+    0b00000000
+  },
+  {
+    0b00111100, // 6
+    0b01100110,
+    0b01100000,
+    0b01111100,
+    0b01100110,
+    0b01100110,
+    0b00111100,
+    0b00000000
+  },
+  {
+    0b01111110, // 7
+    0b01100110,
+    0b00000110,
+    0b00001100,
+    0b00011000,
+    0b00011000,
+    0b00011000,
+    0b00000000
+  },
+  {
+    0b00111100, // 8
+    0b01100110,
+    0b01100110,
+    0b00111100,
+    0b01100110,
+    0b01100110,
+    0b00111100,
+    0b00000000
+  },
+  {
+    0b00111100, // 9
+    0b01100110,
+    0b01100110,
+    0b00111110,
+    0b00000110,
+    0b01100110,
+    0b00111100,
+    0b00000000
+  },
+  {
+    0b00011000, // A
+    0b00111100,
+    0b01100110,
+    0b01100110,
+    0b01111110,
+    0b01100110,
+    0b01100110,
+    0b00000000
+  },
+  {
+    0b01111100, // B
+    0b00110010,
+    0b00110010,
+    0b00111100,
+    0b00110010,
+    0b00110010,
+    0b01111100,
+    0b00000000
+  },
+  {
+    0b00111100, // C
+    0b01100110,
+    0b01100000,
+    0b01100000,
+    0b01100000,
+    0b01100110,
+    0b00111100,
+    0b00000000
+  },
+  {
+    0b01111000, // D
+    0b00110100,
+    0b00110010,
+    0b00110010,
+    0b00110010,
+    0b00110100,
+    0b01111000,
+    0b00000000
+  },
+  {
+    0b01111110, // E
+    0b01100000,
+    0b01111100,
+    0b01100000,
+    0b01100000,
+    0b01100000,
+    0b01111110,
+    0b00000000
+  },
+  {
+    0b01111110, // F
+    0b01100000,
+    0b01111100,
+    0b01100000,
+    0b01100000,
+    0b01100000,
+    0b01100000,
+    0b00000000
   }
 };
+
+
 void setup() {
   Serial.begin(115200);
   Serial.println("Initializing pins...");
