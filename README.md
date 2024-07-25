@@ -4,7 +4,7 @@ This is a DIY project utilizing a nice 8 by 8 led kit I've soldered together, co
 
 the DIY board offers external pins to be controlled from the outside, [bought from aliexpress](https://www.aliexpress.com/item/1005005671763020.html) and soldered manually.
 
-
+![Schema](https://raw.githubusercontent.com/EhudVardi/DIY.8x8LedMatrixWithESP32/master/Resources/schema.webp)
 
 # Environment Installation
 1. Download & install Arduino IDE
@@ -24,7 +24,8 @@ The board has the following pins:
 - STB: latch the data into the internal registers of the led drivers.
 - CLK: clock pin used to time the data shifting from the IN pin.
 - VCC, GND: power the board with either 3.3V or 5V.
- 
+
+ ![Alt text](relative%20path/to/img.jpg?raw=true "Title")
 
 ### ESP32 board
 The board is powered on its "Vin" & "GND" pins, and they can take input voltage from 4V to 12V.
