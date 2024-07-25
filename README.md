@@ -4,7 +4,8 @@ This is a DIY project utilizing a nice 8 by 8 led kit I've soldered together, co
 
 the DIY board offers external pins to be controlled from the outside, [bought from aliexpress](https://www.aliexpress.com/item/1005005671763020.html) and soldered manually.
 
-![Schema](https://raw.githubusercontent.com/EhudVardi/DIY.8x8LedMatrixWithESP32/master/Resources/schema.webp)
+The following is the Schema of the board, provided kindly by the seller:
+![8x8 Led Matrix Board Schema](https://raw.githubusercontent.com/EhudVardi/DIY.8x8LedMatrixWithESP32/master/Resources/schema.webp)
 
 # Environment Installation
 1. Download & install Arduino IDE
