@@ -33,8 +33,6 @@ The board has the following pins:
 - CLK: clock pin used to time the data shifting from the IN pin.
 - VCC, GND: power the board with either 3.3V or 5V.
 
- ![Alt text](relative%20path/to/img.jpg?raw=true "Title")
-
 ### ESP32 board
 The board is powered on its "Vin" & "GND" pins, and they can take input voltage from 4V to 12V.
 
