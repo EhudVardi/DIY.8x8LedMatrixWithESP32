@@ -1,7 +1,21 @@
-#define OE_PIN   12 // Output Enable pin (active low)
-#define DATA_PIN 13 // Serial Data Input
-#define LATCH_PIN 14 // Latch Pin
-#define CLOCK_PIN 15 // Clock Pin
+#define OE_PIN   4 // Output Enable pin (active low)
+#define DATA_1_PIN 13 // Serial Data Input
+#define LATCH_1_PIN 2 // Latch Pin
+#define CLOCK_1_PIN 15 // Clock Pin
+#define DATA_2_PIN 12 // Serial Data Input
+#define LATCH_2_PIN 33 // Latch Pin
+#define CLOCK_2_PIN 32 // Clock Pin
+#define DATA_3_PIN 14 // Serial Data Input
+#define LATCH_3_PIN 22 // Latch Pin
+#define CLOCK_3_PIN 23 // Clock Pin
+#define DATA_4_PIN 27 // Serial Data Input
+#define LATCH_4_PIN 26 // Latch Pin
+#define CLOCK_4_PIN 25 // Clock Pin
+
+#define DATA_PIN(idx) (idx == 1 ? DATA_1_PIN : (idx == 2 ? DATA_2_PIN : (idx == 3 ? DATA_3_PIN : (idx == 4 ? DATA_4_PIN : -1))))
+#define LATCH_PIN(idx) (idx == 1 ? LATCH_1_PIN : (idx == 2 ? LATCH_2_PIN : (idx == 3 ? LATCH_3_PIN : (idx == 4 ? LATCH_4_PIN : -1))))
+#define CLOCK_PIN(idx) (idx == 1 ? CLOCK_1_PIN : (idx == 2 ? CLOCK_2_PIN : (idx == 3 ? CLOCK_3_PIN : (idx == 4 ? CLOCK_4_PIN : -1))))
+
 
 const unsigned long patternChangeInterval = 1000; // Time in milliseconds to change patterns
 unsigned long previousMillis = 0; // Stores the last time the pattern was updated
@@ -56,15 +70,25 @@ void setup() {
   Serial.println("Initializing pins...");
 
   pinMode(OE_PIN, OUTPUT);
-  pinMode(DATA_PIN, OUTPUT);
-  pinMode(LATCH_PIN, OUTPUT);
-  pinMode(CLOCK_PIN, OUTPUT);
+  initPins(1);
+  initPins(2);
+  initPins(3);
+  initPins(4);
 
   digitalWrite(OE_PIN, LOW); // Enable output
-  digitalWrite(LATCH_PIN, LOW); // Initialize Latch
 
   Serial.println("Pins initialized.");
 }
+
+void initPins(int idx){
+  // set pins mode
+  pinMode(DATA_PIN(idx), OUTPUT);
+  pinMode(LATCH_PIN(idx), OUTPUT);
+  pinMode(CLOCK_PIN(idx), OUTPUT);
+  // Initialize Latch
+  digitalWrite(LATCH_PIN(idx), LOW);
+}
+
 
 void loop() {
   unsigned long currentMillis = millis(); // Get the current time
@@ -88,23 +112,33 @@ void displayPattern(byte pattern[8]) {
     // Prepare column data (active low)
     byte col_data = ~pattern[row]; // Columns for the current row in the current pattern
 
-    // Shift out row data
-    shiftOut(row_data);
-    // Shift out column data
-    shiftOut(col_data);
+    // Shift out row data, column data, and latch
+    sendData(1, row_data, col_data);
+    sendData(2, row_data, col_data);
+    sendData(3, row_data, col_data);
+    sendData(4, row_data, col_data);
 
-    // Latch the data
-    digitalWrite(LATCH_PIN, HIGH);
-    //delayMicroseconds(2); // Short delay to ensure data is latched
-    digitalWrite(LATCH_PIN, LOW);
     delay(2); 
   }
 }
 
-void shiftOut(byte data) {
+void sendData(int idx, byte rowData, byte colData)
+{
+  shiftOut(rowData, CLOCK_PIN(idx), DATA_PIN(idx));
+  shiftOut(colData, CLOCK_PIN(idx), DATA_PIN(idx));
+  latch(LATCH_PIN(idx));
+}
+
+void shiftOut(byte data, int clockPin, int dataPin) {
   for (int i = 0; i < 8; i++) {
-    digitalWrite(CLOCK_PIN, LOW);
-    digitalWrite(DATA_PIN, data & (1 << (7 - i)) ? HIGH : LOW);
-    digitalWrite(CLOCK_PIN, HIGH);
+    digitalWrite(clockPin, LOW);
+    digitalWrite(dataPin, data & (1 << (7 - i)) ? HIGH : LOW);
+    digitalWrite(clockPin, HIGH);
   }
+}
+void latch(int latchPin) {
+    // Latch the data
+    digitalWrite(latchPin, HIGH);
+    //delayMicroseconds(2); // Short delay to ensure data is latched
+    digitalWrite(latchPin, LOW);
 }
