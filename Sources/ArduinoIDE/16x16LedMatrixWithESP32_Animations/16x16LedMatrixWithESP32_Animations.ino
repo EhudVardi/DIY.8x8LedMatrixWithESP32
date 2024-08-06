@@ -74,8 +74,8 @@ void sendData(int16_t rowData, int16_t colData)
   byte colData_lowByte = colData & 0xFF;
   shiftOut(rowData_highByte, CLOCK_PIN, DATA_PIN);
   shiftOut(rowData_lowByte, CLOCK_PIN, DATA_PIN);
-  shiftOut(colData_highByte, CLOCK_PIN, DATA_PIN);
   shiftOut(colData_lowByte, CLOCK_PIN, DATA_PIN);
+  shiftOut(colData_highByte, CLOCK_PIN, DATA_PIN);
   latch(LATCH_PIN);
 }
 
