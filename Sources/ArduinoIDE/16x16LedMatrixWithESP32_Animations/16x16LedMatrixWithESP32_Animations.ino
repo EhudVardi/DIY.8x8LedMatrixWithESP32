@@ -4,10 +4,8 @@
 #include "BeatingHeartAnime.h"
 
 #define SCREEN_SIZE 16
-#define MAX_PIXELS 5
 
 BaseAnime* animation = nullptr;
-
 
 
 #define OE_PIN   4 // Output Enable pin (active low)
