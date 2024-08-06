@@ -2,6 +2,7 @@
 #include "BaseAnime.h"
 #include "TheMatrixAnime.h"
 #include "BeatingHeartAnime.h"
+#include "SpiralAnime.h"
 
 #define SCREEN_SIZE 16
 
@@ -36,12 +37,13 @@ void setup() {
   
   
   //animation = new TheMatrixAnime(SCREEN_SIZE, 16);
-  animation = new BeatingHeartAnime(SCREEN_SIZE);
+  //animation = new BeatingHeartAnime(SCREEN_SIZE);
+  animation = new SpiralAnime(SCREEN_SIZE);
   animation->init();
 }
 
 
-const unsigned long stepFrameTime = 100;
+const unsigned long stepFrameTime = 20;
 unsigned long previousMillis = 0;
 
 void loop() {
