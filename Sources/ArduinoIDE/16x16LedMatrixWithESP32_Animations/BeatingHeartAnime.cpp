@@ -33,9 +33,9 @@ void BeatingHeartAnime::drawHeart(const uint8_t* heart, int size) {
             // Compute the index in the 1D array
             int index = i * size + j;
             if (heart[index])
-              setPixel(i + offset, j - offset , true);
+              setPixel(i + offset, j + offset , true);
             else 
-              setPixel(i + offset, j - offset , false);
+              setPixel(i + offset, j + offset , false);
         }
     }
 }

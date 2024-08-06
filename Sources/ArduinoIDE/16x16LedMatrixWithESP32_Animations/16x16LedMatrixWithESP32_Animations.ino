@@ -35,7 +35,8 @@ void setup() {
   Serial.println("Pins initialized.");
   
   
-  animation = new TheMatrixAnime(SCREEN_SIZE, 16);
+  //animation = new TheMatrixAnime(SCREEN_SIZE, 16);
+  animation = new BeatingHeartAnime(SCREEN_SIZE);
   animation->init();
 }
 
