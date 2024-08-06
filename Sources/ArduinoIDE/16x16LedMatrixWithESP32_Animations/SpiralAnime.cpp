@@ -31,6 +31,7 @@ void SpiralAnime::step() {
   
   if (currTrailStep == 0) { // current trail draw finished
     if (currTrailLength == N) {
+      setPixel(currRowIdx,currColIdx,trailInOrOut); //make sure the last trail of the spiral is also drawn, before switching direction
       // spiral complete. switch trail in/out
       init();
       trailInOrOut = !trailInOrOut;
