@@ -21,7 +21,7 @@ SpiralAnime::SpiralAnime(int size)
     : BaseAnime(size), trailInOrOut(true) {}
 
 void SpiralAnime::init() {
-  stepDirection = Down;
+  stepDir = Down;
   currTrailLength = 0;
   currRowIdx = currColIdx = N/2;
   currTrailStep = 0;
@@ -37,8 +37,8 @@ void SpiralAnime::step() {
       trailInOrOut = !trailInOrOut;
     }
 
-    stepDirection = static_cast<Direction>((stepDirection + 1) % 4); // move to next direction
-    if (stepDirection == Left || stepDirection == Right){ // increase length of current direction trail
+    stepDir = static_cast<Dir>((stepDir + 1) % 4); // move to next direction
+    if (stepDir == Left || stepDir == Right){ // increase length of current direction trail
       currTrailLength++; 
     }
     currTrailStep = currTrailLength;
@@ -49,7 +49,7 @@ void SpiralAnime::step() {
   setPixel(currRowIdx,currColIdx,trailInOrOut);
 
   if (currTrailStep > 0) {
-    switch (stepDirection){
+    switch (stepDir){
       case Down:  { currRowIdx++;  break; }
       case Left:  { currColIdx--;  break;}
       case Up:    { currRowIdx--;  break;}

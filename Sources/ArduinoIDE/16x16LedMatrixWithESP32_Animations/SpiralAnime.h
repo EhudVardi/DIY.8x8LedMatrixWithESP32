@@ -3,7 +3,7 @@
 
 #include "BaseAnime.h"
 
-enum Direction {Down=0,Left=1,Up=2,Right=3};
+enum Dir {Down=0,Left=1,Up=2,Right=3};
 
 class SpiralAnime : public BaseAnime {
 public:
@@ -12,7 +12,7 @@ public:
     void step() override;
 
 private:
-    enum Direction stepDirection;
+    enum Dir stepDir;
     int8_t currTrailLength;
     int8_t currTrailStep;
     int8_t currRowIdx;
