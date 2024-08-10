@@ -6,6 +6,8 @@
 #include "LinkedList.h"
 #include "Matrix2D.h"
 
+enum GameState { Initialized, Running, Ended };
+
 class SnakeGame {
 private:
 	Point2D tailPos;
@@ -18,6 +20,8 @@ private:
 	
 	bool IsHeadOutOfBounds(Point2D headPos);
 	bool IsHeadCollideWithBody(Point2D headPos);
+
+  GameState gameState;
 	
 public:
 	SnakeGame(int width, int height);

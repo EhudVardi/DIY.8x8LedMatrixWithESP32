@@ -1,7 +1,7 @@
 #include "SnakeGame.h"
 
 SnakeGame::SnakeGame(int width, int height) 
-	: boardMatrix(width, height){ }
+	: boardMatrix(width, height), gameState(Initialized) { }
 
 void SnakeGame::InitGame(){
 	//// init position of the snake tail
@@ -35,9 +35,12 @@ void SnakeGame::InitGame(){
   snakeBody.append(L, 3);
   // paint current snake on the board
   PaintSnakeOnBoard();
+  gameState = Running;
 }
 
 void SnakeGame::StepGame(){
+  if (gameState != Running)
+    return;
 	//// move the snake and update its body
   // get snake head and tail sections
 	ListNode* snakeTail = snakeBody.getHead();
@@ -51,15 +54,14 @@ void SnakeGame::StepGame(){
 	snakeHead->length++;
 	if (snakeTail->length == 0)
 		snakeBody.trimHead();
-  // set the matrix cell of the new head of the snake
+  // check if the new snake head is out of bounds or if it collides with itself
 	Point2D headPos = GetSnakeHeadPos();
+  if (IsHeadOutOfBounds(headPos) || IsHeadCollideWithBody(headPos)) {
+    gameState = Ended; // end the game and exit
+    return;
+  }
+  // no collisions, set new head on the matrix and allow the game to continue
   boardMatrix.SetBodyCell(headPos.x, headPos.y); 
-	
-	//// check snake health (out of bounds or collide with body)
-	if (IsHeadOutOfBounds(headPos) || IsHeadCollideWithBody(headPos)) {
-		//TODO: endgame
-		//TODO: IsHeadCollideWithBody, using the matrix instead of the body struct 
-	}
 }
 
 Matrix2D SnakeGame::GetBoard() const {
@@ -98,39 +100,7 @@ bool SnakeGame::IsHeadOutOfBounds(Point2D headPos){
 }
 
 bool SnakeGame::IsHeadCollideWithBody(Point2D headPos){
-	Point2D travelPos(tailPos.x, tailPos.y);
-	ListNode* travelNode = snakeBody.getHead();
-	while (travelNode->next){
-		switch (travelNode->dir) {
-			case L: {
-				if (headPos.y == travelPos.y && 
-					headPos.x <= travelPos.x && 
-					headPos.x >= (travelPos.x - travelNode->length))
-						return true;
-			}
-			case R: {
-				if (headPos.y == travelPos.y && 
-					headPos.x >= travelPos.x && 
-					headPos.x <= (travelPos.x + travelNode->length))
-						return true;
-			}
-			case D: {
-				if (headPos.x == travelPos.x && 
-					headPos.y <= travelPos.y && 
-					headPos.y >= (travelPos.y - travelNode->length))
-						return true;
-			}
-			case U: {
-				if (headPos.x == travelPos.x && 
-					headPos.y >= travelPos.y && 
-					headPos.y <= (travelPos.y + travelNode->length))
-						return true;
-			}
-		}
-		travelPos.Move(travelNode->dir, travelNode->length);
-		travelNode = travelNode->next;
-	}
-	return false;
+  return boardMatrix.IsBodyCell(headPos.x, headPos.y);
 }
 
 
