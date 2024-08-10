@@ -3,6 +3,8 @@
 #include "TheMatrixAnime.h"
 #include "BeatingHeartAnime.h"
 #include "SpiralAnime.h"
+#include "BaseInteractiveAnime.h"
+#include "SnakeInteractiveAnime.h"
 
 #define SCREEN_SIZE 16
 
@@ -38,12 +40,13 @@ void setup() {
   
   //animation = new TheMatrixAnime(SCREEN_SIZE, 16);
   //animation = new BeatingHeartAnime(SCREEN_SIZE);
-  animation = new SpiralAnime(SCREEN_SIZE);
+  //animation = new SpiralAnime(SCREEN_SIZE);
+  animation = new SnakeInteractiveAnime(SCREEN_SIZE);
   animation->init();
 }
 
 
-const unsigned long stepFrameTime = 20;
+const unsigned long stepFrameTime = 100;
 unsigned long previousMillis = 0;
 
 void loop() {
