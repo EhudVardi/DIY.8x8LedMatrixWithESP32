@@ -12,8 +12,6 @@ void SnakeInteractiveAnime::step() {
 	game.StepGame();
 	// update display matrix from game board
 	clearMatrix();
-  setPixel(0, 0, true);
-  setPixel(15, 0, true);
 	Matrix2D gameBoard = game.GetBoard();
 	for (int i=0; i<gameBoard.GetWidth(); i++) {
 		for (int j=0; j<gameBoard.GetHeight(); j++) {
