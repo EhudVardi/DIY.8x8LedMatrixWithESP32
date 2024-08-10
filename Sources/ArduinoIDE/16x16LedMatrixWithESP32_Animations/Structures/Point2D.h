@@ -1,6 +1,8 @@
 #ifndef POINT2D_H
 #define POINT2D_H
 
+#include "Direction.h"
+
 class Point2D {
 public:
     int x, y;
