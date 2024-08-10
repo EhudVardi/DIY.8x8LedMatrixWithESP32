@@ -8,7 +8,7 @@ protected:
 	int inputs;
 public:
   BaseInteractiveAnime(int matrixSize, int buttonCount);
-	virtual void setInput(int inputIdx);
+	virtual void setInput(int inputIdx) = 0;;
 };
 
 #endif
