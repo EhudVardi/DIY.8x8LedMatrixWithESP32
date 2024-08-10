@@ -56,7 +56,7 @@ void SnakeGame::StepGame(){
 		snakeBody.trimHead();
   // check if the new snake head is out of bounds or if it collides with itself
 	Point2D headPos = GetSnakeHeadPos();
-  if (IsHeadOutOfBounds(headPos) || IsHeadCollideWithBody(headPos)) {
+  if (boardMatrix.IsPointOutOfBounds(headPos) || boardMatrix.IsBodyCell(headPos.x, headPos.y)) {
     gameState = Ended; // end the game and exit
     return;
   }
@@ -93,21 +93,6 @@ Point2D SnakeGame::GetSnakeHeadPos(){
 		travelNode = travelNode->next;
 	}
 	return snakeHeadPos;
-}
-
-bool SnakeGame::IsHeadOutOfBounds(Point2D headPos){
-	return boardMatrix.IsPointOutOfBounds(headPos);
-}
-
-bool SnakeGame::IsHeadCollideWithBody(Point2D headPos){
-  return boardMatrix.IsBodyCell(headPos.x, headPos.y);
-}
-
-
-
-bool SnakeGame::IsGameOver(){
-	
-	return false;
 }
 
 

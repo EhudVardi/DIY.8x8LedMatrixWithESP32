@@ -17,9 +17,6 @@ private:
 	void PaintSnakeOnBoard();
 	
 	Point2D GetSnakeHeadPos();
-	
-	bool IsHeadOutOfBounds(Point2D headPos);
-	bool IsHeadCollideWithBody(Point2D headPos);
 
   GameState gameState;
 	
@@ -29,7 +26,6 @@ public:
 	void StepGame();
 	Matrix2D GetBoard() const;
 	void TurnSnake(bool clockWise);
-	bool IsGameOver();
 };
 
 
