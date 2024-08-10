@@ -1,10 +1,10 @@
 #ifndef SNAKE_GAME_H
 #define SNAKE_GAME_H
 
-#include "Structures\Direction.h"
-#include "Structures\Point2D.h"
-#include "Structures\LinkedList.h"
-#include "Structures\Matrix2D.h"
+#include "Direction.h"
+#include "Point2D.h"
+#include "LinkedList.h"
+#include "Matrix2D.h"
 
 class SnakeGame {
 private:
