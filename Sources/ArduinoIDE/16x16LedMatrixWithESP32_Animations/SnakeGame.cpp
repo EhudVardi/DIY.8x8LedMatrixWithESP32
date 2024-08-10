@@ -10,7 +10,7 @@ void SnakeGame::InitGame(){
 	//// init body of the snake - one section
 	//snakeBody.append(L, 2);
 	
-	// create example
+	/*// create example 1
 	tailPos.x = 10;
 	tailPos.y = 2;
 	snakeBody.append(L, 4);
@@ -18,22 +18,44 @@ void SnakeGame::InitGame(){
 	snakeBody.append(L, 2);
 	snakeBody.append(U, 3);
 	snakeBody.append(R, 3);
-	snakeBody.append(D, 1);
+	snakeBody.append(D, 1);*/
+  	// create example 2
+	tailPos.x = 2;
+	tailPos.y = 2;
+	snakeBody.append(R, 9);
+	snakeBody.append(U, 2);	
+  snakeBody.append(L, 8);
+	snakeBody.append(U, 2);
+	snakeBody.append(R, 7);
+	snakeBody.append(U, 2);
+  snakeBody.append(L, 6);
+	snakeBody.append(U, 2);
+	snakeBody.append(R, 5);
+	snakeBody.append(U, 2);
+  snakeBody.append(L, 3);
+  // paint current snake on the board
+  PaintSnakeOnBoard();
 }
 
 void SnakeGame::StepGame(){
-	/// move the snake and update its body
+	//// move the snake and update its body
+  // get snake head and tail sections
 	ListNode* snakeTail = snakeBody.getHead();
 	ListNode* snakeHead = snakeBody.getTail();
+  // clear the matrix cell of the old tail end of the snake
+  boardMatrix.ClearCell(tailPos.x, tailPos.y); 
+  // move the tail one step
 	tailPos.Move(snakeTail->dir, 1);
+  // update snake head and tail sections, trim tail section if finished
 	snakeTail->length--;
 	snakeHead->length++;
 	if (snakeTail->length == 0)
 		snakeBody.trimHead();
-	/// paint the snake on the boardMatrix. TODO: optimize!
-	PaintSnakeOnBoard();
-	/// check snake health (out of bounds or collide with body)
+  // set the matrix cell of the new head of the snake
 	Point2D headPos = GetSnakeHeadPos();
+  boardMatrix.SetBodyCell(headPos.x, headPos.y); 
+	
+	//// check snake health (out of bounds or collide with body)
 	if (IsHeadOutOfBounds(headPos) || IsHeadCollideWithBody(headPos)) {
 		//TODO: endgame
 		//TODO: IsHeadCollideWithBody, using the matrix instead of the body struct 
