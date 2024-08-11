@@ -11,8 +11,8 @@
 BaseAnime* animation = nullptr;
 
 
-#define OE_PIN   4 // Output Enable pin (active low)
-#define DATA_1_PIN 13 // Serial Data Input
+#define OE_PIN 5 // Output Enable pin (active low)
+#define DATA_1_PIN 4 // Serial Data Input
 #define LATCH_1_PIN 2 // Latch Pin
 #define CLOCK_1_PIN 15 // Clock Pin
 
