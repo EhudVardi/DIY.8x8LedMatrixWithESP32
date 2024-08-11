@@ -1,7 +1,7 @@
 #include "BeatingHeartAnime.h"
 
 BeatingHeartAnime::BeatingHeartAnime(int size) 
-    : BaseAnime(size), stepCount(0), direction(1) {}
+    : BaseInteractiveAnime(size, 4), stepCount(0), direction(1) {}
 
 void BeatingHeartAnime::init() {
     stepCount = 0;

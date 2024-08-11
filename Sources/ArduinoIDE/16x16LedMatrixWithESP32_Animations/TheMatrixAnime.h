@@ -1,10 +1,10 @@
 #ifndef THE_MATRIX_ANIME_H
 #define THE_MATRIX_ANIME_H
 
-#include "BaseAnime.h"
+#include "BaseInteractiveAnime.h"
 #include <vector>
 
-class TheMatrixAnime : public BaseAnime {
+class TheMatrixAnime : public BaseInteractiveAnime {
 private:
     int maxPixels;
     std::vector<std::pair<int, int>> pixels;

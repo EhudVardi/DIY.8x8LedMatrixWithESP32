@@ -18,7 +18,7 @@
 
 
 SpiralAnime::SpiralAnime(int size) 
-    : BaseAnime(size), trailInOrOut(true) {}
+    : BaseInteractiveAnime(size, 4), trailInOrOut(true) {}
 
 void SpiralAnime::init() {
   stepDir = Down;

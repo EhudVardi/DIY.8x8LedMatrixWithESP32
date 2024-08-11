@@ -1,7 +1,7 @@
 #include "TheMatrixAnime.h"
 
 TheMatrixAnime::TheMatrixAnime(int size, int maxPixels) 
-    : BaseAnime(size), maxPixels(maxPixels) {}
+    : BaseInteractiveAnime(size, 4), maxPixels(maxPixels) {}
 
 void TheMatrixAnime::init() {
     pixels.clear();

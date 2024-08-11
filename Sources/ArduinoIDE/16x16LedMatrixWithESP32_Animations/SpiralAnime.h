@@ -1,11 +1,11 @@
 #ifndef SPIRALANIME_H
 #define SPIRALANIME_H
 
-#include "BaseAnime.h"
+#include "BaseInteractiveAnime.h"
 
 enum Dir {Down=0,Left=1,Up=2,Right=3};
 
-class SpiralAnime : public BaseAnime {
+class SpiralAnime : public BaseInteractiveAnime {
 public:
     SpiralAnime(int matrixSize);
     void init() override;

@@ -1,9 +1,9 @@
 #ifndef BEATINGHEARTANIME_H
 #define BEATINGHEARTANIME_H
 
-#include "BaseAnime.h"
+#include "BaseInteractiveAnime.h"
 
-class BeatingHeartAnime : public BaseAnime {
+class BeatingHeartAnime : public BaseInteractiveAnime {
 public:
     BeatingHeartAnime(int matrixSize);
     void init() override;
