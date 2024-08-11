@@ -1,14 +1,14 @@
 
 #include "BaseAnime.h"
+#include "BaseInteractiveAnime.h"
 #include "TheMatrixAnime.h"
 #include "BeatingHeartAnime.h"
 #include "SpiralAnime.h"
-#include "BaseInteractiveAnime.h"
 #include "SnakeInteractiveAnime.h"
 
 #define SCREEN_SIZE 16
 
-BaseAnime* animation = nullptr;
+BaseInteractiveAnime* animation = nullptr;
 
 
 #define OE_PIN 5 // Output Enable pin (active low)
