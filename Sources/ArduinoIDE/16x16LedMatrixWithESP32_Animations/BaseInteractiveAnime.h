@@ -2,13 +2,29 @@
 #define BASE_INTERACTIVE_ANIME_H
 
 #include "BaseAnime.h"
+#include <vector>
+
+enum class ButtonState {
+    Released,
+    Pressed
+};
+
+class Button {
+public:
+    ButtonState state;
+    Button() : state(ButtonState::Released) {}
+};
 
 class BaseInteractiveAnime : public BaseAnime {
 protected:
-	int inputs;
+    int inputs;
+    std::vector<Button> buttons; 
+
 public:
-  BaseInteractiveAnime(int matrixSize, int buttonCount);
-	virtual void setInput(int inputIdx) = 0;;
+    BaseInteractiveAnime(int matrixSize, int buttonCount);
+
+    void setButtonState(int buttonIdx, ButtonState newState);
+    ButtonState getButtonState(int buttonIdx);
 };
 
 #endif

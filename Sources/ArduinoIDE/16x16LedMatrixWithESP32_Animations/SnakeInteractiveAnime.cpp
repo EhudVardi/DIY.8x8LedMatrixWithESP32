@@ -20,5 +20,3 @@ void SnakeInteractiveAnime::step() {
 		}
 	}
 }
-
-void SnakeInteractiveAnime::setInput(int inputIdx) { }

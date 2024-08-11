@@ -12,7 +12,6 @@ public:
     SnakeInteractiveAnime(int size);
     void init() override;
     void step() override;
-	void setInput(int inputIdx) override;
 };
 
 #endif
