@@ -2,10 +2,11 @@
 
 HWButtonHandler* HWButtonHandler::instance = nullptr;
 
-HWButtonHandler::HWButtonHandler(const std::vector<int>& pins) {
-    for (int pin : pins) {
-        buttons.emplace_back(pin);
-        attachInterrupt(digitalPinToInterrupt(pin), HWButtonHandler::isr, CHANGE);
+HWButtonHandler::HWButtonHandler(const std::vector<int>& pins, const std::vector<std::function<void()>>& handlers) {
+    for (size_t i = 0; i < pins.size(); ++i) {
+        buttons.emplace_back(pins[i]);
+        buttons.back().onPress = handlers[i]; // Assign the corresponding handler
+        attachInterrupt(digitalPinToInterrupt(pins[i]), HWButtonHandler::isr, CHANGE);
     }
     instance = this;
 }

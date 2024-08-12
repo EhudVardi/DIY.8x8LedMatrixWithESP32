@@ -51,7 +51,15 @@ void setup() {
   
 
   std::vector<int> hwButtonPins = {BTN_DOWN_PIN, BTN_UP_PIN, BTN_LEFT_PIN, BTN_RIGHT_PIN, BTN_BACK_PIN, BTN_ENTER_PIN};
-  hwButtonHandler = new HWButtonHandler(hwButtonPins);
+  std::vector<std::function<void()>> hwButtonHandlers = {
+		[](){ animation = new TheMatrixAnime(SCREEN_SIZE, 16); animation->init(); },
+		[](){ animation = new BeatingHeartAnime(SCREEN_SIZE); animation->init(); },
+		[](){ animation = new SpiralAnime(SCREEN_SIZE); animation->init(); },
+		[](){ animation = new SnakeInteractiveAnime(SCREEN_SIZE); animation->init(); },
+		[](){ delay(1000); },
+		[](){ delay(3000); }
+	};
+  hwButtonHandler = new HWButtonHandler(hwButtonPins, hwButtonHandlers);
 }
 
 
@@ -66,27 +74,6 @@ void loop() {
   
   uint8_t* matrix = animation->getMatrix();
   displayPattern(matrix);
-
-  // Check each button for state changes
-  std::vector<HWButton>& hwButtons = hwButtonHandler->getButtons();
-  for (size_t i = 0; i < hwButtons.size(); ++i) {
-      if (hwButtons[i].stateChanged()) {
-          if (hwButtons[i].getState() == HWButtonState::Pressed) {
-            switch (i) {
-              case 0: animation = new TheMatrixAnime(SCREEN_SIZE, 16); break;
-              case 1: animation = new BeatingHeartAnime(SCREEN_SIZE); break;
-              case 2: animation = new SpiralAnime(SCREEN_SIZE); break;
-              case 3: animation = new SnakeInteractiveAnime(SCREEN_SIZE); break;
-              case 4: break;
-              case 5: break;
-            }
-            animation->init();
-          } 
-          else {
-            
-          }
-      }
-  }
 
   //delay(10);
 }
