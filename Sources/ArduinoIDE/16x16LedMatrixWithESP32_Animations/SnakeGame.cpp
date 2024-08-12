@@ -4,11 +4,11 @@ SnakeGame::SnakeGame(int width, int height)
 	: boardMatrix(width, height), gameState(Initialized) { }
 
 void SnakeGame::InitGame(){
-	//// init position of the snake tail
-	//tailPos.x = boardMatrix.GetWidth()/2;
-	//tailPos.y = boardMatrix.GetHeight()/2;
-	//// init body of the snake - one section
-	//snakeBody.append(L, 2);
+	// init position of the snake tail
+	tailPos.x = boardMatrix.GetWidth()/2;
+	tailPos.y = boardMatrix.GetHeight()/2;
+	// init body of the snake - one section
+	snakeBody.append(L, 2);
 	
 	/*// create example 1
 	tailPos.x = 10;
@@ -19,7 +19,7 @@ void SnakeGame::InitGame(){
 	snakeBody.append(U, 3);
 	snakeBody.append(R, 3);
 	snakeBody.append(D, 1);*/
-  	// create example 2
+  /*// create example 2
 	tailPos.x = 2;
 	tailPos.y = 2;
 	snakeBody.append(R, 9);
@@ -27,12 +27,9 @@ void SnakeGame::InitGame(){
   snakeBody.append(L, 8);
 	snakeBody.append(U, 2);
 	snakeBody.append(R, 7);
-	snakeBody.append(U, 2);
+	snakeBody.append(U, 6);
   snakeBody.append(L, 6);
-	snakeBody.append(U, 2);
-	snakeBody.append(R, 5);
-	snakeBody.append(U, 2);
-  snakeBody.append(L, 3);
+  snakeBody.append(D, 1);*/
   // paint current snake on the board
   PaintSnakeOnBoard();
   gameState = Running;
@@ -62,6 +59,17 @@ void SnakeGame::StepGame(){
   }
   // no collisions, set new head on the matrix and allow the game to continue
   boardMatrix.SetBodyCell(headPos.x, headPos.y); 
+}
+
+void SnakeGame::TurnSnake(Direction newDir) {
+  //TODO: decide to turn the snake or not according its current direction and the snake head section length
+  // allow to turn if new direction is adjecent to current snake head section direction (i.e., deny if its the same or opposite direction, else allow)
+  // allow to turn only if the snake head section length is not zero (this signals that previous input has turned the snake but step did not occured yet)
+  // to turn, simply append a new section to the snake head with a length of zero and with the new direction
+  ListNode* snakeHead = snakeBody.getTail();
+  if (snakeHead->length > 0 && IsDirectionsAdjacent(snakeHead->dir, newDir)) {
+    snakeBody.append(newDir, 0);
+  }
 }
 
 Matrix2D SnakeGame::GetBoard() const {

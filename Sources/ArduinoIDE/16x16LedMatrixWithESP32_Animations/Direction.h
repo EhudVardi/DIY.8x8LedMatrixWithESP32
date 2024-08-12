@@ -5,6 +5,7 @@
 #define CCWISE false
 enum Direction { L, D, R, U };
 Direction Turn(Direction dir, bool clockWise);
+bool IsDirectionsAdjacent(Direction d1, Direction d2);
 //std::string directionToString(Direction dir);
 
 #endif

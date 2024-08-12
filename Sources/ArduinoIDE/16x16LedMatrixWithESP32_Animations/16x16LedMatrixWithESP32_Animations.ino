@@ -45,8 +45,8 @@ void setup() {
   
   //animation = new TheMatrixAnime(SCREEN_SIZE, 16);
   //animation = new BeatingHeartAnime(SCREEN_SIZE);
-  animation = new SpiralAnime(SCREEN_SIZE);
-  //animation = new SnakeInteractiveAnime(SCREEN_SIZE);
+  //animation = new SpiralAnime(SCREEN_SIZE);
+  animation = new SnakeInteractiveAnime(SCREEN_SIZE);
   animation->init();
   
 

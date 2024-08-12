@@ -25,7 +25,7 @@ public:
 	void InitGame();
 	void StepGame();
 	Matrix2D GetBoard() const;
-	void TurnSnake(bool clockWise);
+	void TurnSnake(Direction newDir);
 };
 
 

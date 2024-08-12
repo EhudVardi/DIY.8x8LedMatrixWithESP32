@@ -2,7 +2,7 @@
 
 SnakeInteractiveAnime::SnakeInteractiveAnime(int size)
     : BaseInteractiveAnime(size), game(size,size) {
-      stepDuration = 1000;
+      stepDuration = 500;
       SetInputHandlers();
     }
 
@@ -26,15 +26,15 @@ void SnakeInteractiveAnime::step() {
 
 void SnakeInteractiveAnime::SetInputHandlers() {
   inputHandlers[0] = [this]() {
-    stepDuration = 50;
+    game.TurnSnake(U);
   };
   inputHandlers[1] = [this]() {
-    stepDuration = 100;
+    game.TurnSnake(D);
   };
   inputHandlers[2] = [this]() {
-    stepDuration = 250;
+    game.TurnSnake(L);
   };
   inputHandlers[3] = [this]() {
-    stepDuration = 500;
+    game.TurnSnake(R);
   };
 }
