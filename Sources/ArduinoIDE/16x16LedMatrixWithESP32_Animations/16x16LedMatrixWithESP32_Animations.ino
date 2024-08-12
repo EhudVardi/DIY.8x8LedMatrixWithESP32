@@ -25,6 +25,8 @@ HWButtonHandler* hwButtonHandler = nullptr;
 #define BTN_UP_PIN 12
 #define BTN_LEFT_PIN 14
 #define BTN_RIGHT_PIN 27
+#define BTN_BACK_PIN 33
+#define BTN_ENTER_PIN 32
 
 
 void setup() {
@@ -50,7 +52,7 @@ void setup() {
   animation->init();
   
 
-  std::vector<int> hwButtonPins = {BTN_DOWN_PIN, BTN_UP_PIN, BTN_LEFT_PIN, BTN_RIGHT_PIN};
+  std::vector<int> hwButtonPins = {BTN_DOWN_PIN, BTN_UP_PIN, BTN_LEFT_PIN, BTN_RIGHT_PIN, BTN_BACK_PIN, BTN_ENTER_PIN};
   hwButtonHandler = new HWButtonHandler(hwButtonPins);
 }
 
@@ -78,6 +80,8 @@ void loop() {
               case 1: animation = new BeatingHeartAnime(SCREEN_SIZE); break;
               case 2: animation = new SpiralAnime(SCREEN_SIZE); break;
               case 3: animation = new SnakeInteractiveAnime(SCREEN_SIZE); break;
+              case 4: break;
+              case 5: break;
             }
             animation->init();
           } 
