@@ -24,7 +24,7 @@ void SnakeInteractiveAnime::step() {
 	}
 }
 
-void SpiralAnime::SetInputHandlers() {
+void SnakeInteractiveAnime::SetInputHandlers() {
   inputHandlers[0] = [this]() {
     stepDuration = 50;
   };

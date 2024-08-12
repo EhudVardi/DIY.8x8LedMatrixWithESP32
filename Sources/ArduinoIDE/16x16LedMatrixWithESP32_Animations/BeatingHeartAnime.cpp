@@ -43,7 +43,7 @@ void BeatingHeartAnime::drawHeart(const uint8_t* heart, int size) {
     }
 }
 
-void SpiralAnime::SetInputHandlers() {
+void BeatingHeartAnime::SetInputHandlers() {
   inputHandlers[0] = [this]() {
     stepDuration = 50;
   };

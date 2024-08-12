@@ -27,7 +27,7 @@ void TheMatrixAnime::step() {
     }
 }
 
-void SpiralAnime::SetInputHandlers() {
+void TheMatrixAnime::SetInputHandlers() {
   inputHandlers[0] = [this]() {
     stepDuration = 50;
   };
