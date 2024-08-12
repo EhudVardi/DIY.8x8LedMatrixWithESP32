@@ -1,7 +1,7 @@
 #include "TheMatrixAnime.h"
 
 TheMatrixAnime::TheMatrixAnime(int size, int maxPixels) 
-    : BaseInteractiveAnime(size, 4), maxPixels(maxPixels) {
+    : BaseInteractiveAnime(size), maxPixels(maxPixels) {
       stepDuration = 100;
     }
 
