@@ -45,17 +45,17 @@ void setup() {
   
   //animation = new TheMatrixAnime(SCREEN_SIZE, 16);
   //animation = new BeatingHeartAnime(SCREEN_SIZE);
-  //animation = new SpiralAnime(SCREEN_SIZE);
-  animation = new SnakeInteractiveAnime(SCREEN_SIZE);
+  animation = new SpiralAnime(SCREEN_SIZE);
+  //animation = new SnakeInteractiveAnime(SCREEN_SIZE);
   animation->init();
   
 
   std::vector<int> hwButtonPins = {BTN_DOWN_PIN, BTN_UP_PIN, BTN_LEFT_PIN, BTN_RIGHT_PIN, BTN_BACK_PIN, BTN_ENTER_PIN};
   std::vector<std::function<void()>> hwButtonHandlers = {
-		[](){ animation = new TheMatrixAnime(SCREEN_SIZE, 16); animation->init(); },
-		[](){ animation = new BeatingHeartAnime(SCREEN_SIZE); animation->init(); },
-		[](){ animation = new SpiralAnime(SCREEN_SIZE); animation->init(); },
-		[](){ animation = new SnakeInteractiveAnime(SCREEN_SIZE); animation->init(); },
+		[](){ animation->SetInput(0); },
+		[](){ animation->SetInput(1); },
+		[](){ animation->SetInput(2); },
+		[](){ animation->SetInput(3); },
 		[](){ delay(1000); },
 		[](){ delay(3000); }
 	};
