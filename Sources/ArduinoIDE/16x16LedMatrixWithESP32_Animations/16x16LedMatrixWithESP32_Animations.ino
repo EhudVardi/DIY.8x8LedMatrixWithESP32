@@ -1,6 +1,4 @@
 #include "HWButtonHandler.h"
-#include "BaseAnime.h"
-#include "BaseInteractiveAnime.h"
 #include "TheMatrixAnime.h"
 #include "BeatingHeartAnime.h"
 #include "SpiralAnime.h"
