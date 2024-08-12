@@ -4,7 +4,7 @@
 #include "BaseAnime.h"
 #include <unordered_map>
 
-typedef void (*InputHandler)();
+typedef std::function<void()> InputHandler;
 
 class BaseInteractiveAnime : public BaseAnime {
 protected:

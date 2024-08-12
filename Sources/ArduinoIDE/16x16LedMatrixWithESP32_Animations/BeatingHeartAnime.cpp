@@ -3,6 +3,7 @@
 BeatingHeartAnime::BeatingHeartAnime(int size) 
     : BaseInteractiveAnime(size), stepCount(0), direction(1) {
       stepDuration = 10;
+      SetInputHandlers();
     }
 
 void BeatingHeartAnime::init() {
@@ -42,4 +43,18 @@ void BeatingHeartAnime::drawHeart(const uint8_t* heart, int size) {
     }
 }
 
-void BeatingHeartAnime::SetInputHandlers() {}
+void SpiralAnime::SetInputHandlers() {
+  inputHandlers[0] = [this]() {
+    stepDuration = 50;
+  };
+  inputHandlers[1] = [this]() {
+    stepDuration = 100;
+  };
+  inputHandlers[2] = [this]() {
+    stepDuration = 250;
+  };
+  inputHandlers[3] = [this]() {
+    stepDuration = 500;
+  };
+}
+

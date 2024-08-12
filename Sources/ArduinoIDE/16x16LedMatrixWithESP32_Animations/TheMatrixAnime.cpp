@@ -3,6 +3,7 @@
 TheMatrixAnime::TheMatrixAnime(int size, int maxPixels) 
     : BaseInteractiveAnime(size), maxPixels(maxPixels) {
       stepDuration = 100;
+      SetInputHandlers();
     }
 
 void TheMatrixAnime::init() {
@@ -26,4 +27,17 @@ void TheMatrixAnime::step() {
     }
 }
 
-void TheMatrixAnime::SetInputHandlers() {}
+void SpiralAnime::SetInputHandlers() {
+  inputHandlers[0] = [this]() {
+    stepDuration = 50;
+  };
+  inputHandlers[1] = [this]() {
+    stepDuration = 100;
+  };
+  inputHandlers[2] = [this]() {
+    stepDuration = 250;
+  };
+  inputHandlers[3] = [this]() {
+    stepDuration = 500;
+  };
+}

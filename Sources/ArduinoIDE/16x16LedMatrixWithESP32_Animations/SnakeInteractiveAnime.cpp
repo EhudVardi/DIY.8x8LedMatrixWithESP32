@@ -3,6 +3,7 @@
 SnakeInteractiveAnime::SnakeInteractiveAnime(int size)
     : BaseInteractiveAnime(size), game(size,size) {
       stepDuration = 1000;
+      SetInputHandlers();
     }
 
 void SnakeInteractiveAnime::init() {
@@ -23,17 +24,17 @@ void SnakeInteractiveAnime::step() {
 	}
 }
 
-void SnakeInteractiveAnime::SetInputHandlers() {
-  inputHandlers[0] = []() {
-    
+void SpiralAnime::SetInputHandlers() {
+  inputHandlers[0] = [this]() {
+    stepDuration = 50;
   };
-  inputHandlers[1] = []() {
-    
+  inputHandlers[1] = [this]() {
+    stepDuration = 100;
   };
-  inputHandlers[2] = []() {
-    
+  inputHandlers[2] = [this]() {
+    stepDuration = 250;
   };
-  inputHandlers[3] = []() {
-    
+  inputHandlers[3] = [this]() {
+    stepDuration = 500;
   };
 }
