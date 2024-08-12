@@ -1,7 +1,9 @@
 #include "SnakeInteractiveAnime.h"
 
 SnakeInteractiveAnime::SnakeInteractiveAnime(int size)
-    : BaseInteractiveAnime(size, 2), game(size,size) {}
+    : BaseInteractiveAnime(size, 2), game(size,size) {
+      stepDuration = 1000;
+    }
 
 void SnakeInteractiveAnime::init() {
 	game.InitGame();

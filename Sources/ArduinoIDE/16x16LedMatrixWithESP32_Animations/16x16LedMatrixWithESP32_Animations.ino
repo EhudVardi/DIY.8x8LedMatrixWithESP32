@@ -57,12 +57,11 @@ void setup() {
 }
 
 
-const unsigned long stepFrameTime = 100;
 unsigned long previousMillis = 0;
 
 void loop() {
   unsigned long currentMillis = millis();
-  if (currentMillis - previousMillis >= stepFrameTime) {
+  if (currentMillis - previousMillis >= animation->getStepDuration()) {
     previousMillis = currentMillis;
     animation->step();
   }

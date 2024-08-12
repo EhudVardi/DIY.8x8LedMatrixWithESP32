@@ -32,3 +32,5 @@ bool BaseAnime::getPixel(int x, int y) {
     int bitIndex = (x * N + y) % 8;
     return (matrix[byteIndex] & (1 << bitIndex)) != 0;
 }
+
+int BaseAnime::getStepDuration() { return stepDuration; }
