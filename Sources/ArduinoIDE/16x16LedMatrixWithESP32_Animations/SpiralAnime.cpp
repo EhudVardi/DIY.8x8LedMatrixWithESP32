@@ -62,3 +62,5 @@ void SpiralAnime::step() {
 
 }
 
+void SpiralAnime::SetInputHandlers() {}
+

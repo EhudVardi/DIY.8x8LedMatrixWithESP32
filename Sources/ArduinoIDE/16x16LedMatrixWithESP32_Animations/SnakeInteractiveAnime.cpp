@@ -22,3 +22,18 @@ void SnakeInteractiveAnime::step() {
 		}
 	}
 }
+
+void SnakeInteractiveAnime::SetInputHandlers() {
+  inputHandlers[0] = []() {
+    
+  };
+  inputHandlers[1] = []() {
+    
+  };
+  inputHandlers[2] = []() {
+    
+  };
+  inputHandlers[3] = []() {
+    
+  };
+}

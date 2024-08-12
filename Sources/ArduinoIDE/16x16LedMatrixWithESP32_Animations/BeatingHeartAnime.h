@@ -8,6 +8,7 @@ public:
     BeatingHeartAnime(int matrixSize);
     void init() override;
     void step() override;
+    void SetInputHandlers() override;
 
 private:
     void drawHeart(const uint8_t* heart, int size);

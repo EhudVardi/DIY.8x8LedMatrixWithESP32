@@ -42,3 +42,4 @@ void BeatingHeartAnime::drawHeart(const uint8_t* heart, int size) {
     }
 }
 
+void BeatingHeartAnime::SetInputHandlers() {}

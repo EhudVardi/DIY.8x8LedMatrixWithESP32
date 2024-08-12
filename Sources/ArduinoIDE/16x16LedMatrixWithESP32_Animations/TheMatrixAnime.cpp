@@ -25,3 +25,5 @@ void TheMatrixAnime::step() {
         setPixel(pixel.first, pixel.second, true);
     }
 }
+
+void TheMatrixAnime::SetInputHandlers() {}

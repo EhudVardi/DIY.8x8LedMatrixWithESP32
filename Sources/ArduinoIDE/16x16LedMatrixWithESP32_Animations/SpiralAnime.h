@@ -10,6 +10,7 @@ public:
     SpiralAnime(int matrixSize);
     void init() override;
     void step() override;
+    void SetInputHandlers() override;
 
 private:
     enum Dir stepDir;

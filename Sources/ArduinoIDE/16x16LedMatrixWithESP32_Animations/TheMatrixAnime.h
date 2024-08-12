@@ -13,6 +13,7 @@ public:
     TheMatrixAnime(int size, int maxPixels);
     void init() override;
     void step() override;
+    void SetInputHandlers() override;
 };
 
 #endif
