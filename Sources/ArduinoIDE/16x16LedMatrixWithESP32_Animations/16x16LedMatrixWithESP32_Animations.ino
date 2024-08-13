@@ -122,7 +122,9 @@ void shiftOut(byte data, int clockPin, int dataPin) {
   for (int i = 0; i < 8; i++) {
     digitalWrite(clockPin, LOW);
     digitalWrite(dataPin, data & (1 << (7 - i)) ? HIGH : LOW);
+    delayMicroseconds(16);
     digitalWrite(clockPin, HIGH);
+    delayMicroseconds(16);
   }
 }
 void latch(int latchPin) {
