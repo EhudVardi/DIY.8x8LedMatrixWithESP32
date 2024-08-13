@@ -7,6 +7,7 @@
 #define SCREEN_SIZE 16
 
 BaseInteractiveAnime* animation = nullptr;
+int currAnimeIndex = 0;
 
 #define OE_PIN 5        // Output Enable pin (active low)
 #define DATA_1_PIN 4    // Serial Data Input
@@ -42,13 +43,7 @@ void setup() {
 
   Serial.println("Pins initialized.");
 
-
-  //animation = new TheMatrixAnime(SCREEN_SIZE, 16);
-  //animation = new BeatingHeartAnime(SCREEN_SIZE);
-  //animation = new SpiralAnime(SCREEN_SIZE);
-  animation = new SnakeInteractiveAnime(SCREEN_SIZE);
-  animation->init();
-
+  initCurrAnime();
 
   std::vector<int> hwButtonPins = { BTN_DOWN_PIN, BTN_UP_PIN, BTN_LEFT_PIN, BTN_RIGHT_PIN, BTN_BACK_PIN, BTN_ENTER_PIN };
   std::vector<std::function<void()>> hwButtonHandlers = {
@@ -65,13 +60,25 @@ void setup() {
       animation->SetInput(3);
     },
     []() {
-      delay(1000);
+      initCurrAnime();
     },
     []() {
-      delay(3000);
+      currAnimeIndex = (currAnimeIndex + 1) % 4;
+      initCurrAnime();
     }
   };
   hwButtonHandler = new HWButtonHandler(hwButtonPins, hwButtonHandlers);
+}
+
+void initCurrAnime() {
+  switch (currAnimeIndex) {
+    case 0: animation = new SnakeInteractiveAnime(SCREEN_SIZE); break;
+    case 1: animation = new BeatingHeartAnime(SCREEN_SIZE); break;
+    case 2: animation = new SpiralAnime(SCREEN_SIZE); break;
+    case 3:
+    default: animation = new TheMatrixAnime(SCREEN_SIZE, 16); break;
+  }
+  animation->init();
 }
 
 
