@@ -5,33 +5,12 @@ SnakeGame::SnakeGame(int width, int height)
   randomSeed(analogRead(0));
 }
 
-void SnakeGame::InitGame(){
-	// init position of the snake tail
-	tailPos.x = boardMatrix.GetWidth()/2;
-	tailPos.y = boardMatrix.GetHeight()/2;
-	// init body of the snake - one section
-	snakeBody.append(L, 2);
-	
-	/*// create example 1
-	tailPos.x = 10;
-	tailPos.y = 2;
-	snakeBody.append(L, 4);
-	snakeBody.append(U, 1);
-	snakeBody.append(L, 2);
-	snakeBody.append(U, 3);
-	snakeBody.append(R, 3);
-	snakeBody.append(D, 1);*/
-  /*// create example 2
-	tailPos.x = 2;
-	tailPos.y = 2;
-	snakeBody.append(R, 9);
-	snakeBody.append(U, 2);	
-  snakeBody.append(L, 8);
-	snakeBody.append(U, 2);
-	snakeBody.append(R, 7);
-	snakeBody.append(U, 6);
-  snakeBody.append(L, 6);
-  snakeBody.append(D, 1);*/
+void SnakeGame::InitGame() {
+  // init position of the snake tail
+  tailPos.x = boardMatrix.GetWidth() / 2;
+  tailPos.y = boardMatrix.GetHeight() / 2;
+  // init body of the snake - one section
+  snakeBody.append(L, 2);
   // paint current snake on the board
   PaintSnakeOnBoard();
   gameState = Running;
