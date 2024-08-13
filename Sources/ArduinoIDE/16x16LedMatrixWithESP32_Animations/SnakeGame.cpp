@@ -1,7 +1,7 @@
 #include "SnakeGame.h"
 
 SnakeGame::SnakeGame(int width, int height) 
-	: boardMatrix(width, height), gameState(Initialized) { }
+	: boardMatrix(width, height), gameState(Initialized) { randomSeed(analogRead(0)); }
 
 void SnakeGame::InitGame(){
 	// init position of the snake tail
@@ -38,27 +38,48 @@ void SnakeGame::InitGame(){
 void SnakeGame::StepGame(){
   if (gameState != Running)
     return;
-	//// move the snake and update its body
-  // get snake head and tail sections
-	ListNode* snakeTail = snakeBody.getHead();
+
+  // find snake next head position
 	ListNode* snakeHead = snakeBody.getTail();
-  // clear the matrix cell of the old tail end of the snake
-  boardMatrix.ClearCell(tailPos.x, tailPos.y); 
-  // move the tail one step
-	tailPos.Move(snakeTail->dir, 1);
-  // update snake head and tail sections, trim tail section if finished
-	snakeTail->length--;
-	snakeHead->length++;
-	if (snakeTail->length == 0)
-		snakeBody.trimHead();
-  // check if the new snake head is out of bounds or if it collides with itself
-	Point2D headPos = GetSnakeHeadPos();
-  if (boardMatrix.IsPointOutOfBounds(headPos) || boardMatrix.IsBodyCell(headPos.x, headPos.y)) {
-    gameState = Ended; // end the game and exit
+  Point2D headNextPos = GetSnakeHeadPos();
+  headNextPos.Move(snakeHead->dir, 1);
+
+  // if collision with border then end the game and return
+  if (boardMatrix.IsPointOutOfBounds(headNextPos)) {
+    gameState = Ended;
     return;
   }
-  // no collisions, set new head on the matrix and allow the game to continue
-  boardMatrix.SetBodyCell(headPos.x, headPos.y); 
+  // if collision with snake body (except current tail position - allow that) then end the game and return
+  if (boardMatrix.IsBodyCell(headNextPos.x, headNextPos.y) && !headNextPos.IsEqual(tailPos)) {
+    gameState = Ended;
+    return;
+  }
+  
+  // check if next position is food.
+  bool isNextHeadPosFood = boardMatrix.IsFoodCell(headNextPos.x, headNextPos.y);
+  // stretch the head section and update matrix
+  snakeHead->length++;
+  boardMatrix.SetBodyCell(headNextPos.x, headNextPos.y); 
+  if (!isNextHeadPosFood) { // if next head position was not food then also trim the tail
+    // trim the tail section and update tail position and update the matrix
+    boardMatrix.ClearCell(tailPos.x, tailPos.y);
+	  ListNode* snakeTail = snakeBody.getHead();
+    snakeTail->length--;
+    tailPos.Move(snakeTail->dir, 1);
+    // trim entire tail section if its zero length
+    if (snakeTail->length == 0)
+      snakeBody.trimHead();
+  }
+
+  // randomly add food
+  if (RandomGenerator::nextFloat() > 0.9) {
+    Point2D newFoodPos(0,0);
+    do {
+      newFoodPos.x = RandomGenerator::nextInt(0, boardMatrix.GetWidth()-1);
+      newFoodPos.y = RandomGenerator::nextInt(0, boardMatrix.GetHeight()-1);
+    } while (!boardMatrix.IsClearCell(newFoodPos.x, newFoodPos.y));
+    boardMatrix.SetFoodCell(newFoodPos.x, newFoodPos.y);
+  }
 }
 
 void SnakeGame::TurnSnake(Direction newDir) {

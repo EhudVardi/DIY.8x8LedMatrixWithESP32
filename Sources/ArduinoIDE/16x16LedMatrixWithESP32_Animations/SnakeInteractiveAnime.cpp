@@ -18,7 +18,7 @@ void SnakeInteractiveAnime::step() {
 	Matrix2D gameBoard = game.GetBoard();
 	for (int i=0; i<gameBoard.GetWidth(); i++) {
 		for (int j=0; j<gameBoard.GetHeight(); j++) {
-			if (gameBoard.IsBodyCell(i,j))
+			if (!gameBoard.IsClearCell(i,j))
 				setPixel(i, j, true);
 		}
 	}

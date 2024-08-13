@@ -5,6 +5,7 @@
 #include "Point2D.h"
 #include "LinkedList.h"
 #include "Matrix2D.h"
+#include "RandomGenerator.h"
 
 enum GameState { Initialized, Running, Ended };
 
