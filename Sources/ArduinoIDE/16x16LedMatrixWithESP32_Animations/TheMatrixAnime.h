@@ -6,14 +6,14 @@
 
 class TheMatrixAnime : public BaseInteractiveAnime {
 private:
-    int maxPixels;
-    std::vector<std::pair<int, int>> pixels;
+  int maxPixels;
+  std::vector<std::pair<int, int>> pixels;
 
 public:
-    TheMatrixAnime(int size, int maxPixels);
-    void init() override;
-    void step() override;
-    void SetInputHandlers() override;
+  TheMatrixAnime(int size, int maxPixels);
+  void init() override;
+  void step() override;
+  void SetInputHandlers() override;
 };
 
 #endif

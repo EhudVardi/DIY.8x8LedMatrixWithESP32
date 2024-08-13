@@ -7,29 +7,27 @@
 #include "Matrix2D.h"
 #include "RandomGenerator.h"
 
-enum GameState { Initialized, Running, Ended };
+enum GameState { Initialized,
+                 Running,
+                 Ended };
 
 class SnakeGame {
 private:
-	Point2D tailPos;
-	LinkedList snakeBody;
-	Matrix2D boardMatrix;
-	
-	void PaintSnakeOnBoard();
-	
-	Point2D GetSnakeHeadPos();
-
+  Point2D tailPos;
+  LinkedList snakeBody;
+  Matrix2D boardMatrix;
+  void PaintSnakeOnBoard();
+  Point2D GetSnakeHeadPos();
   GameState gameState;
-
   float gameSpeedPercent;
-	
+
 public:
-	SnakeGame(int width, int height);
-	void InitGame();
-	void StepGame();
-	Matrix2D GetBoard() const;
+  SnakeGame(int width, int height);
+  void InitGame();
+  void StepGame();
+  Matrix2D GetBoard() const;
   float GetGameSpeedPercent() const;
-	void TurnSnake(Direction newDir);
+  void TurnSnake(Direction newDir);
 };
 
 

@@ -8,10 +8,10 @@
 
 BaseInteractiveAnime* animation = nullptr;
 
-#define OE_PIN 5 // Output Enable pin (active low)
-#define DATA_1_PIN 4 // Serial Data Input
-#define LATCH_1_PIN 2 // Latch Pin
-#define CLOCK_1_PIN 15 // Clock Pin
+#define OE_PIN 5        // Output Enable pin (active low)
+#define DATA_1_PIN 4    // Serial Data Input
+#define LATCH_1_PIN 2   // Latch Pin
+#define CLOCK_1_PIN 15  // Clock Pin
 
 #define DATA_PIN DATA_1_PIN
 #define LATCH_PIN LATCH_1_PIN
@@ -37,28 +37,40 @@ void setup() {
   pinMode(LATCH_PIN, OUTPUT);
   pinMode(CLOCK_PIN, OUTPUT);
 
-  digitalWrite(LATCH_PIN, LOW); // Initialize Latch
-  digitalWrite(OE_PIN, LOW); // Enable output
+  digitalWrite(LATCH_PIN, LOW);  // Initialize Latch
+  digitalWrite(OE_PIN, LOW);     // Enable output
 
   Serial.println("Pins initialized.");
-  
-  
+
+
   //animation = new TheMatrixAnime(SCREEN_SIZE, 16);
   //animation = new BeatingHeartAnime(SCREEN_SIZE);
   //animation = new SpiralAnime(SCREEN_SIZE);
   animation = new SnakeInteractiveAnime(SCREEN_SIZE);
   animation->init();
-  
 
-  std::vector<int> hwButtonPins = {BTN_DOWN_PIN, BTN_UP_PIN, BTN_LEFT_PIN, BTN_RIGHT_PIN, BTN_BACK_PIN, BTN_ENTER_PIN};
+
+  std::vector<int> hwButtonPins = { BTN_DOWN_PIN, BTN_UP_PIN, BTN_LEFT_PIN, BTN_RIGHT_PIN, BTN_BACK_PIN, BTN_ENTER_PIN };
   std::vector<std::function<void()>> hwButtonHandlers = {
-		[](){ animation->SetInput(0); },
-		[](){ animation->SetInput(1); },
-		[](){ animation->SetInput(2); },
-		[](){ animation->SetInput(3); },
-		[](){ delay(1000); },
-		[](){ delay(3000); }
-	};
+    []() {
+      animation->SetInput(0);
+    },
+    []() {
+      animation->SetInput(1);
+    },
+    []() {
+      animation->SetInput(2);
+    },
+    []() {
+      animation->SetInput(3);
+    },
+    []() {
+      delay(1000);
+    },
+    []() {
+      delay(3000);
+    }
+  };
   hwButtonHandler = new HWButtonHandler(hwButtonPins, hwButtonHandlers);
 }
 
@@ -71,7 +83,7 @@ void loop() {
     previousMillis = currentMillis;
     animation->step();
   }
-  
+
   uint8_t* matrix = animation->getMatrix();
   displayPattern(matrix);
 
@@ -87,8 +99,7 @@ void displayPattern(byte pattern[32]) {
   }
 }
 
-void sendData(int16_t rowData, int16_t colData)
-{
+void sendData(int16_t rowData, int16_t colData) {
   byte rowData_highByte = (rowData >> 8) & 0xFF;
   byte rowData_lowByte = rowData & 0xFF;
   byte colData_highByte = (colData >> 8) & 0xFF;
@@ -108,8 +119,8 @@ void shiftOut(byte data, int clockPin, int dataPin) {
   }
 }
 void latch(int latchPin) {
-    // Latch the data
-    digitalWrite(latchPin, HIGH);
-    //delayMicroseconds(2); // Short delay to ensure data is latched
-    digitalWrite(latchPin, LOW);
+  // Latch the data
+  digitalWrite(latchPin, HIGH);
+  //delayMicroseconds(2); // Short delay to ensure data is latched
+  digitalWrite(latchPin, LOW);
 }

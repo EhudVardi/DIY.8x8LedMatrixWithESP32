@@ -1,6 +1,6 @@
 #include "SpiralAnime.h"
 
-///Drawing algorithm: 
+///Drawing algorithm:
 /// movement directions: D=Down, L=Left, U=Up, R=Right
 /// start from center of matrix: N/2
 /// movements direction and count is shown in the following table.
@@ -17,50 +17,65 @@
 ///				14	15	15	16(actually=15) -> end
 
 
-SpiralAnime::SpiralAnime(int size) 
-    : BaseInteractiveAnime(size), trailInOrOut(true) {
-      stepDuration = 5;
-      SetInputHandlers();
-    }
+SpiralAnime::SpiralAnime(int size)
+  : BaseInteractiveAnime(size), trailInOrOut(true) {
+  stepDuration = 5;
+  SetInputHandlers();
+}
 
 void SpiralAnime::init() {
   stepDir = Down;
   currTrailLength = 0;
-  currRowIdx = currColIdx = N/2;
+  currRowIdx = currColIdx = N / 2;
   currTrailStep = 0;
 }
 
 void SpiralAnime::step() {
-  
-  if (currTrailStep == 0) { // current trail draw finished
+
+  if (currTrailStep == 0) {  // current trail draw finished
     if (currTrailLength == N) {
-      setPixel(currRowIdx,currColIdx,trailInOrOut); //make sure the last trail of the spiral is also drawn, before switching direction
+      setPixel(currRowIdx, currColIdx, trailInOrOut);  //make sure the last trail of the spiral is also drawn, before switching direction
       // spiral complete. switch trail in/out
       init();
       trailInOrOut = !trailInOrOut;
     }
 
-    stepDir = static_cast<Dir>((stepDir + 1) % 4); // move to next direction
-    if (stepDir == Left || stepDir == Right){ // increase length of current direction trail
-      currTrailLength++; 
+    stepDir = static_cast<Dir>((stepDir + 1) % 4);  // move to next direction
+    if (stepDir == Left || stepDir == Right) {      // increase length of current direction trail
+      currTrailLength++;
     }
     currTrailStep = currTrailLength;
     if (currTrailLength == N)
       currTrailStep--;
   }
-  
-  setPixel(currRowIdx,currColIdx,trailInOrOut);
+
+  setPixel(currRowIdx, currColIdx, trailInOrOut);
 
   if (currTrailStep > 0) {
-    switch (stepDir){
-      case Down:  { currRowIdx++;  break; }
-      case Left:  { currColIdx--;  break;}
-      case Up:    { currRowIdx--;  break;}
-      case Right: { currColIdx++;  break;}
+    switch (stepDir) {
+      case Down:
+        {
+          currRowIdx++;
+          break;
+        }
+      case Left:
+        {
+          currColIdx--;
+          break;
+        }
+      case Up:
+        {
+          currRowIdx--;
+          break;
+        }
+      case Right:
+        {
+          currColIdx++;
+          break;
+        }
     }
     currTrailStep--;
   }
-
 }
 
 void SpiralAnime::SetInputHandlers() {
