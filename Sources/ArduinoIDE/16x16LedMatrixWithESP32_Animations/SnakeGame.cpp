@@ -1,7 +1,9 @@
 #include "SnakeGame.h"
 
-SnakeGame::SnakeGame(int width, int height) 
-	: boardMatrix(width, height), gameState(Initialized) { randomSeed(analogRead(0)); }
+SnakeGame::SnakeGame(int width, int height)
+  : boardMatrix(width, height), gameState(Initialized), gameSpeedPercent(0.0) {
+  randomSeed(analogRead(0));
+}
 
 void SnakeGame::InitGame(){
 	// init position of the snake tail
@@ -69,6 +71,8 @@ void SnakeGame::StepGame(){
     // trim entire tail section if its zero length
     if (snakeTail->length == 0)
       snakeBody.trimHead();
+  } else {  // if it was food then speed up the game slightly
+    gameSpeedPercent += 0.01;
   }
 
   // randomly add food
@@ -94,7 +98,10 @@ void SnakeGame::TurnSnake(Direction newDir) {
 }
 
 Matrix2D SnakeGame::GetBoard() const {
-	return boardMatrix;
+  return boardMatrix;
+}
+float SnakeGame::GetGameSpeedPercent() const {
+  return gameSpeedPercent;
 }
 
 void SnakeGame::PaintSnakeOnBoard() {

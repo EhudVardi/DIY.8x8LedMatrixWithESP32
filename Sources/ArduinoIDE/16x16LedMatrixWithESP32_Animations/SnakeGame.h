@@ -20,12 +20,15 @@ private:
 	Point2D GetSnakeHeadPos();
 
   GameState gameState;
+
+  float gameSpeedPercent;
 	
 public:
 	SnakeGame(int width, int height);
 	void InitGame();
 	void StepGame();
 	Matrix2D GetBoard() const;
+  float GetGameSpeedPercent() const;
 	void TurnSnake(Direction newDir);
 };
 

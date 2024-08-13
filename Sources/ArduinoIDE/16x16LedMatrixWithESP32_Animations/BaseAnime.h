@@ -19,7 +19,7 @@ public:
     uint8_t* getMatrix();
     void setPixel(int x, int y, bool state);
     bool getPixel(int x, int y);
-    int getStepDuration();
+    virtual int getStepDuration();
 };
 
 #endif
