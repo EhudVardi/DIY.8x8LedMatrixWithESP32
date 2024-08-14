@@ -80,15 +80,15 @@ void SpiralAnime::step() {
 
 void SpiralAnime::SetInputHandlers() {
   inputHandlers[0] = [this]() {
-    stepDuration = 50;
+    stepDuration = max(10, stepDuration - 5);
   };
   inputHandlers[1] = [this]() {
-    stepDuration = 100;
+    stepDuration = min(1000, stepDuration + 5);
   };
   inputHandlers[2] = [this]() {
-    stepDuration = 250;
+    stepDuration = max(10, stepDuration - 50);
   };
   inputHandlers[3] = [this]() {
-    stepDuration = 500;
+    stepDuration = min(1000, stepDuration + 50);
   };
 }
