@@ -1,14 +1,13 @@
 #include "BeatingHeartAnime.h"
 
 BeatingHeartAnime::BeatingHeartAnime(int size)
-  : BaseInteractiveAnime(size), stepCount(0), direction(1) {
+  : BaseInteractiveAnime(size), stepCount(0) {
   stepDuration = 10;
   SetInputHandlers();
 }
 
 void BeatingHeartAnime::init() {
   stepCount = 0;
-  direction = true;
 }
 
 void BeatingHeartAnime::step() {
@@ -16,15 +15,18 @@ void BeatingHeartAnime::step() {
     drawHeart(&smallHeart[0][0], 5);
   } else if (stepCount < 10) {
     drawHeart(&mediumHeart[0][0], 7);
-  } else {
+  } else if (stepCount < 15) {
     drawHeart(&largeHeart[0][0], 9);
+  } else if (stepCount < 20) {
+    drawHeart(&mediumHeart[0][0], 7);
+  } else if (stepCount < 25) {
+    drawHeart(&largeHeart[0][0], 9);
+  } else if (stepCount < 30) {
+    drawHeart(&mediumHeart[0][0], 7);
+  } else {
+    drawHeart(&smallHeart[0][0], 5);
   }
-
-  stepCount = (direction ? stepCount + 1 : stepCount - 1);
-  if (stepCount >= 15)
-    direction = false;
-  else if (stepCount <= 0)
-    direction = true;
+  stepCount = (stepCount + 1) % 50;
 }
 
 void BeatingHeartAnime::drawHeart(const uint8_t* heart, int size) {
