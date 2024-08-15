@@ -11,7 +11,7 @@ protected:
   std::unordered_map<int, InputHandler> inputHandlers;
   virtual void SetInputHandlers() = 0;
 public:
-  BaseInteractiveAnime(int matrixSize);
+  BaseInteractiveAnime(int size);
   virtual void SetInput(int inputNum);
 };
 

@@ -10,7 +10,7 @@ enum Dir { Down = 0,
 
 class SpiralAnime : public BaseInteractiveAnime {
 public:
-  SpiralAnime(int matrixSize);
+  SpiralAnime(int size);
   void init() override;
   void step() override;
   void SetInputHandlers() override;

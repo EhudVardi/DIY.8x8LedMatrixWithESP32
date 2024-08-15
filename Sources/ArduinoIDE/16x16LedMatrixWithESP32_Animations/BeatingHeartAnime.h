@@ -5,7 +5,7 @@
 
 class BeatingHeartAnime : public BaseInteractiveAnime {
 public:
-  BeatingHeartAnime(int matrixSize);
+  BeatingHeartAnime(int size);
   void init() override;
   void step() override;
   void SetInputHandlers() override;
