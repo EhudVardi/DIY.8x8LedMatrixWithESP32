@@ -3,11 +3,13 @@
 #include "BeatingHeartAnime.h"
 #include "SpiralAnime.h"
 #include "SnakeInteractiveAnime.h"
+#include "TextDisplayAnime.h"
 
 #define SCREEN_SIZE 16
+#define ANIME_COUNT 5
 
 BaseInteractiveAnime* animation = nullptr;
-int currAnimeIndex = 0;
+int currAnimeIndex = 4;
 
 #define OE_PIN 5        // Output Enable pin (active low)
 #define DATA_1_PIN 4    // Serial Data Input
@@ -63,7 +65,7 @@ void setup() {
       initCurrAnime();
     },
     []() {
-      currAnimeIndex = (currAnimeIndex + 1) % 4;
+      currAnimeIndex = (currAnimeIndex + 1) % ANIME_COUNT;
       initCurrAnime();
     }
   };
@@ -72,11 +74,12 @@ void setup() {
 
 void initCurrAnime() {
   switch (currAnimeIndex) {
-    case 0: animation = new SnakeInteractiveAnime(SCREEN_SIZE); break;
+    case 0: animation = new TheMatrixAnime(SCREEN_SIZE, 32, 3, 8, 1); break;
     case 1: animation = new BeatingHeartAnime(SCREEN_SIZE); break;
     case 2: animation = new SpiralAnime(SCREEN_SIZE); break;
-    case 3:
-    default: animation = new TheMatrixAnime(SCREEN_SIZE, 32, 3, 8, 1); break;
+    case 3: animation = new SnakeInteractiveAnime(SCREEN_SIZE); break;
+    case 4:
+    default: animation = new TextDisplayAnime(SCREEN_SIZE); break;
   }
   animation->init();
 }
