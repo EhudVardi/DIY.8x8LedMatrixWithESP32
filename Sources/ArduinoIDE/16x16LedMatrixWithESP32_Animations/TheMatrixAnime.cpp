@@ -1,43 +1,67 @@
 #include "TheMatrixAnime.h"
 
-TheMatrixAnime::TheMatrixAnime(int size, int maxPixels)
-  : BaseInteractiveAnime(size), maxPixels(maxPixels) {
+TheMatrixAnime::TheMatrixAnime(int size, int maxLines, int minLineLength, int maxLineLength, int lineAppearanceRate)
+  : BaseInteractiveAnime(size), maxLines(maxLines), minLineLength(minLineLength), maxLineLength(maxLineLength), lineAppearanceRate(lineAppearanceRate) {
   stepDuration = 100;
   SetInputHandlers();
 }
 
 void TheMatrixAnime::init() {
-  pixels.clear();
+  lines.clear();
+  currentStep = 0;
 }
 
 void TheMatrixAnime::step() {
-  if (pixels.size() < maxPixels) {
+  currentStep++;  // Increment step counter
+  // Randomly add a new line based on the appearance rate
+  if (currentStep % lineAppearanceRate == 0 && lines.size() < maxLines) {
     int col = random(0, N);
-    pixels.push_back({ 0, col });
+    int length = random(minLineLength, maxLineLength + 1);
+    lines.push_back({ 0, col, length });
   }
 
-  for (auto& pixel : pixels) {
-    setPixel(pixel.first, pixel.second, false);
-    pixel.first++;
-    if (pixel.first >= N) {
-      pixel.first = 0;
-      pixel.second = random(0, N);
+  // Update each line
+  for (auto& line : lines) {
+    clearLine(line);  // Clear previous state of the line
+    line.row++;       // Move the line down
+    drawLine(line);   // Set new state of the line
+    // Remove lines that have fully exited the screen
+    if (line.row - line.length >= N) {
+      line = lines.back();
+      lines.pop_back();
     }
-    setPixel(pixel.first, pixel.second, true);
+  }
+}
+
+void TheMatrixAnime::clearLine(Line& line) {
+  for (int i = 0; i < line.length; i++) {
+    int row = line.row - i;
+    if (row >= 0 && row < N) {
+      setPixel(row, line.col, false);
+    }
+  }
+}
+
+void TheMatrixAnime::drawLine(Line& line) {
+  for (int i = 0; i < line.length; i++) {
+    int row = line.row - i;
+    if (row >= 0 && row < N) {
+      setPixel(row, line.col, true);
+    }
   }
 }
 
 void TheMatrixAnime::SetInputHandlers() {
   inputHandlers[0] = [this]() {
-    stepDuration = max(10, stepDuration - 5);
+    stepDuration = max(10, stepDuration - 10);
   };
   inputHandlers[1] = [this]() {
-    stepDuration = min(1000, stepDuration + 5);
+    stepDuration = min(500, stepDuration + 10);
   };
   inputHandlers[2] = [this]() {
-    stepDuration = max(10, stepDuration - 50);
+    lineAppearanceRate = max(1, lineAppearanceRate - 1);
   };
   inputHandlers[3] = [this]() {
-    stepDuration = min(1000, stepDuration + 50);
+    lineAppearanceRate = min(50, lineAppearanceRate + 1);
   };
 }

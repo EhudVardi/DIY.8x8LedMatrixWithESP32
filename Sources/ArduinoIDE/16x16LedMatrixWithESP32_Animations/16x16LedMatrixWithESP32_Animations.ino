@@ -76,7 +76,7 @@ void initCurrAnime() {
     case 1: animation = new BeatingHeartAnime(SCREEN_SIZE); break;
     case 2: animation = new SpiralAnime(SCREEN_SIZE); break;
     case 3:
-    default: animation = new TheMatrixAnime(SCREEN_SIZE, 16); break;
+    default: animation = new TheMatrixAnime(SCREEN_SIZE, 32, 3, 8, 1); break;
   }
   animation->init();
 }
