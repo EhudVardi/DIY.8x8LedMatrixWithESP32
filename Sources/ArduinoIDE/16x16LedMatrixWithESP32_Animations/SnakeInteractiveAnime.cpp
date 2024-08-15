@@ -3,7 +3,6 @@
 SnakeInteractiveAnime::SnakeInteractiveAnime(int size)
   : BaseInteractiveAnime(size), game(size, size) {
   stepDuration = 500;
-  SetInputHandlers();
 }
 
 void SnakeInteractiveAnime::init() {

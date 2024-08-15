@@ -3,7 +3,6 @@
 BeatingHeartAnime::BeatingHeartAnime(int size)
   : BaseInteractiveAnime(size), stepCount(0) {
   stepDuration = 10;
-  SetInputHandlers();
 }
 
 void BeatingHeartAnime::init() {

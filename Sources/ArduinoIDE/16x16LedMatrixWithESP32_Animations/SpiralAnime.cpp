@@ -20,7 +20,6 @@
 SpiralAnime::SpiralAnime(int size)
   : BaseInteractiveAnime(size), trailInOrOut(true) {
   stepDuration = 5;
-  SetInputHandlers();
 }
 
 void SpiralAnime::init() {

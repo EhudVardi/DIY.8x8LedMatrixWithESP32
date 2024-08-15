@@ -8,4 +8,5 @@ void BaseInteractiveAnime::SetInput(int inputNum) {
   if (inputHandlers.find(inputNum) != inputHandlers.end()) {
     inputHandlers[inputNum]();
   }
+  SetInputHandlers();
 }

@@ -3,7 +3,6 @@
 TheMatrixAnime::TheMatrixAnime(int size, int maxLines, int minLineLength, int maxLineLength, int lineAppearanceRate)
   : BaseInteractiveAnime(size), maxLines(maxLines), minLineLength(minLineLength), maxLineLength(maxLineLength), lineAppearanceRate(lineAppearanceRate) {
   stepDuration = 100;
-  SetInputHandlers();
 }
 
 void TheMatrixAnime::init() {
