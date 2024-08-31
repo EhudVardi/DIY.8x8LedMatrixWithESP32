@@ -75,7 +75,7 @@ void SnakeGame::TurnSnake(Direction newDir) {
   }
 }
 
-Matrix2D SnakeGame::GetBoard() const {
+SnakeMatrix2D SnakeGame::GetBoard() const {
   return boardMatrix;
 }
 float SnakeGame::GetGameSpeedPercent() const {
