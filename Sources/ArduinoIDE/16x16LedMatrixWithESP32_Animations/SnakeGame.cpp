@@ -1,7 +1,7 @@
 #include "SnakeGame.h"
 
 SnakeGame::SnakeGame(int width, int height)
-  : boardMatrix(width, height), gameState(Initialized), gameSpeedPercent(0.0) {
+  : boardMatrix(width, height), gameState(SnakeGameState::Initialized), gameSpeedPercent(0.0) {
   randomSeed(analogRead(0));
 }
 
@@ -13,11 +13,11 @@ void SnakeGame::InitGame() {
   snakeBody.append(L, 2);
   // paint current snake on the board
   PaintSnakeOnBoard();
-  gameState = Running;
+  gameState = SnakeGameState::Running;
 }
 
 void SnakeGame::StepGame() {
-  if (gameState != Running)
+  if (gameState != SnakeGameState::Running)
     return;
 
   // find snake next head position
@@ -27,12 +27,12 @@ void SnakeGame::StepGame() {
 
   // if collision with border then end the game and return
   if (boardMatrix.IsPointOutOfBounds(headNextPos)) {
-    gameState = Ended;
+    gameState = SnakeGameState::Ended;
     return;
   }
   // if collision with snake body (except current tail position - allow that) then end the game and return
   if (boardMatrix.IsBodyCell(headNextPos.x, headNextPos.y) && !headNextPos.IsEqual(tailPos)) {
-    gameState = Ended;
+    gameState = SnakeGameState::Ended;
     return;
   }
 
