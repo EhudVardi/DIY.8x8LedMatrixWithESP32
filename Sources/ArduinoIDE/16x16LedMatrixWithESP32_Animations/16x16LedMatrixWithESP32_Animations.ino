@@ -4,9 +4,10 @@
 #include "SpiralAnime.h"
 #include "SnakeInteractiveAnime.h"
 #include "TextDisplayAnime.h"
+#include "TetrisInteractiveAnime.h"
 
 #define SCREEN_SIZE 16
-#define ANIME_COUNT 5
+#define ANIME_COUNT 6
 
 BaseInteractiveAnime* animation = nullptr;
 int currAnimeIndex = 4;
@@ -78,7 +79,8 @@ void initCurrAnime() {
     case 1: animation = new BeatingHeartAnime(SCREEN_SIZE); break;
     case 2: animation = new SpiralAnime(SCREEN_SIZE); break;
     case 3: animation = new SnakeInteractiveAnime(SCREEN_SIZE); break;
-    case 4:
+    case 4: animation = new TetrisInteractiveAnime(SCREEN_SIZE); break;
+    case 5:
     default: animation = new TextDisplayAnime(SCREEN_SIZE); break;
   }
   animation->init();
