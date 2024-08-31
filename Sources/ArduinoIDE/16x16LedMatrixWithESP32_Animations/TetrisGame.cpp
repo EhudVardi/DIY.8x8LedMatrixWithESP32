@@ -13,7 +13,8 @@ void TetrisGame::SpawnNewTetrimino() {
     { Point2D(0, 0), Point2D(1, 0), Point2D(0, 1), Point2D(1, 1) },   // Square
     { Point2D(0, 0), Point2D(-1, 0), Point2D(1, 0), Point2D(2, 0) },  // Line
     { Point2D(0, 0), Point2D(0, -1), Point2D(1, 0), Point2D(0, 1) },  // T-Shape
-                                                                      // Add more shapes as needed
+    { Point2D(0, 0), Point2D(0, -1), Point2D(-1, -1), Point2D(0, 1) },  // L-Shape
+    { Point2D(0, 0), Point2D(0, -1), Point2D(1, -1), Point2D(0, 1) },  // L-Shape mirrored
   };
 
   int index = RandomGenerator::nextInt(0, shapes.size());
