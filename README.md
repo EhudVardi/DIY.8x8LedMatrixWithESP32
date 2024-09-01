@@ -70,8 +70,8 @@ At this point, the led matrix board should display and swap between 3 patterns i
 
 
 # Variations
-There are variations for the base 8x8 example in this project.
-[16x16 led matrix with animations](./Sources/ArduinoIDE/16x16LedMatrixWithESP32_Animations/README.md)
+There are variations for the base 8x8 example in this project.  
+[16x16 led matrix with animations](./Sources/ArduinoIDE/16x16LedMatrixWithESP32_Animations/README.md)  
 [8x8 led matrix with rotary encoder](./Sources/ArduinoIDE/8x8LedMatrixWithESP32_ControlWithRotaryEncoder/README.md)
 
 
