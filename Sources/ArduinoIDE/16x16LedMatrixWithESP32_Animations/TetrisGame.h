@@ -15,6 +15,7 @@ private:
   Tetrimino* currentTetrimino;
   TetrisGameState gameState;
   float gameSpeedPercent;
+  const float gameSpeedPercentStep = 0.05;
 
   void SpawnNewTetrimino();
   void PlaceTetrimino();

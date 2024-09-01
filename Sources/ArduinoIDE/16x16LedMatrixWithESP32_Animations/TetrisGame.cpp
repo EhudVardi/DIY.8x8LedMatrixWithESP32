@@ -30,7 +30,12 @@ void TetrisGame::StepGame() {
   if (boardMatrix.IsCollision(*currentTetrimino)) {
     currentTetrimino->Move(D);  // Move it back up
     PlaceTetrimino();
-    ClearFilledRows();
+    int filledRowsCount = ClearFilledRows();
+    gameSpeedPercent += (gameSpeedPercentStep * filledRowsCount);
+    if (gameSpeedPercent >= 1.0) {
+      gameState = TetrisGameState::Ended;
+      return;
+    }
     SpawnNewTetrimino();
     if (boardMatrix.IsCollision(*currentTetrimino)) {
       gameState = TetrisGameState::Ended;
