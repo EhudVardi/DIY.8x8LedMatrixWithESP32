@@ -69,6 +69,12 @@ At this point, the led matrix board should display and swap between 3 patterns i
 - To make use of different GPIO's, make sure to change the definitions in the code, and it is recommended to select simple GPIO pins and not UART pins. do NOT use UART0 pins, you won't be able to flash new firmware if you do.
 
 
+# Variations
+There are variations for the base 8x8 example in this project.
+[16x16 led matrix with animations](./Sources/ArduinoIDE/16x16LedMatrixWithESP32_Animations/README.md)
+[8x8 led matrix with rotary encoder](./Sources/ArduinoIDE/8x8LedMatrixWithESP32_ControlWithRotaryEncoder/README.md)
+
+
 # Contributing
 
 Pull requests are welcome. Make me smarted if you will ;)
