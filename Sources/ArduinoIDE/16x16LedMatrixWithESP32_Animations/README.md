@@ -13,14 +13,13 @@ To control the animation set, six simple push buttons are connected to provide a
 
 A well-structured code is added to provide generic and expandable way to read and response to the buttons input.
 
-Animation list:
-BeatingHeart - a simple heart beating. buttons control the speed of the animation.
-TheMatrix - a cool animation inspired by the iconic matrix code. buttons control the speed and density of the animation.
-Spiral - a spiral that fill the screen and the empty it. buttons control the speed of the animation.
-TextDisplay - a demo of text being displayed. all english charaters are mapped correctly. Hebrew characters also but the resolution is not sufficient to distinctively show each character.
-SnakeGame - a simple implementation of the classic Snake game. buttons control the snake.
-TetrisGame - a simple implementation of the classic tetris game. the impl' is incomplete but the core of the game works correctly. Left and Right buttons move the tetriminos, Up and Down buttons rotate it.
-
+Animation list:  
+BeatingHeart - a simple heart beating. buttons control the speed of the animation.  
+TheMatrix - a cool animation inspired by the iconic matrix code. buttons control the speed and density of the animation.  
+Spiral - a spiral that fill the screen and the empty it. buttons control the speed of the animation.  
+TextDisplay - a demo of text being displayed. all english charaters are mapped correctly. Hebrew characters also but the resolution is not sufficient to distinctively show each character.  
+SnakeGame - a simple implementation of the classic Snake game. buttons control the snake.  
+TetrisGame - a simple implementation of the classic tetris game. the impl' is incomplete but the core of the game works correctly. Left and Right buttons move the tetriminos, Up and Down buttons rotate it.  
 
 # Connecting it together
 The led matrix board is connected in the same way, there's no change.
