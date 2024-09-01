@@ -42,13 +42,4 @@ void TetrisInteractiveAnime::SetInputHandlers() {
   };
 }
 
-int TetrisInteractiveAnime::getStepDuration() {
-  // return a modified step duration, according to the game current speed percent
-  // at 0.0 the step duration should be full - baseDuration
-  // at 1.0 the step duration should be completely divided with the local const "durationDiv"
-  // find the linear equation coefs a and b
-  // finalStepDuration = a*(gameSpeedPercent)+b
-  // -> finalStepDuration = baseDuration*(gameSpeedPercent*((1-durationDiv)/durationDiv)+1)
-  // also make sure the minimum finalStepDuration value will be at least 1 (using max(1,..))
-  return max(1, (int)(stepDuration * (game.GetGameSpeedPercent() * durationCoef + 1.0)));
 }

@@ -15,7 +15,6 @@ public:
   void init() override;
   void step() override;
   void SetInputHandlers() override;
-  int getStepDuration() override;
 };
 
 #endif
