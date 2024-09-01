@@ -10,11 +10,11 @@ void TetrisGame::InitGame() {
 
 void TetrisGame::SpawnNewTetrimino() {
   static std::vector<std::vector<Point2D>> shapes = {
-    { Point2D(0, 0), Point2D(1, 0), Point2D(0, 1), Point2D(1, 1) },   // Square
-    { Point2D(0, 0), Point2D(-1, 0), Point2D(1, 0), Point2D(2, 0) },  // Line
-    { Point2D(0, 0), Point2D(0, -1), Point2D(1, 0), Point2D(0, 1) },  // T-Shape
+    { Point2D(0, 0), Point2D(1, 0), Point2D(0, 1), Point2D(1, 1) },       // Square
+    { Point2D(0, 0), Point2D(-1, 0), Point2D(1, 0), Point2D(2, 0) },      // Line
+    { Point2D(0, 0), Point2D(0, -1), Point2D(1, 0), Point2D(0, 1) },      // T-Shape
     { Point2D(0, 0), Point2D(0, -1), Point2D(-1, -1), Point2D(0, 1) },  // L-Shape
-    { Point2D(0, 0), Point2D(0, -1), Point2D(1, -1), Point2D(0, 1) },  // L-Shape mirrored
+    { Point2D(0, 0), Point2D(0, -1), Point2D(1, -1), Point2D(0, 1) },    // L-Shape mirrored
   };
 
   int index = RandomGenerator::nextInt(0, shapes.size());
