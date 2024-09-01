@@ -2,16 +2,23 @@
 
 TetrisInteractiveAnime::TetrisInteractiveAnime(int size)
   : BaseInteractiveAnime(size), game(size, size) {
-  stepDuration = 500;
+  stepDuration = 10;
 }
 
 void TetrisInteractiveAnime::init() {
   game.InitGame();
+  previousMillis = 0;
 }
 
 void TetrisInteractiveAnime::step() {
-  // step the game
-  game.StepGame();
+
+  // step the game if its time
+  unsigned long currentMillis = millis();
+  if (currentMillis - TetrisInteractiveAnime::previousMillis >= TetrisInteractiveAnime::getGameStepDuration()) {
+    previousMillis = currentMillis;
+    game.StepGame();
+  }
+
   // update display matrix from game board
   clearMatrix();
   TetrisMatrix2D gameBoard = game.GetBoard();
@@ -42,4 +49,6 @@ void TetrisInteractiveAnime::SetInputHandlers() {
   };
 }
 
+int TetrisInteractiveAnime::getGameStepDuration() {
+  return stepDuration * ((1 - durationDiv) * game.GetGameSpeedPercent() + durationDiv);
 }

@@ -7,8 +7,10 @@
 class TetrisInteractiveAnime : public BaseInteractiveAnime {
 private:
   TetrisGame game;
-  const float durationDiv = 10;
-  const float durationCoef = (1 - durationDiv) / (durationDiv);
+
+  const float durationDiv = 50;
+  int getGameStepDuration();
+  unsigned long previousMillis = 0;
 
 public:
   TetrisInteractiveAnime(int size);
