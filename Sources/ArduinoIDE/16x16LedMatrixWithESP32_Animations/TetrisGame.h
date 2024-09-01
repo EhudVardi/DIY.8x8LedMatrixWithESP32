@@ -18,7 +18,7 @@ private:
 
   void SpawnNewTetrimino();
   void PlaceTetrimino();
-  void ClearFilledRows();
+  int ClearFilledRows();
 
 public:
   TetrisGame(int width, int height);

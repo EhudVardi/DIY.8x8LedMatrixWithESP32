@@ -44,7 +44,9 @@ void TetrisGame::PlaceTetrimino() {
   currentTetrimino = nullptr;
 }
 
-void TetrisGame::ClearFilledRows() {
+int TetrisGame::ClearFilledRows() {
+
+  int filledRows = 0;
   int height = boardMatrix.GetHeight();
   int width = boardMatrix.GetWidth();
 
@@ -64,6 +66,7 @@ void TetrisGame::ClearFilledRows() {
     }
 
     if (isRowFilled) {
+      filledRows++;
       // Skip this row; it's filled and will be removed
       continue;
     } else {
@@ -81,6 +84,8 @@ void TetrisGame::ClearFilledRows() {
       boardMatrix.Set(x, y, newBoard[y][x]);
     }
   }
+
+  return filledRows;
 }
 
 
