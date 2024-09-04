@@ -7,15 +7,12 @@
 
 class Tetrimino {
 private:
-  std::vector<Point2D> blocks;  // Relative positions of blocks
-  Point2D position;             // Absolute position of the Tetrimino
-  Direction rotation;
-
-  // Helper function to rotate a point around the origin
-  Point2D RotatePoint(const Point2D& point, bool clockWise) const;
+  std::vector<std::vector<Point2D>> shapes;  // All possible shapes of the Tetrimino
+  int currentShapeIndex;                     // Index of the current shape
+  Point2D position;                          // Absolute position of the Tetrimino
 
 public:
-  Tetrimino(const std::vector<Point2D>& shape, const Point2D& startPos);
+  Tetrimino(const std::vector<std::vector<Point2D>>& shapes, const Point2D& startPos);
 
   void Move(Direction dir);
   void Rotate(bool clockWise);

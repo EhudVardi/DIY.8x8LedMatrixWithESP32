@@ -4,6 +4,7 @@
 #include "Tetrimino.h"
 #include "TetrisMatrix2D.h"
 #include "RandomGenerator.h"
+#include <vector>
 
 enum class TetrisGameState { Initialized,
                              Running,
@@ -16,7 +17,9 @@ private:
   TetrisGameState gameState;
   float gameSpeedPercent;
   const float gameSpeedPercentStep = 0.05;
+  std::vector<Tetrimino> tetriminoPool;  // Pre-initialized Tetrimino pool
 
+  void InitTetriminoPool();  // Initialize the pool of Tetriminos
   void SpawnNewTetrimino();
   void PlaceTetrimino();
   int ClearFilledRows();

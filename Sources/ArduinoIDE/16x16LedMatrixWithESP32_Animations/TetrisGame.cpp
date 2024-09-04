@@ -1,7 +1,37 @@
 #include "TetrisGame.h"
 
 TetrisGame::TetrisGame(int width, int height)
-  : boardMatrix(width, height), currentTetrimino(nullptr), gameState(TetrisGameState::Initialized), gameSpeedPercent(0.0f) {}
+  : boardMatrix(width, height), currentTetrimino(nullptr), gameState(TetrisGameState::Initialized), gameSpeedPercent(0.0f) {
+  InitTetriminoPool();
+}
+
+void TetrisGame::InitTetriminoPool() {
+  tetriminoPool = {
+    Tetrimino({
+                { { Point2D(0, 0), Point2D(1, 0), Point2D(0, 1), Point2D(1, 1) } }  // Square has one rotation state
+              },
+              Point2D(boardMatrix.GetWidth() / 2, 1)),
+    Tetrimino({ { { Point2D(0, 0), Point2D(-1, 0), Point2D(1, 0), Point2D(2, 0) } },  // Line has two rotation states
+                { { Point2D(0, 0), Point2D(0, -1), Point2D(0, 1), Point2D(0, 2) } } },
+              Point2D(boardMatrix.GetWidth() / 2, 1)),
+    Tetrimino({ { { Point2D(0, 0), Point2D(0, 1), Point2D(-1, 0), Point2D(1, 0) } },  // T-Shape has four rotation states
+                { { Point2D(0, 0), Point2D(0, -1), Point2D(1, 0), Point2D(0, 1) } },
+                { { Point2D(0, 0), Point2D(0, -1), Point2D(-1, 0), Point2D(1, 0) } },
+                { { Point2D(0, 0), Point2D(0, -1), Point2D(-1, 0), Point2D(0, 1) } } },
+              Point2D(boardMatrix.GetWidth() / 2, 1)),
+    Tetrimino({ { { Point2D(0, 0), Point2D(0, -1), Point2D(0, 1), Point2D(-1, 1) } },  // L-Shape has four rotation states
+                { { Point2D(0, 0), Point2D(-1, 0), Point2D(1, 0), Point2D(1, 1) } },
+                { { Point2D(0, 0), Point2D(0, 1), Point2D(0, -1), Point2D(1, -1) } },
+                { { Point2D(0, 0), Point2D(1, 0), Point2D(-1, 0), Point2D(-1, -1) } } },
+              Point2D(boardMatrix.GetWidth() / 2, 1)),
+    Tetrimino({ { { Point2D(0, 0), Point2D(0, -1), Point2D(0, 1), Point2D(1, 1) } },  // L-Shape (reversed) has four rotation states
+                { { Point2D(0, 0), Point2D(-1, 0), Point2D(1, 0), Point2D(1, -1) } },
+                { { Point2D(0, 0), Point2D(0, 1), Point2D(0, -1), Point2D(-1, -1) } },
+                { { Point2D(0, 0), Point2D(1, 0), Point2D(-1, 0), Point2D(-1, 1) } } },
+              Point2D(boardMatrix.GetWidth() / 2, 1))
+    // Add other shapes similarly
+  };
+}
 
 void TetrisGame::InitGame() {
   SpawnNewTetrimino();
@@ -9,17 +39,8 @@ void TetrisGame::InitGame() {
 }
 
 void TetrisGame::SpawnNewTetrimino() {
-  static std::vector<std::vector<Point2D>> shapes = {
-    { Point2D(0, 0), Point2D(1, 0), Point2D(0, 1), Point2D(1, 1) },       // Square
-    { Point2D(0, 0), Point2D(-1, 0), Point2D(1, 0), Point2D(2, 0) },      // Line
-    { Point2D(0, 0), Point2D(0, -1), Point2D(1, 0), Point2D(0, 1) },      // T-Shape
-    { Point2D(0, 0), Point2D(0, -1), Point2D(-1, -1), Point2D(0, 1) },  // L-Shape
-    { Point2D(0, 0), Point2D(0, -1), Point2D(1, -1), Point2D(0, 1) },    // L-Shape mirrored
-  };
-
-  int index = RandomGenerator::nextInt(0, shapes.size());
-  Point2D startPos(boardMatrix.GetWidth() / 2, 1);  // Start position at the top center of the board
-  currentTetrimino = new Tetrimino(shapes[index], startPos);
+  int index = RandomGenerator::nextInt(0, tetriminoPool.size());
+  currentTetrimino = new Tetrimino(tetriminoPool[index]);
 }
 
 void TetrisGame::StepGame() {
