@@ -96,6 +96,8 @@ void loop() {
     animation->step();
   }
 
+  hwButtonHandler->updateButtons();
+
   uint8_t* matrix = animation->getMatrix();
   displayPattern(matrix);
 

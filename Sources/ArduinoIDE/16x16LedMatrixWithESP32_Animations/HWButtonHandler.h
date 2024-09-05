@@ -3,7 +3,7 @@
 
 #include <Arduino.h>
 #include <vector>
-#include <functional>  // Required for std::function
+#include <functional>
 
 // Enum for button states
 enum class HWButtonState {
@@ -19,8 +19,13 @@ public:
   volatile HWButtonState lastState;
   std::function<void()> onPress;  // Event handler
 
+  // Debounce parameters
+  unsigned long lastDebounceTime;          // Last time the button state changed
+  const unsigned long debounceDelay = 50;  // Debounce delay in milliseconds
+  int lastReading;                         // Last stable reading from the button pin
+
   HWButton(int pin)
-    : pin(pin), state(HWButtonState::Released), lastState(HWButtonState::Released) {
+    : pin(pin), state(HWButtonState::Released), lastState(HWButtonState::Released), lastReading(HIGH), lastDebounceTime(0) {
     pinMode(pin, INPUT_PULLUP);
   }
 
@@ -28,14 +33,31 @@ public:
     return state;
   }
 
+  // Update the button state with debounce logic
   void updateState() {
-    HWButtonState currentState = digitalRead(pin) == LOW ? HWButtonState::Pressed : HWButtonState::Released;
-    if (currentState != state) {
-      state = currentState;
-      if (state == HWButtonState::Pressed && onPress) {
-        onPress();  // Call the event handler when pressed
+    int currentReading = digitalRead(pin);
+
+    // Check if the reading has changed (due to noise or press)
+    if (currentReading != lastReading) {
+      lastDebounceTime = millis();  // Reset the debounce timer
+    }
+
+    // Only update the button state if enough time has passed (debounce)
+    if ((millis() - lastDebounceTime) > debounceDelay) {
+      // State has been stable for the debounce delay, so update the button state
+      HWButtonState currentState = (currentReading == LOW) ? HWButtonState::Pressed : HWButtonState::Released;
+
+      if (currentState != state) {
+        state = currentState;
+
+        // Call the event handler if the button is pressed
+        if (state == HWButtonState::Pressed && onPress) {
+          onPress();
+        }
       }
     }
+
+    lastReading = currentReading;  // Update lastReading for the next iteration
   }
 
   bool stateChanged() {
@@ -51,8 +73,6 @@ public:
 class HWButtonHandler {
 private:
   std::vector<HWButton> buttons;
-  static HWButtonHandler* instance;
-  static void isr();  // ISR function
 
 public:
   HWButtonHandler(const std::vector<int>& pins, const std::vector<std::function<void()>>& handlers);
