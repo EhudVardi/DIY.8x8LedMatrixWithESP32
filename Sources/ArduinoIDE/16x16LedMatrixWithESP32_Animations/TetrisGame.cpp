@@ -49,7 +49,8 @@ void TetrisGame::StepGame() {
 
   currentTetrimino->Move(U);  // Move the Tetrimino down
   if (boardMatrix.IsCollision(*currentTetrimino)) {
-    currentTetrimino->Move(D);  // Move it back up
+    isFinalizingTetrimino = false;  //if finalizing tetrimino active, disable it for next tetrimino
+    currentTetrimino->Move(D);      // Move it back up
     PlaceTetrimino();
     int filledRowsCount = ClearFilledRows();
     gameSpeedPercent += (gameSpeedPercentStep * filledRowsCount);
@@ -124,10 +125,12 @@ Tetrimino* TetrisGame::GetCurrTetrimino() const {
 }
 
 float TetrisGame::GetGameSpeedPercent() const {
-  return gameSpeedPercent;
+  return isFinalizingTetrimino ? 1.0 : gameSpeedPercent;
 }
 
 void TetrisGame::MoveTetrimino(Direction dir) {
+  if (isFinalizingTetrimino)
+    return;
   currentTetrimino->Move(dir);
   if (boardMatrix.IsCollision(*currentTetrimino)) {
     currentTetrimino->Move(Turn(Turn(dir, CWISE), CWISE));  // Move back if collision
@@ -135,8 +138,15 @@ void TetrisGame::MoveTetrimino(Direction dir) {
 }
 
 void TetrisGame::RotateTetrimino(bool clockWise) {
+  if (isFinalizingTetrimino)
+    return;
   currentTetrimino->Rotate(clockWise);
   if (boardMatrix.IsCollision(*currentTetrimino)) {
     currentTetrimino->Rotate(!clockWise);  // Rotate back if collision
   }
+}
+
+void TetrisGame::FinalizeTetrimino() {
+  // push current tetrimino immediately to its future position
+  isFinalizingTetrimino = true;
 }

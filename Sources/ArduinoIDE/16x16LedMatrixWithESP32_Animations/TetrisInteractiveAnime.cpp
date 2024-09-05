@@ -36,7 +36,7 @@ void TetrisInteractiveAnime::step() {
 
 void TetrisInteractiveAnime::SetInputHandlers() {
   inputHandlers[0] = [this]() {
-    game.RotateTetrimino(true);
+    game.FinalizeTetrimino();
   };
   inputHandlers[1] = [this]() {
     game.RotateTetrimino(false);
