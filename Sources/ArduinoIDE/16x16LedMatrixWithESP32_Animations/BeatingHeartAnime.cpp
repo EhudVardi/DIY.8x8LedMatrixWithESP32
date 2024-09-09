@@ -3,6 +3,7 @@
 BeatingHeartAnime::BeatingHeartAnime(int size)
   : BaseInteractiveAnime(size), stepCount(0) {
   stepDuration = 10;
+  SetInputHandlers();
 }
 
 void BeatingHeartAnime::init() {
@@ -44,16 +45,20 @@ void BeatingHeartAnime::drawHeart(const uint8_t* heart, int size) {
 }
 
 void BeatingHeartAnime::SetInputHandlers() {
-  inputHandlers[0] = [this]() {
-    stepDuration = max(10, stepDuration - 5);
-  };
-  inputHandlers[1] = [this]() {
-    stepDuration = min(1000, stepDuration + 5);
-  };
-  inputHandlers[2] = [this]() {
-    stepDuration = max(10, stepDuration - 50);
-  };
-  inputHandlers[3] = [this]() {
-    stepDuration = min(1000, stepDuration + 50);
-  };
+  RegisterInputHandler(0, [this](bool isSet) {
+    if (isSet)
+      stepDuration = max(10, stepDuration - 5);
+  });
+  RegisterInputHandler(1, [this](bool isSet) {
+    if (isSet)
+      stepDuration = min(1000, stepDuration + 5);
+  });
+  RegisterInputHandler(2, [this](bool isSet) {
+    if (isSet)
+      stepDuration = max(10, stepDuration - 50);
+  });
+  RegisterInputHandler(3, [this](bool isSet) {
+    if (isSet)
+      stepDuration = min(1000, stepDuration + 50);
+  });
 }

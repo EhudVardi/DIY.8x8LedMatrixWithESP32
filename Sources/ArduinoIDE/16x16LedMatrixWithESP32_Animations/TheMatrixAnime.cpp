@@ -3,6 +3,7 @@
 TheMatrixAnime::TheMatrixAnime(int size, int maxLines, int minLineLength, int maxLineLength, int lineAppearanceRate)
   : BaseInteractiveAnime(size), maxLines(maxLines), minLineLength(minLineLength), maxLineLength(maxLineLength), lineAppearanceRate(lineAppearanceRate) {
   stepDuration = 100;
+  SetInputHandlers();
 }
 
 void TheMatrixAnime::init() {
@@ -51,16 +52,20 @@ void TheMatrixAnime::drawLine(Line& line) {
 }
 
 void TheMatrixAnime::SetInputHandlers() {
-  inputHandlers[0] = [this]() {
-    stepDuration = max(10, stepDuration - 10);
-  };
-  inputHandlers[1] = [this]() {
-    stepDuration = min(500, stepDuration + 10);
-  };
-  inputHandlers[2] = [this]() {
-    lineAppearanceRate = max(1, lineAppearanceRate - 1);
-  };
-  inputHandlers[3] = [this]() {
-    lineAppearanceRate = min(50, lineAppearanceRate + 1);
-  };
+  RegisterInputHandler(0, [this](bool isSet) {
+    if (isSet)
+      stepDuration = max(10, stepDuration - 10);
+  });
+  RegisterInputHandler(1, [this](bool isSet) {
+    if (isSet)
+      stepDuration = min(500, stepDuration + 10);
+  });
+  RegisterInputHandler(2, [this](bool isSet) {
+    if (isSet)
+      lineAppearanceRate = max(1, lineAppearanceRate - 1);
+  });
+  RegisterInputHandler(3, [this](bool isSet) {
+    if (isSet)
+      lineAppearanceRate = min(50, lineAppearanceRate + 1);
+  });
 }

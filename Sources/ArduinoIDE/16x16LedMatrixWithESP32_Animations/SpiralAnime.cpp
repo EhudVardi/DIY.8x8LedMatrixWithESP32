@@ -20,6 +20,7 @@
 SpiralAnime::SpiralAnime(int size)
   : BaseInteractiveAnime(size), trailInOrOut(true) {
   stepDuration = 5;
+  SetInputHandlers();
 }
 
 void SpiralAnime::init() {
@@ -78,16 +79,20 @@ void SpiralAnime::step() {
 }
 
 void SpiralAnime::SetInputHandlers() {
-  inputHandlers[0] = [this]() {
-    stepDuration = max(10, stepDuration - 5);
-  };
-  inputHandlers[1] = [this]() {
-    stepDuration = min(1000, stepDuration + 5);
-  };
-  inputHandlers[2] = [this]() {
-    stepDuration = max(10, stepDuration - 50);
-  };
-  inputHandlers[3] = [this]() {
-    stepDuration = min(1000, stepDuration + 50);
-  };
+  RegisterInputHandler(0, [this](bool isSet) {
+    if (isSet)
+      stepDuration = max(10, stepDuration - 5);
+  });
+  RegisterInputHandler(1, [this](bool isSet) {
+    if (isSet)
+      stepDuration = min(1000, stepDuration + 5);
+  });
+  RegisterInputHandler(2, [this](bool isSet) {
+    if (isSet)
+      stepDuration = max(10, stepDuration - 50);
+  });
+  RegisterInputHandler(3, [this](bool isSet) {
+    if (isSet)
+      stepDuration = min(1000, stepDuration + 50);
+  });
 }

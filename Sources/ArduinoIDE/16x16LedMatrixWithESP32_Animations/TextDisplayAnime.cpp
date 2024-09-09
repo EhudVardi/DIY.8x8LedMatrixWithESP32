@@ -5,6 +5,7 @@ TextDisplayAnime::TextDisplayAnime(int size)
   : BaseInteractiveAnime(size), isScrolling(true) {
   stepDuration = 100;
   initializeCharacterMap();
+  SetInputHandlers();
 }
 
 void TextDisplayAnime::init() {
@@ -302,16 +303,20 @@ void TextDisplayAnime::addCharacterToMatrix(const std::array<byte, 4>& charMatri
 }
 
 void TextDisplayAnime::SetInputHandlers() {
-  inputHandlers[0] = [this]() {
-    stepDuration = max(10, stepDuration - 5);
-  };
-  inputHandlers[1] = [this]() {
-    stepDuration = min(1000, stepDuration + 5);
-  };
-  inputHandlers[2] = [this]() {
-    isScrolling = false;
-  };
-  inputHandlers[3] = [this]() {
-    isScrolling = true;
-  };
+  RegisterInputHandler(0, [this](bool isSet) {
+    if (isSet)
+      stepDuration = max(10, stepDuration - 5);
+  });
+  RegisterInputHandler(1, [this](bool isSet) {
+    if (isSet)
+      stepDuration = min(1000, stepDuration + 5);
+  });
+  RegisterInputHandler(2, [this](bool isSet) {
+    if (isSet)
+      isScrolling = false;
+  });
+  RegisterInputHandler(3, [this](bool isSet) {
+    if (isSet)
+      isScrolling = true;
+  });
 }

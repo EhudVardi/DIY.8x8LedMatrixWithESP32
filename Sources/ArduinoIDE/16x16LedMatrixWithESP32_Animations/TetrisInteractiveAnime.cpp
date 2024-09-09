@@ -3,6 +3,7 @@
 TetrisInteractiveAnime::TetrisInteractiveAnime(int size)
   : BaseInteractiveAnime(size), game(size, size) {
   stepDuration = 10;
+  SetInputHandlers();
 }
 
 void TetrisInteractiveAnime::init() {
@@ -35,18 +36,22 @@ void TetrisInteractiveAnime::step() {
 }
 
 void TetrisInteractiveAnime::SetInputHandlers() {
-  inputHandlers[0] = [this]() {
-    game.FinalizeTetrimino();
-  };
-  inputHandlers[1] = [this]() {
-    game.RotateTetrimino(false);
-  };
-  inputHandlers[2] = [this]() {
-    game.MoveTetrimino(L);
-  };
-  inputHandlers[3] = [this]() {
-    game.MoveTetrimino(R);
-  };
+  RegisterInputHandler(0, [this](bool isSet) {
+    if (isSet)
+      game.FinalizeTetrimino();
+  });
+  RegisterInputHandler(1, [this](bool isSet) {
+    if (isSet)
+      game.RotateTetrimino(false);
+  });
+  RegisterInputHandler(2, [this](bool isSet) {
+    if (isSet)
+      game.MoveTetrimino(L);
+  });
+  RegisterInputHandler(3, [this](bool isSet) {
+    if (isSet)
+      game.MoveTetrimino(R);
+  });
 }
 
 int TetrisInteractiveAnime::getGameStepDuration() {
