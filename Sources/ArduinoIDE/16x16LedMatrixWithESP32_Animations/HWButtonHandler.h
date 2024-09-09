@@ -17,7 +17,8 @@ public:
   int pin;
   volatile HWButtonState state;
   volatile HWButtonState lastState;
-  std::function<void()> onPress;  // Event handler
+  std::function<void()> onPress;    // press Event handler
+  std::function<void()> onRelease;  // release Event handler
 
   // Debounce parameters
   unsigned long lastDebounceTime;          // Last time the button state changed
@@ -53,19 +54,13 @@ public:
         // Call the event handler if the button is pressed
         if (state == HWButtonState::Pressed && onPress) {
           onPress();
+        } else if (state == HWButtonState::Released && onRelease) {
+          onRelease();
         }
       }
     }
 
     lastReading = currentReading;  // Update lastReading for the next iteration
-  }
-
-  bool stateChanged() {
-    if (state != lastState) {
-      lastState = state;
-      return true;
-    }
-    return false;
   }
 };
 
@@ -75,7 +70,7 @@ private:
   std::vector<HWButton> buttons;
 
 public:
-  HWButtonHandler(const std::vector<int>& pins, const std::vector<std::function<void()>>& handlers);
+  HWButtonHandler(const std::vector<int>& pins, const std::vector<std::function<void()>>& handlers_onPress, const std::vector<std::function<void()>>& handlers_onRelease);
   void updateButtons();
   std::vector<HWButton>& getButtons();
 };

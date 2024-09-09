@@ -49,7 +49,7 @@ void setup() {
   initCurrAnime();
 
   std::vector<int> hwButtonPins = { BTN_DOWN_PIN, BTN_UP_PIN, BTN_LEFT_PIN, BTN_RIGHT_PIN, BTN_BACK_PIN, BTN_ENTER_PIN };
-  std::vector<std::function<void()>> hwButtonHandlers = {
+  std::vector<std::function<void()>> hwButtonHandlers_onPress = {
     []() {
       animation->SetInput(0);
     },
@@ -70,7 +70,15 @@ void setup() {
       initCurrAnime();
     }
   };
-  hwButtonHandler = new HWButtonHandler(hwButtonPins, hwButtonHandlers);
+  std::vector<std::function<void()>> hwButtonHandlers_onRelease = {
+    []() {},
+    []() {},
+    []() {},
+    []() {},
+    []() {},
+    []() {}
+  };
+  hwButtonHandler = new HWButtonHandler(hwButtonPins, hwButtonHandlers_onPress, hwButtonHandlers_onRelease);
 }
 
 void initCurrAnime() {
