@@ -16,7 +16,7 @@ private:
   Tetrimino* currentTetrimino;
   TetrisGameState gameState;
   float gameSpeedPercent;
-  const float gameSpeedPercentStep = 0.05;
+  const float gameSpeedPercentStep = 0.01;
   bool isFinalizingTetrimino = false;
   std::vector<Tetrimino> tetriminoPool;  // Pre-initialized Tetrimino pool
 
