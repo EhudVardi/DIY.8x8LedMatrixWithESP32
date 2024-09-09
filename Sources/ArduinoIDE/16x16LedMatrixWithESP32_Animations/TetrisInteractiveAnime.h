@@ -10,7 +10,12 @@ private:
 
   const float durationDiv = 50;
   int getGameStepDuration();
-  unsigned long previousMillis = 0;
+  unsigned long previousGameStepMillis = 0;
+
+  bool isMovingTetrimino = false;
+  Direction tetriminoMoveDirection = L;
+  int getMoveStepDuration();
+  unsigned long previousMoveStepMillis = 0;
 
 public:
   TetrisInteractiveAnime(int size);

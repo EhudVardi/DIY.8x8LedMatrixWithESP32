@@ -8,16 +8,23 @@ TetrisInteractiveAnime::TetrisInteractiveAnime(int size)
 
 void TetrisInteractiveAnime::init() {
   game.InitGame();
-  previousMillis = 0;
+  previousGameStepMillis = 0;
+  previousMoveStepMillis = 0;
 }
 
 void TetrisInteractiveAnime::step() {
 
-  // step the game if its time
   unsigned long currentMillis = millis();
-  if (currentMillis - TetrisInteractiveAnime::previousMillis >= TetrisInteractiveAnime::getGameStepDuration()) {
-    previousMillis = currentMillis;
+  // step the game if its time
+  if (currentMillis - TetrisInteractiveAnime::previousGameStepMillis >= TetrisInteractiveAnime::getGameStepDuration()) {
+    previousGameStepMillis = currentMillis;
     game.StepGame();
+  }
+  // continous move of tetrimino if enabled
+  if (currentMillis - TetrisInteractiveAnime::previousMoveStepMillis >= TetrisInteractiveAnime::getMoveStepDuration()) {
+    previousMoveStepMillis = currentMillis;
+    if (isMovingTetrimino)
+      game.MoveTetrimino(tetriminoMoveDirection);
   }
 
   // update display matrix from game board
@@ -45,15 +52,23 @@ void TetrisInteractiveAnime::SetInputHandlers() {
       game.RotateTetrimino(false);
   });
   RegisterInputHandler(2, [this](bool isSet) {
-    if (isSet)
-      game.MoveTetrimino(L);
+    if (isSet) {
+      isMovingTetrimino = true;
+      tetriminoMoveDirection = L;
+    } else isMovingTetrimino = false;
   });
   RegisterInputHandler(3, [this](bool isSet) {
-    if (isSet)
-      game.MoveTetrimino(R);
+    if (isSet) {
+      isMovingTetrimino = true;
+      tetriminoMoveDirection = R;
+    } else isMovingTetrimino = false;
   });
 }
 
 int TetrisInteractiveAnime::getGameStepDuration() {
   return stepDuration * ((1 - durationDiv) * game.GetGameSpeedPercent() + durationDiv);
+}
+
+int TetrisInteractiveAnime::getMoveStepDuration() {
+  return stepDuration * 10;
 }
