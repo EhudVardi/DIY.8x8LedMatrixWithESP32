@@ -71,10 +71,18 @@ void setup() {
     }
   };
   std::vector<std::function<void()>> hwButtonHandlers_onRelease = {
-    []() {},
-    []() {},
-    []() {},
-    []() {},
+    []() {
+      animation->ResetInput(0);
+    },
+    []() {
+      animation->ResetInput(1);
+    },
+    []() {
+      animation->ResetInput(2);
+    },
+    []() {
+      animation->ResetInput(3);
+    },
     []() {},
     []() {}
   };

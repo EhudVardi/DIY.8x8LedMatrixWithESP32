@@ -4,7 +4,7 @@
 #include "BaseAnime.h"
 #include <unordered_map>
 
-typedef std::function<void()> InputHandler;
+typedef std::function<void(bool)> InputHandler;
 
 class BaseInteractiveAnime : public BaseAnime {
 protected:
@@ -12,7 +12,9 @@ protected:
   virtual void SetInputHandlers() = 0;
 public:
   BaseInteractiveAnime(int size);
-  virtual void SetInput(int inputNum);
+  virtual void SetInput(int inputNum);    // Call with true
+  virtual void ResetInput(int inputNum);  // Call with false
+  void RegisterInputHandler(int inputNum, InputHandler handler);
 };
 
 #endif

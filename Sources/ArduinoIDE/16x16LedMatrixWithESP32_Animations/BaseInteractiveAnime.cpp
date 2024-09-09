@@ -4,9 +4,17 @@ BaseInteractiveAnime::BaseInteractiveAnime(int size)
   : BaseAnime(size) {}
 
 void BaseInteractiveAnime::SetInput(int inputNum) {
-  // check if a handler with a key corresponds to the inputNum, and call it if exists
   if (inputHandlers.find(inputNum) != inputHandlers.end()) {
-    inputHandlers[inputNum]();
+    inputHandlers[inputNum](true);  // Call the handler with true (set)
   }
-  SetInputHandlers();
+}
+
+void BaseInteractiveAnime::ResetInput(int inputNum) {
+  if (inputHandlers.find(inputNum) != inputHandlers.end()) {
+    inputHandlers[inputNum](false);  // Call the handler with false (reset)
+  }
+}
+
+void BaseInteractiveAnime::RegisterInputHandler(int inputNum, InputHandler handler) {
+  inputHandlers[inputNum] = handler;
 }
