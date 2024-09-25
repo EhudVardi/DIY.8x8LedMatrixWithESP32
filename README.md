@@ -4,6 +4,7 @@ This is a DIY project utilizing a nice 8 by 8 led kit I've soldered together, co
 
 the DIY board offers external pins to be controlled from the outside, [bought from aliexpress](https://www.aliexpress.com/item/1005005671763020.html) and soldered manually.
 
+## The led board
 The following is the Schema of the board, provided kindly by the seller:
 ![8x8 Led Matrix Board Schema](https://raw.githubusercontent.com/EhudVardi/DIY.8x8LedMatrixWithESP32/master/Resources/schema.webp)
 
@@ -13,6 +14,13 @@ A few notes on the board:
    - for example, we send 10000001 which will enable the 1st and the last rows, and then we send 00011000 which will light up the 4th and 5th leds of the first and the last rows.
 3. I could not identify the type of the single 8 pin chip, I'm not sure how does it plays in the mix.
 4. Note of the J4 point, I believe it is connected to a carry bit of some sort and it might allow us to concatenate multiple boards together.
+
+
+# Project Variations
+There are variations for this project, one of them is using a 16x16 board and I recommand you to take a look at it.\
+[16x16 led matrix with animations](./Sources/ArduinoIDE/16x16LedMatrixWithESP32_Animations/README.md)  
+[8x8 led matrix with rotary encoder](./Sources/ArduinoIDE/8x8LedMatrixWithESP32_ControlWithRotaryEncoder/README.md)
+
 
 # Environment Installation
 1. Download & install Arduino IDE
@@ -34,10 +42,8 @@ The board has the following pins:
 - VCC, GND: power the board with either 3.3V or 5V.
 
 ### ESP32 board
-The board is powered on its "Vin" & "GND" pins, and they can take input voltage from 4V to 12V.
-
-When powered, the board provides a stable 3.3V on the its "3.3V" & "GND" pins that can power low current loads.
-
+The board is powered on its "Vin" & "GND" pins, and they can take input voltage from 4V to 12V.\
+When powered, the board provides a stable 3.3V on the its "3.3V" & "GND" pins that can power low current loads.\
 We select GPIO's 12,13,14 and 15 of the ESP32 board to the "OE", "IN", "STB", "CLK" of the led matrix.
 
 ### Connecting them together:
@@ -53,7 +59,7 @@ We select GPIO's 12,13,14 and 15 of the ESP32 board to the "OE", "IN", "STB", "C
 # Build & Flash firmware
 1. Open the ".ino" code file in the IDE 
 2. Disconnect the external power to the ESP32 board
-3. connect the ESP32 board to your host PC via USB and select the COM port 
+3. connect the ESP32 board to your host PC via USB and select the COM port
 - Open windows Device manager and look under "ports" what is the port of the board. 
 - Go to Tools > Port > and select that port.
 - The IDE should tell you that the board is connected at the bottom right corner of the app
@@ -67,13 +73,6 @@ At this point, the led matrix board should display and swap between 3 patterns i
 # Modifying the Code
 - To add more patterns, simply add more data to the "patterns" variable.
 - To make use of different GPIO's, make sure to change the definitions in the code, and it is recommended to select simple GPIO pins and not UART pins. do NOT use UART0 pins, you won't be able to flash new firmware if you do.
-
-
-# Variations
-There are variations for the base 8x8 example in this project.  
-[16x16 led matrix with animations](./Sources/ArduinoIDE/16x16LedMatrixWithESP32_Animations/README.md)  
-[8x8 led matrix with rotary encoder](./Sources/ArduinoIDE/8x8LedMatrixWithESP32_ControlWithRotaryEncoder/README.md)
-
 
 # Contributing
 
