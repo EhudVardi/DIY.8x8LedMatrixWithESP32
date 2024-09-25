@@ -27,6 +27,11 @@ void BeatingHeartAnime::step() {
     drawHeart(&smallHeart[0][0], 5);
   }
   stepCount = (stepCount + 1) % 50;
+
+
+  setPixel(0, 0, true);
+  setPixel(15, 0, true);
+  setPixel(0, 15, true);
 }
 
 void BeatingHeartAnime::drawHeart(const uint8_t* heart, int size) {
@@ -37,9 +42,9 @@ void BeatingHeartAnime::drawHeart(const uint8_t* heart, int size) {
       // Compute the index in the 1D array
       int index = i * size + j;
       if (heart[index])
-        setPixel(i + offset, j + offset, true);
+        setPixel(j + offset, i + offset, true);
       else
-        setPixel(i + offset, j + offset, false);
+        setPixel(j + offset, i + offset, false);
     }
   }
 }

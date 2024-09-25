@@ -37,7 +37,7 @@ void TheMatrixAnime::clearLine(Line& line) {
   for (int i = 0; i < line.length; i++) {
     int row = line.row - i;
     if (row >= 0 && row < N) {
-      setPixel(row, line.col, false);
+      setPixel(line.col, row, false);
     }
   }
 }
@@ -46,7 +46,7 @@ void TheMatrixAnime::drawLine(Line& line) {
   for (int i = 0; i < line.length; i++) {
     int row = line.row - i;
     if (row >= 0 && row < N) {
-      setPixel(row, line.col, true);
+      setPixel(line.col, row, true);
     }
   }
 }

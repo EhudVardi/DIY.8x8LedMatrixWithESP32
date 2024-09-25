@@ -296,7 +296,7 @@ void TextDisplayAnime::addCharacterToMatrix(const std::array<byte, 4>& charMatri
     for (int row = 0; row < 5; row++) {
       bool isPixelOn = columnData & (1 << row);
       if (row < N && targetCol < N) {
-        setPixel(row, targetCol, isPixelOn);
+        setPixel(targetCol, row, isPixelOn);
       }
     }
   }
