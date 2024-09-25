@@ -1,6 +1,6 @@
 # Description
 
-This version of the project is built upon the original, but with a [16x16 led matrix board] (https://www.aliexpress.com/item/1005005648151934.html).
+This version of the project is built upon the original, but with a [16x16 led matrix board](https://www.aliexpress.com/item/1005005648151934.html).
 The board contains 4 8bit drivers, 2 for the 16 rows and 2 for the 16 columns.
 The sketch code is modified to map a 16x16 matrix, and to push four bytes at each cycle instead of two. the data is pushed in the following order:
 high rows (8-15), low rows (0-7), low columns (0-7), high columns (8-15).
