@@ -288,8 +288,7 @@ void TextDisplayAnime::step() {
 
 void TextDisplayAnime::addCharacterToMatrix(const std::array<byte, 4>& charMatrix, int xOffset) {
   for (int col = 0; col < 4; col++) {
-    // Calculate the flipped column index
-    int targetCol = xOffset + (3 - col);
+    int targetCol = xOffset + col;
     if (targetCol < 0 || targetCol >= N) continue;
 
     byte columnData = charMatrix[col];
