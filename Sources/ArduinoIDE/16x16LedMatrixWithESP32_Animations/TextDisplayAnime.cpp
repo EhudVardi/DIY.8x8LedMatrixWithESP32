@@ -266,7 +266,7 @@ void TextDisplayAnime::step() {
   int xOffset = N - scrollOffset;
 
   // Iterate over the text in reverse order and map characters to the matrix
-  for (auto it = text.rbegin(); it != text.rend(); ++it) {
+  for (auto it = text.begin(); it != text.end(); ++it) {
     char c = *it;
     if (characterMap.find(c) != characterMap.end()) {
       // Only draw characters that are partially or fully visible
