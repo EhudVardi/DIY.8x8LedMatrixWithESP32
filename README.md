@@ -69,6 +69,8 @@ We select GPIO's 12,13,14 and 15 of the ESP32 board to the "OE", "IN", "STB", "C
 
 # Results
 At this point, the led matrix board should display and swap between 3 patterns in a 1 second interval.
+### A demonstration video on youtube for the 16x16 variation:
+[![here](https://img.youtube.com/vi/_oplOXZ3Vvw/0.jpg)](https://www.youtube.com/watch?v=_oplOXZ3Vvw)
 
 # Modifying the Code
 - To add more patterns, simply add more data to the "patterns" variable.
