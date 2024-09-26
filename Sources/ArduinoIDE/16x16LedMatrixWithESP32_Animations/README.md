@@ -26,10 +26,9 @@ The led matrix board is connected in the same way, there's no change.
 Six push buttons are connected directly between six pins on the ESP32 board and the ground.
 
 # Results
-The enter button switches to the next animation in the set.
-The back button resets the current animation.
-The Up, Down, Left and Right buttons control eacn animation in a different way.
-
+The enter button switches to the next animation in the set, the back button resets the current animation, and the Up, Down, Left and Right buttons control eacn animation in a different way.\
+Here's A demonstration video on youtube:\
+[![here](https://img.youtube.com/vi/_oplOXZ3Vvw/0.jpg)](https://www.youtube.com/watch?v=_oplOXZ3Vvw)
 
 # Modifying the Code
 The animation base classes can easily be expanded to add more animations.
