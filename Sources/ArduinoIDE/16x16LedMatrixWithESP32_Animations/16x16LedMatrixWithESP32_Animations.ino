@@ -12,14 +12,10 @@
 BaseInteractiveAnime* animation = nullptr;
 int currAnimeIndex = 4;
 
-#define OE_PIN 5        // Output Enable pin (active low)
-#define DATA_1_PIN 4    // Serial Data Input
-#define LATCH_1_PIN 2   // Latch Pin
-#define CLOCK_1_PIN 15  // Clock Pin
-
-#define DATA_PIN DATA_1_PIN
-#define LATCH_PIN LATCH_1_PIN
-#define CLOCK_PIN CLOCK_1_PIN
+#define OE_PIN 5      // Output Enable pin (active low)
+#define DATA_PIN 4    // Serial Data Input
+#define LATCH_PIN 2   // Latch Pin
+#define CLOCK_PIN 15  // Clock Pin
 
 
 HWButtonHandler* hwButtonHandler = nullptr;
