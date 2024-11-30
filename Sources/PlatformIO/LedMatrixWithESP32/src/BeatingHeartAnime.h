@@ -1,6 +1,7 @@
 #ifndef BEATINGHEARTANIME_H
 #define BEATINGHEARTANIME_H
 
+#include <vector>
 #include "BaseInteractiveAnime.h"
 
 class BeatingHeartAnime : public BaseInteractiveAnime {

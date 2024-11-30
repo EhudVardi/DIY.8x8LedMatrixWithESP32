@@ -29,6 +29,13 @@ HWButtonHandler* hwButtonHandler = nullptr;
 #define BTN_ENTER_PIN 32
 
 
+void initCurrAnime();
+void displayPattern(byte pattern[32]);
+void sendData(int16_t rowData, int16_t colData);
+void shiftOut(byte data, int clockPin, int dataPin);
+void latch(int latchPin);
+
+
 void setup() {
   Serial.begin(115200);
   Serial.println("Initializing pins...");
