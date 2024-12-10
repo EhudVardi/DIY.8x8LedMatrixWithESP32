@@ -8,22 +8,22 @@
 
 class TextDisplayAnime : public BaseInteractiveAnime {
 private:
-  std::unordered_map<char, std::array<byte, 4>> characterMap;
-  std::string text;
-  int scrollOffset;
-  int textIndex;
-  bool isScrolling;
+    std::unordered_map<char, std::array<byte, 4>> characterMap;
+    std::string text;
+    int scrollOffset;
+    int textIndex;
+    bool isScrolling;
 
 public:
-  TextDisplayAnime(int size);
-  void setText(const std::string& text);
-  void init() override;
-  void step() override;
-  void SetInputHandlers() override;
+    TextDisplayAnime(int size);
+    void setText(const std::string& text);
+    void init() override;
+    void step() override;
+    void SetInputHandlers() override;
 
 private:
-  void initializeCharacterMap();
-  void addCharacterToMatrix(const std::array<byte, 4>& charMatrix, int xOffset);
+    void initializeCharacterMap();
+    void addCharacterToMatrix(const std::array<byte, 4>& charMatrix, int xOffset);
 };
 
 #endif

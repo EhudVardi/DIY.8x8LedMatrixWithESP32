@@ -7,21 +7,21 @@
 
 class Tetrimino {
 private:
-  std::vector<std::vector<Point2D>> shapes;  // All possible shapes of the Tetrimino
-  int currentShapeIndex;                     // Index of the current shape
-  Point2D position;                          // Absolute position of the Tetrimino
+    std::vector<std::vector<Point2D>> shapes;  // All possible shapes of the Tetrimino
+    int currentShapeIndex;                     // Index of the current shape
+    Point2D position;                          // Absolute position of the Tetrimino
 
 public:
-  Tetrimino(const std::vector<std::vector<Point2D>>& shapes, const Point2D& startPos);
+    Tetrimino(const std::vector<std::vector<Point2D>>& shapes, const Point2D& startPos);
 
-  void Move(Direction dir);
-  void Rotate(bool clockWise);
-  std::vector<Point2D> GetBlocks() const;
-  Point2D GetPosition() const;
-  void SetPosition(const Point2D& newPos);
+    void Move(Direction dir);
+    void Rotate(bool clockWise);
+    std::vector<Point2D> GetBlocks() const;
+    Point2D GetPosition() const;
+    void SetPosition(const Point2D& newPos);
 
-  // New method to get absolute block positions
-  std::vector<Point2D> GetAbsoluteBlocks() const;
+    // New method to get absolute block positions
+    std::vector<Point2D> GetAbsoluteBlocks() const;
 };
 
 #endif

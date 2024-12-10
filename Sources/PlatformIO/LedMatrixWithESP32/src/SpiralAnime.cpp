@@ -18,81 +18,81 @@
 
 
 SpiralAnime::SpiralAnime(int size)
-  : BaseInteractiveAnime(size), trailInOrOut(true) {
-  stepDuration = 5;
-  SetInputHandlers();
+    : BaseInteractiveAnime(size), trailInOrOut(true) {
+    stepDuration = 5;
+    SetInputHandlers();
 }
 
 void SpiralAnime::init() {
-  stepDir = Down;
-  currTrailLength = 0;
-  currRowIdx = currColIdx = N / 2;
-  currTrailStep = 0;
+    stepDir = Down;
+    currTrailLength = 0;
+    currRowIdx = currColIdx = N / 2;
+    currTrailStep = 0;
 }
 
 void SpiralAnime::step() {
 
-  if (currTrailStep == 0) {  // current trail draw finished
-    if (currTrailLength == N) {
-      setPixel(currRowIdx, currColIdx, trailInOrOut);  //make sure the last trail of the spiral is also drawn, before switching direction
-      // spiral complete. switch trail in/out
-      init();
-      trailInOrOut = !trailInOrOut;
+    if (currTrailStep == 0) {  // current trail draw finished
+        if (currTrailLength == N) {
+            setPixel(currRowIdx, currColIdx, trailInOrOut);  //make sure the last trail of the spiral is also drawn, before switching direction
+            // spiral complete. switch trail in/out
+            init();
+            trailInOrOut = !trailInOrOut;
+        }
+
+        stepDir = static_cast<Dir>((stepDir + 1) % 4);  // move to next direction
+        if (stepDir == Left || stepDir == Right) {      // increase length of current direction trail
+            currTrailLength++;
+        }
+        currTrailStep = currTrailLength;
+        if (currTrailLength == N)
+            currTrailStep--;
     }
 
-    stepDir = static_cast<Dir>((stepDir + 1) % 4);  // move to next direction
-    if (stepDir == Left || stepDir == Right) {      // increase length of current direction trail
-      currTrailLength++;
-    }
-    currTrailStep = currTrailLength;
-    if (currTrailLength == N)
-      currTrailStep--;
-  }
+    setPixel(currRowIdx, currColIdx, trailInOrOut);
 
-  setPixel(currRowIdx, currColIdx, trailInOrOut);
-
-  if (currTrailStep > 0) {
-    switch (stepDir) {
-      case Down:
-        {
-          currRowIdx++;
-          break;
+    if (currTrailStep > 0) {
+        switch (stepDir) {
+            case Down:
+                {
+                    currRowIdx++;
+                    break;
+                }
+            case Left:
+                {
+                    currColIdx--;
+                    break;
+                }
+            case Up:
+                {
+                    currRowIdx--;
+                    break;
+                }
+            case Right:
+                {
+                    currColIdx++;
+                    break;
+                }
         }
-      case Left:
-        {
-          currColIdx--;
-          break;
-        }
-      case Up:
-        {
-          currRowIdx--;
-          break;
-        }
-      case Right:
-        {
-          currColIdx++;
-          break;
-        }
+        currTrailStep--;
     }
-    currTrailStep--;
-  }
 }
 
 void SpiralAnime::SetInputHandlers() {
-  RegisterInputHandler(0, [this](bool isSet) {
-    if (isSet)
-      stepDuration = max(10, stepDuration - 5);
-  });
-  RegisterInputHandler(1, [this](bool isSet) {
-    if (isSet)
-      stepDuration = min(1000, stepDuration + 5);
-  });
-  RegisterInputHandler(2, [this](bool isSet) {
-    if (isSet)
-      stepDuration = max(10, stepDuration - 50);
-  });
-  RegisterInputHandler(3, [this](bool isSet) {
-    if (isSet)
-      stepDuration = min(1000, stepDuration + 50);
-  });
+    RegisterInputHandler(0, [this](bool isSet) {
+        if (isSet)
+            stepDuration = max(10, stepDuration - 5);
+    });
+    RegisterInputHandler(1, [this](bool isSet) {
+        if (isSet)
+            stepDuration = min(1000, stepDuration + 5);
+    });
+    RegisterInputHandler(2, [this](bool isSet) {
+        if (isSet)
+            stepDuration = max(10, stepDuration - 50);
+    });
+    RegisterInputHandler(3, [this](bool isSet) {
+        if (isSet)
+            stepDuration = min(1000, stepDuration + 50);
+    });
 }

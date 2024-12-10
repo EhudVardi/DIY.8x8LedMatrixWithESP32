@@ -8,12 +8,12 @@
 
 class TetrisMatrix2D : public Matrix2D<int> {
 public:
-  TetrisMatrix2D(int width, int height);
+    TetrisMatrix2D(int width, int height);
 
-  bool IsRowFilled(int row) const;
-  void ClearRow(int row);
-  void AddTetrimino(const Tetrimino& tetrimino);
-  bool IsCollision(const Tetrimino& tetrimino) const;
+    bool IsRowFilled(int row) const;
+    void ClearRow(int row);
+    void AddTetrimino(const Tetrimino& tetrimino);
+    bool IsCollision(const Tetrimino& tetrimino) const;
 };
 
 #endif  // TETRIS_MATRIX2D_H
