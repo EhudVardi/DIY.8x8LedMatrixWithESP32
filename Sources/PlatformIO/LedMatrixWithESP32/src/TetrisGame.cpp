@@ -47,10 +47,10 @@ void TetrisGame::StepGame() {
     if (gameState != TetrisGameState::Running)
         return;
 
-    currentTetrimino->Move(U);  // Move the Tetrimino down
+    currentTetrimino->Move(U); // Move the Tetrimino down
     if (boardMatrix.IsCollision(*currentTetrimino)) {
-        isFinalizingTetrimino = false;  //if finalizing tetrimino active, disable it for next tetrimino
-        currentTetrimino->Move(D);      // Move it back up
+        isFinalizingTetrimino = false; //if finalizing tetrimino active, disable it for next tetrimino
+        currentTetrimino->Move(D); // Move it back up
         PlaceTetrimino();
         int filledRowsCount = ClearFilledRows();
         gameSpeedPercent += (gameSpeedPercentStep * filledRowsCount);

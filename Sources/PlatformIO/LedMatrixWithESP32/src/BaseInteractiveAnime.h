@@ -12,8 +12,8 @@ protected:
     virtual void SetInputHandlers() = 0;
 public:
     BaseInteractiveAnime(int size);
-    virtual void SetInput(int inputNum);    // Call with true
-    virtual void ResetInput(int inputNum);  // Call with false
+    virtual void SetInput(int inputNum); // Call with true (set)
+    virtual void ResetInput(int inputNum);  // Call with false (reset)
     void RegisterInputHandler(int inputNum, InputHandler handler);
 };
 

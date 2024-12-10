@@ -1,9 +1,8 @@
 #include "SnakeMatrix2D.h"
 
-// Constructor implementation
 SnakeMatrix2D::SnakeMatrix2D(int w, int h)
     : Matrix2D(w, h) {
-}  // Call base class constructor
+}
 
 void SnakeMatrix2D::Clear() {
     MatrixElement emptyElement = {};

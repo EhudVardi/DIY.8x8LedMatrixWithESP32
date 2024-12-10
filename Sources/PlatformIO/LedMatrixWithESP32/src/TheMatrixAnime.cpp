@@ -12,19 +12,18 @@ void TheMatrixAnime::init() {
 }
 
 void TheMatrixAnime::step() {
-    currentStep++;  // Increment step counter
+    currentStep++; // Increment step counter
     // Randomly add a new line based on the appearance rate
     if (currentStep % lineAppearanceRate == 0 && lines.size() < maxLines) {
         int col = random(0, N);
         int length = random(minLineLength, maxLineLength + 1);
         lines.push_back({ 0, col, length });
     }
-
     // Update each line
     for (auto& line : lines) {
-        clearLine(line);  // Clear previous state of the line
-        line.row++;       // Move the line down
-        drawLine(line);   // Set new state of the line
+        clearLine(line); // Clear previous state of the line
+        line.row++; // Move the line down
+        drawLine(line); // Set new state of the line
         // Remove lines that have fully exited the screen
         if (line.row - line.length >= N) {
             line = lines.back();

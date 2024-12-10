@@ -36,21 +36,18 @@ public:
 
     // Update the button state with debounce logic
     void updateState() {
-        int currentReading = digitalRead(pin);
 
+        int currentReading = digitalRead(pin);
         // Check if the reading has changed (due to noise or press)
         if (currentReading != lastReading) {
             lastDebounceTime = millis();  // Reset the debounce timer
         }
-
         // Only update the button state if enough time has passed (debounce)
         if ((millis() - lastDebounceTime) > debounceDelay) {
             // State has been stable for the debounce delay, so update the button state
             HWButtonState currentState = (currentReading == LOW) ? HWButtonState::Pressed : HWButtonState::Released;
-
             if (currentState != state) {
                 state = currentState;
-
                 // Call the event handler if the button is pressed
                 if (state == HWButtonState::Pressed && onPress) {
                     onPress();
@@ -60,7 +57,6 @@ public:
                 }
             }
         }
-
         lastReading = currentReading;  // Update lastReading for the next iteration
     }
 };

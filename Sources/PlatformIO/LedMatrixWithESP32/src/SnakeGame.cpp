@@ -79,6 +79,7 @@ void SnakeGame::TurnSnake(Direction newDir) {
 SnakeMatrix2D SnakeGame::GetBoard() const {
     return boardMatrix;
 }
+
 float SnakeGame::GetGameSpeedPercent() const {
     return gameSpeedPercent;
 }
@@ -98,7 +99,6 @@ void SnakeGame::PaintSnakeOnBoard() {
         travelNode = travelNode->next;
     }
 }
-
 
 Point2D SnakeGame::GetSnakeHeadPos() {
     Point2D snakeHeadPos(tailPos.x, tailPos.y);

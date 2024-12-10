@@ -35,10 +35,10 @@ ListNode* LinkedList::getTail() const {
     return temp;
 }
 void LinkedList::trimHead() {
-    if (!head) return;  // If the list is empty, do nothing
+    if (!head) return; // If the list is empty, do nothing
     ListNode* temp = head;
-    head = head->next;  // Move the head pointer to the next node
-    delete temp;        // Delete the old head
+    head = head->next; // Move the head pointer to the next node
+    delete temp; // Delete the old head
 }
 //void LinkedList::display() {
 //    ListNode* temp = head;

@@ -20,9 +20,9 @@ private:
     float gameSpeedPercent;
     const float gameSpeedPercentStep = 0.01;
     bool isFinalizingTetrimino = false;
-    std::vector<Tetrimino> tetriminoPool;  // Pre-initialized Tetrimino pool
+    std::vector<Tetrimino> tetriminoPool; // Pre-initialized Tetrimino pool
 
-    void InitTetriminoPool();  // Initialize the pool of Tetriminos
+    void InitTetriminoPool(); // Initialize the pool of Tetriminos
     void SpawnNewTetrimino();
     void PlaceTetrimino();
     int ClearFilledRows();
