@@ -91,6 +91,7 @@ void initCurrAnime() {
         default: animation = new TextDisplayAnime(SCREEN_SIZE); break;
     }
     animation->init(ledMatrixHandler);
+    ledMatrixHandler->clearMatrix();
 }
 
 
