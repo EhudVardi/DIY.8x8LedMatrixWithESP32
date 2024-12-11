@@ -34,8 +34,10 @@ void TetrisGame::InitTetriminoPool() {
 }
 
 void TetrisGame::InitGame() {
-    SpawnNewTetrimino();
-    gameState = TetrisGameState::Running;
+    boardMatrix.Clear(); // clear game board
+    gameSpeedPercent = 0.0f; // reset game speed
+    SpawnNewTetrimino(); // add initial tetrimino
+    gameState = TetrisGameState::Running; // set running game state
 }
 
 void TetrisGame::SpawnNewTetrimino() {

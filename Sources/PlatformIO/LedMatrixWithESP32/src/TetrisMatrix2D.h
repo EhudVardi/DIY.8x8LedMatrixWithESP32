@@ -11,6 +11,7 @@ public:
     TetrisMatrix2D(int width, int height);
 
     bool IsRowFilled(int row) const;
+    void Clear();
     void ClearRow(int row);
     void AddTetrimino(const Tetrimino& tetrimino);
     bool IsCollision(const Tetrimino& tetrimino) const;

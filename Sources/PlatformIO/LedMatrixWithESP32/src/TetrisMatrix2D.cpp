@@ -11,6 +11,10 @@ bool TetrisMatrix2D::IsRowFilled(int row) const {
     return true;
 }
 
+void TetrisMatrix2D::Clear() {
+    Matrix2D::Clear(0);
+}
+
 void TetrisMatrix2D::ClearRow(int row) {
     // Shift all rows above the cleared row down by one
     for (int y = row; y > 0; y--) {
