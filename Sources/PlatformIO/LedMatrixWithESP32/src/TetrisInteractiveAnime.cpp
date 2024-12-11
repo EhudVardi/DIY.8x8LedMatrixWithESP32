@@ -1,7 +1,7 @@
 #include "TetrisInteractiveAnime.h"
 
 TetrisInteractiveAnime::TetrisInteractiveAnime(int size)
-    : BaseInteractiveAnime(size), game(size, size) {
+    : BaseInteractiveAnime(), game(size, size) {
     stepDuration = 10;
     SetInputHandlers();
 }

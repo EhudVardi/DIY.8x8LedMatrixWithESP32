@@ -10,7 +10,7 @@ protected:
     int stepDuration;
 
 public:
-    BaseAnime(int size);
+    BaseAnime();
     virtual void init(LedMatrixHandler* ledMatrixHandler) = 0;
     virtual void step(LedMatrixHandler* ledMatrixHandler) = 0;
     virtual int getStepDuration();

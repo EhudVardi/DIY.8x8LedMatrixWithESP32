@@ -18,7 +18,7 @@
 
 
 SpiralAnime::SpiralAnime(int size)
-    : BaseInteractiveAnime(size), trailInOrOut(true) {
+    : BaseInteractiveAnime(), trailInOrOut(true) {
     stepDuration = 5;
     SetInputHandlers();
 }

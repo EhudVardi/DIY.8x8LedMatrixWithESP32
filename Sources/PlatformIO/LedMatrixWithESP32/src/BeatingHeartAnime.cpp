@@ -1,7 +1,7 @@
 #include "BeatingHeartAnime.h"
 
 BeatingHeartAnime::BeatingHeartAnime(int size)
-    : BaseInteractiveAnime(size), currHeartIndex(0) {
+    : BaseInteractiveAnime(), currHeartIndex(0) {
     stepDuration = 70;
     SetInputHandlers();
 }

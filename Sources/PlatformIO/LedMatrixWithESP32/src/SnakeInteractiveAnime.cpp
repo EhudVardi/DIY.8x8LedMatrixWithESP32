@@ -1,7 +1,7 @@
 #include "SnakeInteractiveAnime.h"
 
 SnakeInteractiveAnime::SnakeInteractiveAnime(int size)
-    : BaseInteractiveAnime(size), game(size, size) {
+    : BaseInteractiveAnime(), game(size, size) {
     stepDuration = 500;
     SetInputHandlers();
 }

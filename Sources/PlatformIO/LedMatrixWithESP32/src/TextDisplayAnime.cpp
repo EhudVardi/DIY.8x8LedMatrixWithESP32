@@ -2,7 +2,7 @@
 #include <unordered_map>
 
 TextDisplayAnime::TextDisplayAnime(int size)
-    : BaseInteractiveAnime(size), isScrolling(true) {
+    : BaseInteractiveAnime(), isScrolling(true) {
     stepDuration = 100;
     initializeCharacterMap();
     SetInputHandlers();

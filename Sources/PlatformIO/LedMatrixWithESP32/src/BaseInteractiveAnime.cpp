@@ -1,8 +1,6 @@
 #include "BaseInteractiveAnime.h"
 
-BaseInteractiveAnime::BaseInteractiveAnime(int size)
-    : BaseAnime(size) {
-}
+BaseInteractiveAnime::BaseInteractiveAnime() {}
 
 void BaseInteractiveAnime::SetInput(int inputNum) {
     if (inputHandlers.find(inputNum) != inputHandlers.end()) {

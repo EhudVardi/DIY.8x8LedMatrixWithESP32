@@ -1,7 +1,7 @@
 #include "TheMatrixAnime.h"
 
 TheMatrixAnime::TheMatrixAnime(int size, int maxLines, int minLineLength, int maxLineLength, int lineAppearanceRate)
-    : BaseInteractiveAnime(size), maxLines(maxLines), minLineLength(minLineLength), maxLineLength(maxLineLength), lineAppearanceRate(lineAppearanceRate) {
+    : BaseInteractiveAnime(), maxLines(maxLines), minLineLength(minLineLength), maxLineLength(maxLineLength), lineAppearanceRate(lineAppearanceRate) {
     stepDuration = 100;
     SetInputHandlers();
 }
