@@ -23,11 +23,7 @@ void BeatingHeartAnime::drawHeart(LedMatrixHandler* ledMatrixHandler, const uint
         for (int j = 0; j < size; ++j) {
             // Compute the index in the 1D array
             int index = i * size + j;
-            //TODO: attempt to replace  ledMatrixHandler->setPixel(j + offset, i + offset, (bool)(heart[index])));
-            if (heart[index])
-                ledMatrixHandler->setPixel(j + offset, i + offset, true);
-            else
-                ledMatrixHandler->setPixel(j + offset, i + offset, false);
+            ledMatrixHandler->setPixel(j + offset, i + offset, (bool)(heart[index]));
         }
     }
 }
