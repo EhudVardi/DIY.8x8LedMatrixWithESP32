@@ -7,12 +7,12 @@
 class BeatingHeartAnime : public BaseInteractiveAnime {
 public:
     BeatingHeartAnime(int size);
-    void init() override;
-    void step() override;
+    void init(LedMatrixHandler* ledMatrixHandler) override;
+    void step(LedMatrixHandler* ledMatrixHandler) override;
     void SetInputHandlers() override;
 
 private:
-    void drawHeart(const uint8_t* heart, int size);
+    void drawHeart(LedMatrixHandler* ledMatrixHandler, const uint8_t* heart, int size);
     const uint8_t smallHeart[12][12] = {
       { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
       { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },

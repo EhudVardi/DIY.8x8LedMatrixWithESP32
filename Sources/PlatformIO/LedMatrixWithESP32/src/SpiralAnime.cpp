@@ -23,20 +23,22 @@ SpiralAnime::SpiralAnime(int size)
     SetInputHandlers();
 }
 
-void SpiralAnime::init() {
-    stepDir = Down;
-    currTrailLength = 0;
-    currRowIdx = currColIdx = N / 2;
-    currTrailStep = 0;
+void SpiralAnime::init(LedMatrixHandler* ledMatrixHandler) {
+    resetSpiral(-1); //reset spiral. center will be set correctly at step func.
 }
 
-void SpiralAnime::step() {
+void SpiralAnime::step(LedMatrixHandler* ledMatrixHandler) {
+
+    int N = ledMatrixHandler->getSize();
+
+    if (currRowIdx == -1 || currColIdx == -1) //re-reset spiral now that we have the size N
+        resetSpiral(N / 2);
 
     if (currTrailStep == 0) {  // current trail draw finished
         if (currTrailLength == N) {
-            setPixel(currRowIdx, currColIdx, trailInOrOut);  //make sure the last trail of the spiral is also drawn, before switching direction
-            // spiral complete. switch trail in/out
-            init();
+            ledMatrixHandler->setPixel(currRowIdx, currColIdx, trailInOrOut);  //make sure the last trail of the spiral is also drawn, before switching direction
+            // spiral complete. reset spiral head pos and switch trail in/out
+            resetSpiral(N / 2);
             trailInOrOut = !trailInOrOut;
         }
 
@@ -49,30 +51,14 @@ void SpiralAnime::step() {
             currTrailStep--;
     }
 
-    setPixel(currRowIdx, currColIdx, trailInOrOut);
+    ledMatrixHandler->setPixel(currRowIdx, currColIdx, trailInOrOut);
 
     if (currTrailStep > 0) {
         switch (stepDir) {
-            case Down:
-                {
-                    currRowIdx++;
-                    break;
-                }
-            case Left:
-                {
-                    currColIdx--;
-                    break;
-                }
-            case Up:
-                {
-                    currRowIdx--;
-                    break;
-                }
-            case Right:
-                {
-                    currColIdx++;
-                    break;
-                }
+            case Down: { currRowIdx++; break; }
+            case Left: { currColIdx--; break; }
+            case Up: { currRowIdx--; break; }
+            case Right: { currColIdx++; break; }
         }
         currTrailStep--;
     }
@@ -95,4 +81,12 @@ void SpiralAnime::SetInputHandlers() {
         if (isSet)
             stepDuration = min(1000, stepDuration + 50);
     });
+}
+
+
+void SpiralAnime::resetSpiral(int centerPos) {
+    stepDir = Down;
+    currTrailLength = 0;
+    currRowIdx = currColIdx = centerPos;
+    currTrailStep = 0;
 }

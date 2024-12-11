@@ -6,13 +6,13 @@ TetrisInteractiveAnime::TetrisInteractiveAnime(int size)
     SetInputHandlers();
 }
 
-void TetrisInteractiveAnime::init() {
+void TetrisInteractiveAnime::init(LedMatrixHandler* ledMatrixHandler) {
     game.InitGame();
     previousGameStepMillis = 0;
     previousMoveStepMillis = 0;
 }
 
-void TetrisInteractiveAnime::step() {
+void TetrisInteractiveAnime::step(LedMatrixHandler* ledMatrixHandler) {
 
     unsigned long currentMillis = millis();
     // step the game if its time
@@ -28,17 +28,17 @@ void TetrisInteractiveAnime::step() {
     }
 
     // update display matrix from game board
-    clearMatrix();
+    ledMatrixHandler->clearMatrix();
     TetrisMatrix2D gameBoard = game.GetBoard();
     for (int i = 0; i < gameBoard.GetWidth(); i++) {
         for (int j = 0; j < gameBoard.GetHeight(); j++) {
-            setPixel(i, j, (bool)gameBoard.Get(i, j));
+            ledMatrixHandler->setPixel(i, j, (bool)gameBoard.Get(i, j));
         }
     }
     Tetrimino* currTetrimino = game.GetCurrTetrimino();
     std::vector<Point2D> tetriBlocks = currTetrimino->GetAbsoluteBlocks();
     for (const auto& block : tetriBlocks) {
-        setPixel(block.x, block.y, true);
+        ledMatrixHandler->setPixel(block.x, block.y, true);
     }
 }
 

@@ -8,7 +8,7 @@ TextDisplayAnime::TextDisplayAnime(int size)
     SetInputHandlers();
 }
 
-void TextDisplayAnime::init() {
+void TextDisplayAnime::init(LedMatrixHandler* ledMatrixHandler) {
     setText("0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ");
     //setText("נועם המעפן");
 }
@@ -258,9 +258,12 @@ void TextDisplayAnime::setText(const std::string& text) {
     scrollOffset = 0;
 }
 
-void TextDisplayAnime::step() {
+void TextDisplayAnime::step(LedMatrixHandler* ledMatrixHandler) {
+
+    int N = ledMatrixHandler->getSize();
+
     // Clear the matrix
-    clearMatrix();
+    ledMatrixHandler->clearMatrix();
 
     // Calculate xOffset to handle clipping in and out
     int xOffset = N - scrollOffset;
@@ -271,7 +274,7 @@ void TextDisplayAnime::step() {
         if (characterMap.find(c) != characterMap.end()) {
             // Only draw characters that are partially or fully visible
             if (xOffset < N && xOffset > -5) {
-                addCharacterToMatrix(characterMap[c], xOffset);
+                addCharacterToMatrix(ledMatrixHandler, characterMap[c], xOffset);
             }
             xOffset += 5;  // Move to the next character's position
         }
@@ -286,7 +289,10 @@ void TextDisplayAnime::step() {
     }
 }
 
-void TextDisplayAnime::addCharacterToMatrix(const std::array<byte, 4>& charMatrix, int xOffset) {
+void TextDisplayAnime::addCharacterToMatrix(LedMatrixHandler* ledMatrixHandler, const std::array<byte, 4>& charMatrix, int xOffset) {
+
+    int N = ledMatrixHandler->getSize();
+
     for (int col = 0; col < 4; col++) {
         int targetCol = xOffset + col;
         if (targetCol < 0 || targetCol >= N) continue;
@@ -295,7 +301,7 @@ void TextDisplayAnime::addCharacterToMatrix(const std::array<byte, 4>& charMatri
         for (int row = 0; row < 5; row++) {
             bool isPixelOn = columnData & (1 << row);
             if (row < N && targetCol < N) {
-                setPixel(targetCol, row, isPixelOn);
+                ledMatrixHandler->setPixel(targetCol, row, isPixelOn);
             }
         }
     }

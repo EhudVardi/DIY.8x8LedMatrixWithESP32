@@ -6,12 +6,15 @@ TheMatrixAnime::TheMatrixAnime(int size, int maxLines, int minLineLength, int ma
     SetInputHandlers();
 }
 
-void TheMatrixAnime::init() {
+void TheMatrixAnime::init(LedMatrixHandler* ledMatrixHandler) {
     lines.clear();
     currentStep = 0;
 }
 
-void TheMatrixAnime::step() {
+void TheMatrixAnime::step(LedMatrixHandler* ledMatrixHandler) {
+
+    int N = ledMatrixHandler->getSize();
+
     currentStep++; // Increment step counter
     // Randomly add a new line based on the appearance rate
     if (currentStep % lineAppearanceRate == 0 && lines.size() < maxLines) {
@@ -21,9 +24,9 @@ void TheMatrixAnime::step() {
     }
     // Update each line
     for (auto& line : lines) {
-        clearLine(line); // Clear previous state of the line
+        clearLine(ledMatrixHandler, line); // Clear previous state of the line
         line.row++; // Move the line down
-        drawLine(line); // Set new state of the line
+        drawLine(ledMatrixHandler, line); // Set new state of the line
         // Remove lines that have fully exited the screen
         if (line.row - line.length >= N) {
             line = lines.back();
@@ -32,20 +35,26 @@ void TheMatrixAnime::step() {
     }
 }
 
-void TheMatrixAnime::clearLine(Line& line) {
+void TheMatrixAnime::clearLine(LedMatrixHandler* ledMatrixHandler, Line& line) {
+
+    int N = ledMatrixHandler->getSize();
+
     for (int i = 0; i < line.length; i++) {
         int row = line.row - i;
         if (row >= 0 && row < N) {
-            setPixel(line.col, row, false);
+            ledMatrixHandler->setPixel(line.col, row, false);
         }
     }
 }
 
-void TheMatrixAnime::drawLine(Line& line) {
+void TheMatrixAnime::drawLine(LedMatrixHandler* ledMatrixHandler, Line& line) {
+
+    int N = ledMatrixHandler->getSize();
+
     for (int i = 0; i < line.length; i++) {
         int row = line.row - i;
         if (row >= 0 && row < N) {
-            setPixel(line.col, row, true);
+            ledMatrixHandler->setPixel(line.col, row, true);
         }
     }
 }

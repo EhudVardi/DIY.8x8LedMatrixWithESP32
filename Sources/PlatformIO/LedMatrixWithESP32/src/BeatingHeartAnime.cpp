@@ -6,24 +6,28 @@ BeatingHeartAnime::BeatingHeartAnime(int size)
     SetInputHandlers();
 }
 
-void BeatingHeartAnime::init() {}
+void BeatingHeartAnime::init(LedMatrixHandler* ledMatrixHandler) {}
 
-void BeatingHeartAnime::step() {
+void BeatingHeartAnime::step(LedMatrixHandler* ledMatrixHandler) {
     currHeartIndex = (currHeartIndex + 1) % heartMatrices.size();
-    drawHeart(&heartMatrices[currHeartIndex][0][0], 12);
+    drawHeart(ledMatrixHandler, &heartMatrices[currHeartIndex][0][0], 12);
 }
 
-void BeatingHeartAnime::drawHeart(const uint8_t* heart, int size) {
+void BeatingHeartAnime::drawHeart(LedMatrixHandler* ledMatrixHandler, const uint8_t* heart, int size) {
+
+    int N = ledMatrixHandler->getSize();
+
     int offset = (N - size) / 2;  // Centering offset
-    clearMatrix();
+    ledMatrixHandler->clearMatrix();
     for (int i = 0; i < size; ++i) {
         for (int j = 0; j < size; ++j) {
             // Compute the index in the 1D array
             int index = i * size + j;
+            //TODO: attempt to replace  ledMatrixHandler->setPixel(j + offset, i + offset, (bool)(heart[index])));
             if (heart[index])
-                setPixel(j + offset, i + offset, true);
+                ledMatrixHandler->setPixel(j + offset, i + offset, true);
             else
-                setPixel(j + offset, i + offset, false);
+                ledMatrixHandler->setPixel(j + offset, i + offset, false);
         }
     }
 }

@@ -12,8 +12,8 @@ private:
 
 public:
     SnakeInteractiveAnime(int size);
-    void init() override;
-    void step() override;
+    void init(LedMatrixHandler* ledMatrixHandler) override;
+    void step(LedMatrixHandler* ledMatrixHandler) override;
     void SetInputHandlers() override;
     int getStepDuration() override;
 };

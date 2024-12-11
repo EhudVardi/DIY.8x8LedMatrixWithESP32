@@ -13,8 +13,8 @@ enum Dir {
 class SpiralAnime : public BaseInteractiveAnime {
 public:
     SpiralAnime(int size);
-    void init() override;
-    void step() override;
+    void init(LedMatrixHandler* ledMatrixHandler) override;
+    void step(LedMatrixHandler* ledMatrixHandler) override;
     void SetInputHandlers() override;
 
 private:
@@ -24,6 +24,8 @@ private:
     int8_t currRowIdx;
     int8_t currColIdx;
     bool trailInOrOut;
+
+    void resetSpiral(int centerPos);
 };
 
 #endif  // SPIRALANIME_H

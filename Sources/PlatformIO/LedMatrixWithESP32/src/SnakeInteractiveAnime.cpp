@@ -6,20 +6,20 @@ SnakeInteractiveAnime::SnakeInteractiveAnime(int size)
     SetInputHandlers();
 }
 
-void SnakeInteractiveAnime::init() {
+void SnakeInteractiveAnime::init(LedMatrixHandler* ledMatrixHandler) {
     game.InitGame();
 }
 
-void SnakeInteractiveAnime::step() {
+void SnakeInteractiveAnime::step(LedMatrixHandler* ledMatrixHandler) {
     // step the game
     game.StepGame();
     // update display matrix from game board
-    clearMatrix();
+    ledMatrixHandler->clearMatrix();
     SnakeMatrix2D gameBoard = game.GetBoard();
     for (int i = 0; i < gameBoard.GetWidth(); i++) {
         for (int j = 0; j < gameBoard.GetHeight(); j++) {
             if (!gameBoard.IsClearCell(i, j))
-                setPixel(i, j, true);
+                ledMatrixHandler->setPixel(i, j, true);
         }
     }
 }

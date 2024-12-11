@@ -21,13 +21,13 @@ private:
 
 public:
     TheMatrixAnime(int size, int maxLines, int minLineLength, int maxLineLength, int lineAppearanceRate);
-    void init() override;
-    void step() override;
+    void init(LedMatrixHandler* ledMatrixHandler) override;
+    void step(LedMatrixHandler* ledMatrixHandler) override;
     void SetInputHandlers() override;
 
 private:
-    void clearLine(Line& line);
-    void drawLine(Line& line);
+    void clearLine(LedMatrixHandler* ledMatrixHandler, Line& line);
+    void drawLine(LedMatrixHandler* ledMatrixHandler, Line& line);
 };
 
 #endif

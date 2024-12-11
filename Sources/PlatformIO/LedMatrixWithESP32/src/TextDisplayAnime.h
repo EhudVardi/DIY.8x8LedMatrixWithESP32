@@ -17,13 +17,13 @@ private:
 public:
     TextDisplayAnime(int size);
     void setText(const std::string& text);
-    void init() override;
-    void step() override;
+    void init(LedMatrixHandler* ledMatrixHandler) override;
+    void step(LedMatrixHandler* ledMatrixHandler) override;
     void SetInputHandlers() override;
 
 private:
     void initializeCharacterMap();
-    void addCharacterToMatrix(const std::array<byte, 4>& charMatrix, int xOffset);
+    void addCharacterToMatrix(LedMatrixHandler* ledMatrixHandler, const std::array<byte, 4>& charMatrix, int xOffset);
 };
 
 #endif
