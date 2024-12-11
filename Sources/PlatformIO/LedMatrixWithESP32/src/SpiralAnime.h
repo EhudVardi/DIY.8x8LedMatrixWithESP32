@@ -24,8 +24,6 @@ private:
     int8_t currRowIdx;
     int8_t currColIdx;
     bool trailInOrOut;
-
-    void resetSpiral(int centerPos);
 };
 
 #endif  // SPIRALANIME_H

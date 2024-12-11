@@ -24,21 +24,21 @@ SpiralAnime::SpiralAnime(int size)
 }
 
 void SpiralAnime::init(LedMatrixHandler* ledMatrixHandler) {
-    resetSpiral(-1); //reset spiral. center will be set correctly at step func.
+    stepDir = Down;
+    currTrailLength = 0;
+    currRowIdx = currColIdx = ledMatrixHandler->getSize() / 2;
+    currTrailStep = 0;
 }
 
 void SpiralAnime::step(LedMatrixHandler* ledMatrixHandler) {
 
     int N = ledMatrixHandler->getSize();
 
-    if (currRowIdx == -1 || currColIdx == -1) //re-reset spiral now that we have the size N
-        resetSpiral(N / 2);
-
     if (currTrailStep == 0) {  // current trail draw finished
         if (currTrailLength == N) {
             ledMatrixHandler->setPixel(currRowIdx, currColIdx, trailInOrOut);  //make sure the last trail of the spiral is also drawn, before switching direction
             // spiral complete. reset spiral head pos and switch trail in/out
-            resetSpiral(N / 2);
+            init(ledMatrixHandler);
             trailInOrOut = !trailInOrOut;
         }
 
@@ -81,12 +81,4 @@ void SpiralAnime::SetInputHandlers() {
         if (isSet)
             stepDuration = min(1000, stepDuration + 50);
     });
-}
-
-
-void SpiralAnime::resetSpiral(int centerPos) {
-    stepDir = Down;
-    currTrailLength = 0;
-    currRowIdx = currColIdx = centerPos;
-    currTrailStep = 0;
 }
