@@ -6,6 +6,12 @@ SnakeGame::SnakeGame(int width, int height)
 }
 
 void SnakeGame::InitGame() {
+    // clear the game board
+    boardMatrix.Clear();
+    // reset game speed
+    gameSpeedPercent = 0.0;
+    // clear the snake body
+    snakeBody.clear();
     // init position of the snake tail
     tailPos.x = boardMatrix.GetWidth() / 2;
     tailPos.y = boardMatrix.GetHeight() / 2;
