@@ -1,14 +1,13 @@
 #ifndef ANIMATION_MANAGER_H
 #define ANIMATION_MANAGER_H
 
-#include "BaseInteractiveAnime.h"
-#include "LedMatrixHandler.h"
-#include "TheMatrixAnime.h"
-#include "BeatingHeartAnime.h"
-#include "SpiralAnime.h"
-#include "SnakeInteractiveAnime.h"
-#include "TextDisplayAnime.h"
-#include "TetrisInteractiveAnime.h"
+#include "HAL/LedMatrixHandler.h"
+#include "GUI/Animations/TheMatrix/TheMatrixAnime.h"
+#include "GUI/Animations/BeatingHeart/BeatingHeartAnime.h"
+#include "GUI/Animations/Spiral/SpiralAnime.h"
+#include "GUI/Animations/Snake/SnakeInteractiveAnime.h"
+#include "GUI/Animations/TextScroll/TextDisplayAnime.h"
+#include "GUI/Animations/Tetris/TetrisInteractiveAnime.h"
 
 #include <vector>
 

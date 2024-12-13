@@ -1,7 +1,7 @@
 #ifndef THE_MATRIX_ANIME_H
 #define THE_MATRIX_ANIME_H
 
-#include "BaseInteractiveAnime.h"
+#include "./../BaseInteractiveAnime.h"
 #include <vector>
 
 struct Line {

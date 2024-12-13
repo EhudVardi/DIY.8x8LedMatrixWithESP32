@@ -1,11 +1,11 @@
 #ifndef SNAKE_GAME_H
 #define SNAKE_GAME_H
 
-#include "Direction.h"
-#include "Point2D.h"
-#include "LinkedList.h"
+#include "Models/Direction.h"
+#include "Models/Point2D.h"
+#include "Models/LinkedList.h"
 #include "SnakeMatrix2D.h"
-#include "RandomGenerator.h"
+#include "Data/Utils/RandomGenerator.h"
 
 enum class SnakeGameState {
     Initialized,

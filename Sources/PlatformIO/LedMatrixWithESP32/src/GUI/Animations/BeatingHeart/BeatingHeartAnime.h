@@ -2,7 +2,7 @@
 #define BEATINGHEARTANIME_H
 
 #include <vector>
-#include "BaseInteractiveAnime.h"
+#include "./../BaseInteractiveAnime.h"
 
 class BeatingHeartAnime : public BaseInteractiveAnime {
 public:

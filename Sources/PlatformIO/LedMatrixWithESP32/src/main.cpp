@@ -1,7 +1,7 @@
 #include <Arduino.h>
-#include "HWButtonHandler.h"
-#include "LedMatrixHandler.h"
-#include "AnimationManager.h"
+#include "HAL/HWButtonHandler.h"
+#include "HAL/LedMatrixHandler.h"
+#include "GUI/AnimationManager.h"
 
 #define SCREEN_SIZE 16
 

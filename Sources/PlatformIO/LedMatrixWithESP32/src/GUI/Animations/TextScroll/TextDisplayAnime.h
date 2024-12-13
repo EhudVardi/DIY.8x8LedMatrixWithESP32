@@ -1,7 +1,7 @@
 #ifndef TEXT_DISPLAY_ANIME_H
 #define TEXT_DISPLAY_ANIME_H
 
-#include "BaseInteractiveAnime.h"
+#include "./../BaseInteractiveAnime.h"
 #include <unordered_map>
 #include <string>
 #include <array>

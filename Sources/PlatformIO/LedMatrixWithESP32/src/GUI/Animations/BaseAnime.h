@@ -3,7 +3,7 @@
 
 #include <Arduino.h>
 #include <stdint.h>
-#include "LedMatrixHandler.h"
+#include "HAL/LedMatrixHandler.h"
 
 class BaseAnime {
 protected:

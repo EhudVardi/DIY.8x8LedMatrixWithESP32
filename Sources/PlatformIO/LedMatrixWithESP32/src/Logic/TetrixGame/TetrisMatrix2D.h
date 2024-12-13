@@ -1,9 +1,9 @@
 #ifndef TETRIS_MATRIX2D_H
 #define TETRIS_MATRIX2D_H
 
-#include "Matrix2D.h"
+#include "Models/Matrix2D.h"
 #include "Tetrimino.h"
-#include "Point2D.h"
+#include "Models/Point2D.h"
 #include <vector>
 
 class TetrisMatrix2D : public Matrix2D<int> {

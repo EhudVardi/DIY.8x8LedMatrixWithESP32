@@ -1,7 +1,7 @@
 #ifndef SNAKEMATRIX2D_H
 #define SNAKEMATRIX2D_H
 
-#include "Matrix2D.h"
+#include "Models/Matrix2D.h"
 
 // Struct to represent a matrix element for the Snake game
 struct MatrixElement {

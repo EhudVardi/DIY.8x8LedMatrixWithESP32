@@ -3,7 +3,7 @@
 
 #include "Tetrimino.h"
 #include "TetrisMatrix2D.h"
-#include "RandomGenerator.h"
+#include "Data/Utils/RandomGenerator.h"
 #include <vector>
 
 enum class TetrisGameState {

@@ -1,8 +1,8 @@
 #ifndef TETRIMINO_H
 #define TETRIMINO_H
 
-#include "Point2D.h"
-#include "Direction.h"
+#include "Models/Point2D.h"
+#include "Models/Direction.h"
 #include <vector>
 
 class Tetrimino {
