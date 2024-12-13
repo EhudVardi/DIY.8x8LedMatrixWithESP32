@@ -6,6 +6,7 @@ AnimationManager::AnimationManager(int screenSize)
 {
     // Initialize the list of animations
     animations.push_back(new TextDisplayAnime(screenSize, APP_TITLE_STRING));
+    animations.push_back(new StarTravelAnime(screenSize, 7));
     animations.push_back(new TheMatrixAnime(screenSize, 32, 3, 8, 1));
     animations.push_back(new BeatingHeartAnime(screenSize));
     animations.push_back(new SpiralAnime(screenSize));

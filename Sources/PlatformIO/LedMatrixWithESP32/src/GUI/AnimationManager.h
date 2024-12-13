@@ -8,6 +8,7 @@
 #include "Animations/Snake/SnakeInteractiveAnime.h"
 #include "Animations/TextScroll/TextDisplayAnime.h"
 #include "Animations/Tetris/TetrisInteractiveAnime.h"
+#include "Animations/StarTravel/StarTravelAnime.h"
 
 #include <vector>
 
