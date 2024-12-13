@@ -3,7 +3,7 @@
 #include <cstdlib>
 
 StarTravelAnime::StarTravelAnime(int size, int starCount)
-    : BaseInteractiveAnime(), matrixSize(size), speed(0.1f) {
+    : BaseInteractiveAnime(), matrixSize(size), speed(0.1f), fieldOfView(1.0f) {
     stars.resize(starCount);
     stepDuration = 5;
     SetInputHandlers();
@@ -33,9 +33,10 @@ void StarTravelAnime::step(LedMatrixHandler* ledMatrixHandler) {
             continue;
         }
 
-        // Perspective projection to 2D
-        int row = static_cast<int>((star.x / star.z) * (matrixSize / 2) + matrixSize / 2);
-        int col = static_cast<int>((star.y / star.z) * (matrixSize / 2) + matrixSize / 2);
+        // Perspective projection to 2D with FoV adjustment
+        float fovFactor = fieldOfView / star.z;
+        int row = static_cast<int>(star.x * fovFactor + matrixSize / 2);
+        int col = static_cast<int>(star.y * fovFactor + matrixSize / 2);
 
         // Draw the star if it's within bounds
         if (row >= 0 && row < matrixSize && col >= 0 && col < matrixSize) {
@@ -47,20 +48,39 @@ void StarTravelAnime::step(LedMatrixHandler* ledMatrixHandler) {
 void StarTravelAnime::SetInputHandlers() {
     RegisterInputHandler(0, [this](bool isSet) {
         if (isSet)
-            speed = std::max(0.05f, speed - 0.05f);
+            speed = std::max(0.05f, speed - 0.05f);  // Decrease Speed
     });
     RegisterInputHandler(1, [this](bool isSet) {
         if (isSet)
-            speed = std::min(1.0f, speed + 0.05f);
+            speed = std::min(1.0f, speed + 0.05f);  // Increase Speed
     });
     RegisterInputHandler(2, [this](bool isSet) {
         if (isSet)
-            if (stars.size() > 1)
-                stars.resize(stars.size() - 1);
+            fieldOfView = std::max(0.5f, fieldOfView - 0.1f);  // Reduce FoV
     });
     RegisterInputHandler(3, [this](bool isSet) {
         if (isSet)
-            if (stars.size() < 100)
-                stars.resize(stars.size() + 1);
+            fieldOfView = std::min(2.0f, fieldOfView + 0.1f);  // Increase FoV
     });
 }
+
+
+
+// RegisterInputHandler(0, [this](bool isSet) {
+//     if (isSet)
+//         speed = std::max(0.05f, speed - 0.05f);
+// });
+// RegisterInputHandler(1, [this](bool isSet) {
+//     if (isSet)
+//         speed = std::min(1.0f, speed + 0.05f);
+// });
+// RegisterInputHandler(2, [this](bool isSet) {
+//     if (isSet)
+//         if (stars.size() > 1)
+//             stars.resize(stars.size() - 1);
+// });
+// RegisterInputHandler(3, [this](bool isSet) {
+//     if (isSet)
+//         if (stars.size() < 100)
+//             stars.resize(stars.size() + 1);
+// });

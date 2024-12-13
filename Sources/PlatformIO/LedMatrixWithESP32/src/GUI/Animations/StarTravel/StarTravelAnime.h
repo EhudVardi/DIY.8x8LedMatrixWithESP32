@@ -20,6 +20,7 @@ private:
     std::vector<Star> stars;
     int matrixSize;
     float speed;
+    float fieldOfView;
 };
 
 #endif  // STARTRAVELANIME_H
