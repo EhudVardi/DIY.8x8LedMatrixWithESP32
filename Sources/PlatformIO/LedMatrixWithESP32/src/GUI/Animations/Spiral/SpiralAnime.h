@@ -1,7 +1,7 @@
 #ifndef SPIRALANIME_H
 #define SPIRALANIME_H
 
-#include "./../BaseInteractiveAnime.h"
+#include "../BaseInteractiveAnime.h"
 
 enum Dir {
     Down = 0,

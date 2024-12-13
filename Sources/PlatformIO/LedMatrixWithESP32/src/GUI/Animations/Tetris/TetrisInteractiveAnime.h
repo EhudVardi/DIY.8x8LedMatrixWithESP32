@@ -1,7 +1,7 @@
 #ifndef TETRIS_INTERACTIVE_ANIME_H
 #define TETRIS_INTERACTIVE_ANIME_H
 
-#include "./../BaseInteractiveAnime.h"
+#include "../BaseInteractiveAnime.h"
 #include "Logic/TetrixGame/TetrisGame.h"
 
 class TetrisInteractiveAnime : public BaseInteractiveAnime {
