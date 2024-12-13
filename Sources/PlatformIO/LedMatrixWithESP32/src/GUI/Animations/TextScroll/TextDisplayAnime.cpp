@@ -6,15 +6,29 @@ TextDisplayAnime::TextDisplayAnime(int size)
     stepDuration = 100;
     initializeCharacterMap();
     SetInputHandlers();
+
+    setText("0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ");
+    //setText("נועם הגבר");
+}
+TextDisplayAnime::TextDisplayAnime(int size, const std::string& initialText)
+    : TextDisplayAnime(size) {
+    
+    setText(initialText);
 }
 
-void TextDisplayAnime::init(LedMatrixHandler* ledMatrixHandler) {
-    setText("0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ");
-    //setText("נועם המעפן");
-}
+void TextDisplayAnime::init(LedMatrixHandler* ledMatrixHandler) {}
 
 void TextDisplayAnime::initializeCharacterMap() {
     // Map characters to their 5x4 matrices (using 4x5 in byte form)
+    // Special characters (. )
+    characterMap['.'] = { 0b00000,
+                          0b10000,
+                          0b00000,
+                          0b00000 };
+    characterMap[' '] = { 0b00000,
+                          0b00000,
+                          0b00000,
+                          0b00000 };
     // Digit characters (0-9)
     characterMap['0'] = { 0b11111,
                           0b10001,

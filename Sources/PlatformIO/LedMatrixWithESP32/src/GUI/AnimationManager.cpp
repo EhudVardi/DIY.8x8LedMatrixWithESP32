@@ -1,15 +1,16 @@
 #include "AnimationManager.h"
+#include "Application/ApplicationProperties.h"
 
 AnimationManager::AnimationManager(int screenSize) 
-    : currAnimeIndex(4) // Default animation index
+    : currAnimeIndex(0) // Default animation index
 {
     // Initialize the list of animations
+    animations.push_back(new TextDisplayAnime(screenSize, APP_TITLE_STRING));
     animations.push_back(new TheMatrixAnime(screenSize, 32, 3, 8, 1));
     animations.push_back(new BeatingHeartAnime(screenSize));
     animations.push_back(new SpiralAnime(screenSize));
     animations.push_back(new SnakeInteractiveAnime(screenSize));
     animations.push_back(new TetrisInteractiveAnime(screenSize));
-    animations.push_back(new TextDisplayAnime(screenSize));
 }
 
 void AnimationManager::init(LedMatrixHandler* ledMatrixHandler) {

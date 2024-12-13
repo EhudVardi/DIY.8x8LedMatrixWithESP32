@@ -16,6 +16,7 @@ private:
 
 public:
     TextDisplayAnime(int size);
+    TextDisplayAnime(int size, const std::string& initialText);
     void setText(const std::string& text);
     void init(LedMatrixHandler* ledMatrixHandler) override;
     void step(LedMatrixHandler* ledMatrixHandler) override;
