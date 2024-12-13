@@ -4,18 +4,15 @@
 #include <Arduino.h>
 #include <stdint.h>
 
-#define OE_PIN 5      // Output Enable pin (active low)
-#define DATA_PIN 4    // Serial Data Input
-#define LATCH_PIN 2   // Latch Pin
-#define CLOCK_PIN 15  // Clock Pin
-
 class LedMatrixHandler {
 protected:
     int N;
     uint8_t* matrix;
 
+    int _oe_pin, _data_pin, _latch_pin, _clock_pin;
+
 public:
-    LedMatrixHandler(int size);
+    LedMatrixHandler(int size, int oe_pin, int data_pin, int latch_pin, int clock_pin);
     ~LedMatrixHandler();
 
     int getSize() { return N; }
@@ -30,8 +27,8 @@ private:
     void initPins();
     void displayPattern(byte pattern[32]);
     void sendData(int16_t rowData, int16_t colData);
-    void shiftOut(byte data, int clockPin, int dataPin);
-    void latch(int latchPin);
+    void shiftOut(byte data);
+    void latch();
 };
 
 #endif //LED_MATRIX_HANDLER_H

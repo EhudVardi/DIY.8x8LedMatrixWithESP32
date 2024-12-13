@@ -1,7 +1,7 @@
 #include "LedMatrixHandler.h"
 
-LedMatrixHandler::LedMatrixHandler(int size)
-    : N(size) {
+LedMatrixHandler::LedMatrixHandler(int size, int oe_pin, int data_pin, int latch_pin, int clock_pin)
+    : N(size), _oe_pin(oe_pin), _data_pin(data_pin), _latch_pin(latch_pin), _clock_pin(clock_pin) {
     int numBytes = (N * N) / 8;
     matrix = new uint8_t[numBytes]();
     initPins();
@@ -38,12 +38,12 @@ void LedMatrixHandler::render(){
 
 
 void LedMatrixHandler::initPins() {
-    pinMode(OE_PIN, OUTPUT);
-    pinMode(DATA_PIN, OUTPUT);
-    pinMode(LATCH_PIN, OUTPUT);
-    pinMode(CLOCK_PIN, OUTPUT);
-    digitalWrite(LATCH_PIN, LOW); // Initialize Latch
-    digitalWrite(OE_PIN, LOW); // Enable output
+    pinMode(_oe_pin, OUTPUT);
+    pinMode(_data_pin, OUTPUT);
+    pinMode(_latch_pin, OUTPUT);
+    pinMode(_clock_pin, OUTPUT);
+    digitalWrite(_latch_pin, LOW); // Initialize Latch
+    digitalWrite(_oe_pin, LOW); // Enable output
 }
 void LedMatrixHandler::displayPattern(byte pattern[32]) {
     for (int row = 0; row < 16; row++) {
@@ -58,24 +58,24 @@ void LedMatrixHandler::sendData(int16_t rowData, int16_t colData) {
     byte rowData_lowByte = rowData & 0xFF;
     byte colData_highByte = (colData >> 8) & 0xFF;
     byte colData_lowByte = colData & 0xFF;
-    shiftOut(rowData_highByte, CLOCK_PIN, DATA_PIN);
-    shiftOut(rowData_lowByte, CLOCK_PIN, DATA_PIN);
-    shiftOut(colData_lowByte, CLOCK_PIN, DATA_PIN);
-    shiftOut(colData_highByte, CLOCK_PIN, DATA_PIN);
-    latch(LATCH_PIN);
+    shiftOut(rowData_highByte);
+    shiftOut(rowData_lowByte);
+    shiftOut(colData_lowByte);
+    shiftOut(colData_highByte);
+    latch();
 }
-void LedMatrixHandler::shiftOut(byte data, int clockPin, int dataPin) {
+void LedMatrixHandler::shiftOut(byte data) {
     for (int i = 0; i < 8; i++) {
-        digitalWrite(clockPin, LOW);
-        digitalWrite(dataPin, data & (1 << (7 - i)) ? HIGH : LOW);
+        digitalWrite(_clock_pin, LOW);
+        digitalWrite(_data_pin, data & (1 << (7 - i)) ? HIGH : LOW);
         delayMicroseconds(16);
-        digitalWrite(clockPin, HIGH);
+        digitalWrite(_clock_pin, HIGH);
         delayMicroseconds(16);
     }
 }
-void LedMatrixHandler::latch(int latchPin) {
+void LedMatrixHandler::latch() {
     // Latch the data
-    digitalWrite(latchPin, HIGH);
+    digitalWrite(_latch_pin, HIGH);
     //delayMicroseconds(2); // Short delay to ensure data is latched
-    digitalWrite(latchPin, LOW);
+    digitalWrite(_latch_pin, LOW);
 }

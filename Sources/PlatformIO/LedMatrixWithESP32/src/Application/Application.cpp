@@ -1,13 +1,14 @@
 #include "Application.h"
+#include "ApplicationConfig.h"
 
 void Application::setup() {
     
     log("Initializing...");
 
-    ledMatrixHandler = new LedMatrixHandler(SCREEN_SIZE);
+    ledMatrixHandler = new LedMatrixHandler(DISPLAY_SCREEN_SIZE, DISPLAY_OE_PIN, DISPLAY_DATA_PIN, DISPLAY_LATCH_PIN, DISPLAY_CLOCK_PIN);
 
     // Initialize the AnimationManager
-    animationManager = new AnimationManager(SCREEN_SIZE);
+    animationManager = new AnimationManager(DISPLAY_SCREEN_SIZE);
     animationManager->init(ledMatrixHandler);
 
     // Setup button handlers
@@ -28,7 +29,6 @@ void Application::setup() {
         [this]() {},
         [this]() {}
     };
-
     hwButtonHandler = new HWButtonHandler(hwButtonPins, hwButtonHandlers_onPress, hwButtonHandlers_onRelease);
 
     log("Initialized.");
