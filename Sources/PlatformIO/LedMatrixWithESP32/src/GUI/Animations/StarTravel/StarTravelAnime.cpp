@@ -3,7 +3,7 @@
 #include <cstdlib>
 
 StarTravelAnime::StarTravelAnime(int size, int starCount)
-    : BaseInteractiveAnime(), matrixSize(size), speed(0.1f), fieldOfView(1.0f) {
+    : BaseInteractiveAnime(), matrixSize(size), speed(1.0f), fieldOfView(0.5f) {
     stars.resize(starCount);
     stepDuration = 5;
     SetInputHandlers();
@@ -47,40 +47,25 @@ void StarTravelAnime::step(LedMatrixHandler* ledMatrixHandler) {
 
 void StarTravelAnime::SetInputHandlers() {
     RegisterInputHandler(0, [this](bool isSet) {
-        if (isSet)
-            speed = std::max(0.05f, speed - 0.05f);  // Decrease Speed
+        if (isSet) {
+            speed = std::max(0.02f, speed - 0.02f);  // Decrease Speed
+            fieldOfView = std::min(2.0f, fieldOfView + 0.03f);  // Increase FoV
+        }
     });
     RegisterInputHandler(1, [this](bool isSet) {
-        if (isSet)
-            speed = std::min(1.0f, speed + 0.05f);  // Increase Speed
+        if (isSet) {
+            speed = std::min(1.0f, speed + 0.02f);  // Increase Speed
+            fieldOfView = std::max(0.5f, fieldOfView - 0.03f);  // Reduce FoV
+        }
     });
     RegisterInputHandler(2, [this](bool isSet) {
         if (isSet)
-            fieldOfView = std::max(0.5f, fieldOfView - 0.1f);  // Reduce FoV
+            if (stars.size() > 1)
+                stars.resize(stars.size() - 1);  // Remove a star
     });
     RegisterInputHandler(3, [this](bool isSet) {
         if (isSet)
-            fieldOfView = std::min(2.0f, fieldOfView + 0.1f);  // Increase FoV
+            if (stars.size() < 100)
+                stars.resize(stars.size() + 1);  // Add a star
     });
 }
-
-
-
-// RegisterInputHandler(0, [this](bool isSet) {
-//     if (isSet)
-//         speed = std::max(0.05f, speed - 0.05f);
-// });
-// RegisterInputHandler(1, [this](bool isSet) {
-//     if (isSet)
-//         speed = std::min(1.0f, speed + 0.05f);
-// });
-// RegisterInputHandler(2, [this](bool isSet) {
-//     if (isSet)
-//         if (stars.size() > 1)
-//             stars.resize(stars.size() - 1);
-// });
-// RegisterInputHandler(3, [this](bool isSet) {
-//     if (isSet)
-//         if (stars.size() < 100)
-//             stars.resize(stars.size() + 1);
-// });
