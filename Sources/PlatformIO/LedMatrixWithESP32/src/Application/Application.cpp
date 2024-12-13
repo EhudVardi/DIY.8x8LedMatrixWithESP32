@@ -1,8 +1,8 @@
 #include "Application.h"
 
 void Application::setup() {
-    Serial.begin(115200);
-    Serial.println("Initializing...");
+    
+    log("Initializing...");
 
     ledMatrixHandler = new LedMatrixHandler(SCREEN_SIZE);
 
@@ -31,7 +31,7 @@ void Application::setup() {
 
     hwButtonHandler = new HWButtonHandler(hwButtonPins, hwButtonHandlers_onPress, hwButtonHandlers_onRelease);
 
-    Serial.println("Initialized.");
+    log("Initialized.");
 }
 
 void Application::loop() {

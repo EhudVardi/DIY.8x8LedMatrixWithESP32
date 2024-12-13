@@ -5,6 +5,7 @@
 #include "HAL/HWButtonHandler.h"
 #include "HAL/LedMatrixHandler.h"
 #include "GUI/AnimationManager.h"
+#include "Data/Log/Log.h"
 
 #define SCREEN_SIZE 16
 
